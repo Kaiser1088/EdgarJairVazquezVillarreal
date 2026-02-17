@@ -1,0 +1,62 @@
+@page "/contact"
+
+<PageTitle>Contacto</PageTitle>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center mb-5">
+            <h2 class="fw-bold display-5">¿Hablamos?</h2>
+            <p class="lead text-muted">Estoy disponible para nuevos proyectos, consultoría o simplemente para conectar.</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <!-- Tarjeta de Información -->
+        <div class="col-md-5 mb-4">
+            <div class="card h-100 border-0 shadow-sm hover-effect">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-box mb-3 text-primary">
+                        <i class="bi bi-envelope-at-fill display-4"></i>
+                    </div>
+                    <h4 class="card-title fw-bold">Correo Electrónico</h4>
+                    <p class="card-text text-muted">Para consultas detalladas o propuestas.</p>
+                    <a href="mailto:tu-correo@ejemplo.com" class="btn btn-outline-primary rounded-pill px-4">Enviar Correo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjeta de Redes -->
+        <div class="col-md-5 mb-4">
+            <div class="card h-100 border-0 shadow-sm hover-effect">
+                <div class="card-body p-4 text-center">
+                    <div class="icon-box mb-3 text-primary">
+                        <i class="bi bi-linkedin display-4"></i>
+                    </div>
+                    <h4 class="card-title fw-bold">LinkedIn</h4>
+                    <p class="card-text text-muted">Conectemos profesionalmente.</p>
+                    <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" class="btn btn-outline-primary rounded-pill px-4">Ver Perfil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8 text-center">
+            <div class="p-4 bg-light rounded-3 shadow-sm">
+                <h5 class="fw-bold"><i class="bi bi-github me-2"></i>GitHub</h5>
+                <p class="mb-3">Explora el código de mis proyectos open source y contribuciones.</p>
+                <a href="https://github.com/tu-usuario" target="_blank" class="text-decoration-none fw-bold">github.com/tu-usuario <i class="bi bi-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-effect {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-effect:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+</style>
