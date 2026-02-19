@@ -24,6 +24,11 @@ jobs:
       - name: Publish
         run: dotnet publish EdgarJairVazquezVillarreal/EdgarJairVazquezVillarreal.csproj -c Release -o release
 
+      - name: Fix GitHub Pages for Blazor
+        run: |
+          touch release/wwwroot/.nojekyll
+          cp release/wwwroot/index.html release/wwwroot/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
