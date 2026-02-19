@@ -2,32 +2,40 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "master", "main" ]
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  deploy-to-github-pages:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: 8.0.x
 
-      - name: Publish .NET Core Project
-        run: dotnet publish EdgarJairVazquezVillarreal/EdgarJairVazquezVillarreal.csproj -c Release -o release --nologo
+      - name: Publish
+        run: dotnet publish EdgarJairVazquezVillarreal/EdgarJairVazquezVillarreal.csproj -c Release -o release
 
-      # Copiar index.html a 404.html para que el enrutamiento funcione correctamente en GitHub Pages
-      - name: Copy index.html to 404.html
-        run: cp release/wwwroot/index.html release/wwwroot/404.html
-
-      # Añadir .nojekyll para asegurar que los archivos con guion bajo (como _framework) se sirvan correctamente
-      - name: Add .nojekyll file
-        run: touch release/wwwroot/.nojekyll
-
-      - name: Commit wwwroot to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: release/wwwroot
+          path: release/wwwroot
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
