@@ -62,9 +62,9 @@ a:hover {
 }
 
 .card:hover, .glass-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent-color); /* Glow effect on hover */
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.15), var(--shadow-md);
+    border-color: var(--accent-color);
 }
 
 /* Override Bootstrap Cards */
@@ -95,9 +95,10 @@ a:hover {
 
 .btn-primary:hover {
     filter: brightness(1.1);
-    transform: scale(1.02);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
     color: #0f172a;
-    background: linear-gradient(135deg, var(--accent-color) 0%, #00a8cc 100%); /* Maintain gradient */
+    background: linear-gradient(135deg, var(--accent-color) 0%, #00a8cc 100%);
 }
 
 .btn-outline-primary {
@@ -208,4 +209,35 @@ ul.tech-list li::before {
 .loading-progress-text {
     color: var(--text-secondary);
     font-family: var(--font-mono);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: var(--primary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-bg);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Gradient Separator */
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, var(--accent-color), transparent);
+    margin: 3rem 0;
+    opacity: 0.8;
 }
