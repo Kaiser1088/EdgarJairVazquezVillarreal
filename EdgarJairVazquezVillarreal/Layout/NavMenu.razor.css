@@ -64,8 +64,9 @@
     }
 
 .nav-item ::deep a.active {
-    background-color: rgba(255,255,255,0.37);
+    background-color: rgba(255,255,255,0.2);
     color: white;
+    border-left: 4px solid #3498db; /* Blue accent for active link */
 }
 
 .nav-item ::deep a:hover {
