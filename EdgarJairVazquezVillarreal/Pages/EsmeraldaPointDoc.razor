@@ -1,0 +1,120 @@
+@page "/docs/esmeraldapoint"
+
+<PageTitle>EsmeraldaPoint - Documentación</PageTitle>
+
+<div class="container mt-4 mb-5">
+    <div class="d-flex align-items-center mb-4">
+        <a href="projects" class="btn btn-outline-primary btn-sm me-3"><i class="bi bi-arrow-left me-1"></i> Volver a Proyectos</a>
+        <h2 class="mb-0 text-info fw-bold">EsmeraldaPoint — Sistema de Punto de Venta y ERP</h2>
+    </div>
+
+    <div class="glass-card p-4 p-md-5">
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-info-circle me-2"></i> Descripción General</h4>
+            <p class="text-secondary" style="font-size: 1.1rem;">
+                Sistema empresarial completo desarrollado desde cero para una tortillería en Monclova, Coahuila. Cubre ventas, inventario, recursos humanos, proveedores y finanzas, con arquitectura distribuida entre dos ciudades.
+            </p>
+        </section>
+
+        <hr class="mb-5" />
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-diagram-3 me-2"></i> Arquitectura</h4>
+            <p class="text-secondary">Es una solución con 5 proyectos en <strong>.NET 10</strong>:</p>
+            <ul class="text-secondary tech-list">
+                <li><strong>EsmeraldaAPI:</strong> El núcleo — una API REST en ASP.NET Core que centraliza toda la lógica de negocio y sirve como puente entre las demás aplicaciones.</li>
+                <li><strong>SharedEsmeralda:</strong> Biblioteca de modelos compartidos que usan todos los proyectos, evitando duplicación de código.</li>
+                <li><strong>TortEsmeralda:</strong> Aplicación de escritorio en <strong>WPF</strong> que corre en el punto de venta físico en Monclova.</li>
+                <li><strong>GestionEsmeralda:</strong> Back-office en <strong>Blazor Server</strong> accesible desde cualquier navegador.</li>
+                <li><strong>GestionEsmeralda.Client:</strong> Cliente <strong>Blazor WebAssembly</strong>.</li>
+            </ul>
+        </section>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-database me-2"></i> Base de Datos</h4>
+            <div class="bg-dark p-3 rounded border border-secondary mb-3">
+                <span class="badge badge-glass me-2">PostgreSQL</span>
+                <span class="badge badge-glass me-2">Entity Framework Core 10</span>
+                <span class="badge badge-glass me-2">Code First</span>
+            </div>
+            <p class="text-secondary">
+                Base de datos <strong>PostgreSQL</strong> con 20 tablas diseñadas y normalizadas, organizadas en 6 módulos:
+            </p>
+            <ul class="text-secondary tech-list">
+                <li>Núcleo de ventas e inventario.</li>
+                <li>Recursos humanos.</li>
+                <li>Proveedores.</li>
+                <li>Finanzas y turnos.</li>
+                <li>Sistema y configuración.</li>
+                <li>Notificaciones.</li>
+            </ul>
+            <p class="text-secondary">
+                Implementada con <strong>Entity Framework Core 10</strong> usando enfoque <em>Code First</em> con migraciones, índices únicos y relaciones bien definidas.
+            </p>
+        </section>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-code-square me-2"></i> Tecnologías Utilizadas</h4>
+            <div class="row text-secondary">
+                <div class="col-md-6 mb-3">
+                    <h6 class="text-info fw-bold">Backend</h6>
+                    <ul class="tech-list">
+                        <li>ASP.NET Core 10</li>
+                        <li>Entity Framework Core 10</li>
+                        <li>PostgreSQL & Npgsql</li>
+                        <li>Swashbuckle (Swagger)</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h6 class="text-info fw-bold">Frontend & Herramientas</h6>
+                    <ul class="tech-list">
+                        <li>WPF (.NET 10)</li>
+                        <li>Blazor Server / WebAssembly</li>
+                        <li>Visual Studio 2026</li>
+                        <li>pgAdmin 4, dotnet-ef CLI, Git</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-check2-square me-2"></i> Funcionalidades Implementadas</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="text-secondary tech-list">
+                        <li>Gestión de sucursales con catálogo de productos por sucursal.</li>
+                        <li>Control de inventario con stock mínimo y movimientos.</li>
+                        <li>Sistema de turnos matutino y vespertino con corte de caja.</li>
+                        <li>Registro de ventas con <strong>Mercado Pago</strong> integrado.</li>
+                        <li>Módulo de RRHH con nómina semanal y cálculo de finiquitos.</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="text-secondary tech-list">
+                        <li>Gestión de proveedores con cuentas por pagar.</li>
+                        <li>Reportes financieros diarios por turno.</li>
+                        <li>Sistema de notificaciones para stock bajo, pagos pendientes y finiquitos próximos.</li>
+                        <li>Historial de precios, bitácora de accesos y configuración centralizada.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h4 class="text-neon mb-3"><i class="bi bi-lightbulb me-2"></i> Decisiones de Arquitectura Destacables</h4>
+            <div class="row text-secondary">
+                <div class="col-12">
+                    <div class="p-3 mb-3 border border-info rounded" style="background-color: rgba(0, 212, 255, 0.05);">
+                        <ul class="mb-0" style="line-height: 1.8;">
+                            <li><strong>Separación cliente-servidor:</strong> Conexión entre Monclova (POS) y Saltillo (servidor central) conectados por internet.</li>
+                            <li><strong>Patrón multi-sucursal:</strong> Catálogos y existencias independientes por sucursal.</li>
+                            <li><strong>Patrón DTO (Data Transfer Object):</strong> Utilizado exhaustivamente para evitar over-posting y prevenir referencias circulares en JSON.</li>
+                            <li><strong>Soft Delete:</strong> Implementación de eliminación lógica en lugar de eliminación física para preservar la integridad histórica de los registros.</li>
+                            <li><strong>Bulk Endpoints:</strong> Desarrollo de endpoints especiales para operaciones masivas eficientes.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
