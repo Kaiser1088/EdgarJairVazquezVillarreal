@@ -1,26 +1,28 @@
 @page "/projects"
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@implements IDisposable
 
-<PageTitle>Mis Proyectos</PageTitle>
+<PageTitle>@LangApp.Get("ProjectsTitle")</PageTitle>
 
 <div class="container mt-4">
-    <h2 class="mb-4">Mis Proyectos</h2>
+    <h2 class="mb-4">@LangApp.Get("ProjectsTitle")</h2>
+
     <div class="row">
-        <!-- EsmeraldaPoint -->
+
+        <!-- ── EsmeraldaPoint ─────────────────────────────────────────── -->
         <div class="col-12 mb-4">
-            <div class="card shadow-sm project-card border border-info" style="background-color: rgba(0, 212, 255, 0.03);">
+            <div class="card shadow-sm project-card scroll-reveal">
                 <div class="row g-0">
-                    <div class="col-md-4 d-flex align-items-center justify-content-center p-4 border-end" style="border-color: rgba(148, 163, 184, 0.2) !important;">
+                    <div class="col-md-4 d-flex align-items-center justify-content-center p-4 border-end">
                         <div class="text-center">
-                            <i class="bi bi-shop text-info" style="font-size: 4rem; filter: drop-shadow(0 0 10px rgba(0,212,255,0.4));"></i>
+                            <i class="bi bi-shop text-success" style="font-size: 4rem;"></i>
                             <h4 class="mt-3 text-neon fw-bold">EsmeraldaPoint</h4>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body p-4">
-                            <h5 class="card-title text-info fw-bold">Sistema de Punto de Venta y ERP</h5>
-                            <p class="card-text text-secondary mb-3">
-                                Sistema empresarial completo desarrollado desde cero para una tortillería. Cubre ventas, inventario, recursos humanos, proveedores y finanzas, con arquitectura distribuida entre dos ciudades.
-                            </p>
+                            <h5 class="card-title fw-bold">@LangApp.Get("ProjEsmeraldaSubtitle")</h5>
+                            <p class="card-text mb-3">@LangApp.Get("ProjEsmeraldaDesc")</p>
                             <div class="d-flex flex-wrap gap-2 mb-4">
                                 <span class="badge badge-glass">ASP.NET Core 10</span>
                                 <span class="badge badge-glass">Blazor</span>
@@ -28,8 +30,10 @@
                                 <span class="badge badge-glass">PostgreSQL</span>
                                 <span class="badge badge-glass">EF Core 10</span>
                             </div>
-                            <div class="d-flex justify-content-end mt-auto">
-                                <a href="docs/esmeraldapoint" class="btn btn-outline-primary"><i class="bi bi-journal-text me-2"></i>Ver Documentación Completa</a>
+                            <div class="d-flex justify-content-end">
+                                <a href="docs/esmeraldapoint" class="btn btn-outline-primary">
+                                    <i class="bi bi-journal-text me-2"></i>@LangApp.Get("ViewDocs")
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -37,197 +41,228 @@
             </div>
         </div>
 
+        <!-- ── App de Gestión Empresarial ────────────────────────────── -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow-sm project-card">
-                <!-- Placeholder para imagen -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: rgba(255,255,255,0.05);">
-                    <i class="bi bi-laptop fs-1 text-info"></i>
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 200px; background-color: rgba(99,102,241,0.06);">
+                    <i class="bi bi-laptop fs-1 text-primary"></i>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-info">App de Gestión Empresarial</h5>
-                    <p class="card-text">
-                        Plataforma integral diseñada para la administración de activos, control de inventarios IT y automatización de flujos de trabajo empresariales.
-                    </p>
-                    <ul class="small text-secondary">
-                        <li>Implementación de módulos para cumplimiento CTPAT.</li>
-                        <li>Gestión de bases de datos relacionales en SQL Server.</li>
+                    <h5 class="card-title">@LangApp.Get("ProjMgmtTitle")</h5>
+                    <p class="card-text">@LangApp.Get("ProjMgmtDesc")</p>
+                    <ul class="small">
+                        <li>@LangApp.Get("ProjMgmtB1")</li>
+                        <li>@LangApp.Get("ProjMgmtB2")</li>
                     </ul>
                     <div class="mt-2 mb-3">
                         <span class="badge badge-glass">.NET 10</span>
                         <span class="badge badge-glass">Blazor</span>
                         <span class="badge badge-glass">SQL Server</span>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ── Controlador de Hardware Industrial ─────────────────────── -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow-sm project-card">
-                 <!-- Imagen de Portada -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; overflow: hidden; background-color: rgba(255,255,255,0.05);">
-                    <img src="ImagenesDocs/Tarjeta de control 1 diseño.png" class="card-img-top h-100 object-fit-cover" alt="Diseño Tarjeta de Control">
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 200px; overflow: hidden;">
+                    <img src="ImagenesDocs/Tarjeta de control 1 diseño.png"
+                         class="h-100 object-fit-cover w-100"
+                         alt="Diseño Tarjeta de Control" />
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-info">Controlador de Hardware Industrial</h5>
-                    <p class="card-text">
-                        Diseño y prototipado de una PCB personalizada basada en el microcontrolador ESP32-S3 para aplicaciones de control y monitoreo industrial.
-                    </p>
-                    <ul class="small text-secondary">
-                        <li>Integración de periféricos y protocolos de comunicación IoT.</li>
-                        <li>Modelado mecánico de componentes y ensamblaje.</li>
+                    <h5 class="card-title">@LangApp.Get("ProjHardwareTitle")</h5>
+                    <p class="card-text">@LangApp.Get("ProjHardwareDesc")</p>
+                    <ul class="small">
+                        <li>@LangApp.Get("ProjHardwareB1")</li>
+                        <li>@LangApp.Get("ProjHardwareB2")</li>
                     </ul>
                     <div class="mt-2 mb-3">
                         <span class="badge badge-glass">ESP32-S3</span>
                         <span class="badge badge-glass">SolidWorks</span>
                         <span class="badge badge-glass">Hardware</span>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- ── Sistema de Etiquetado ZPL ──────────────────────────────── -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow-sm project-card">
-                 <!-- Placeholder para imagen -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: rgba(255,255,255,0.05);">
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 200px; background-color: rgba(99,102,241,0.06);">
                     <i class="bi bi-printer fs-1 text-secondary"></i>
-                    <!-- <img src="img-proyectos/zpl-labels.jpg" class="card-img-top h-100 object-fit-cover" alt="Etiquetado ZPL"> -->
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title text-info">Sistema de Etiquetado ZPL</h5>
-                    <p class="card-text">
-                        Desarrollo de una solución en C# para la generación dinámica de etiquetas en formato ZPL, optimizando procesos de impresión en líneas de producción.
-                    </p>
-                    <ul class="small text-secondary">
-                        <li>Comunicación directa con impresoras industriales de etiquetas.</li>
-                        <li>Estandarización de formatos para logística y envíos.</li>
+                    <h5 class="card-title">@LangApp.Get("ProjZPLTitle")</h5>
+                    <p class="card-text">@LangApp.Get("ProjZPLDesc")</p>
+                    <ul class="small">
+                        <li>@LangApp.Get("ProjZPLB1")</li>
+                        <li>@LangApp.Get("ProjZPLB2")</li>
                     </ul>
                     <div class="mt-2 mb-3">
                         <span class="badge badge-glass">C#</span>
                         <span class="badge badge-glass">ZPL</span>
                         <span class="badge badge-glass">Logística</span>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Nueva Sección: Proyectos Académicos -->
+    </div><!-- /row proyectos principales -->
+
+
+    <!-- ── Proyectos Académicos ───────────────────────────────────────── -->
     <div class="row mt-4">
         <div class="col-12">
-            <h3 class="mb-3 border-bottom pb-2" style="border-color: var(--accent-color) !important; color: var(--text-secondary);">Proyectos Académicos Destacados</h3>
+            <h3 class="mb-3 border-bottom pb-2" style="border-color: var(--accent-color) !important; color: var(--text-secondary);">
+                @LangApp.Get("ProjAcademicTitle")
+            </h3>
         </div>
 
+        <!-- Brazo Robótico -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm project-card">
-                 <!-- Imagen de Portada -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 180px; overflow: hidden; background-color: rgba(255,255,255,0.05);">
-                    <img src="ImagenesDocs/Robotde6ejes.png" class="card-img-top h-100" style="object-fit: contain;" alt="Brazo Robótico de 6 Ejes">
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 180px; overflow: hidden;">
+                    <img src="ImagenesDocs/Robotde6ejes.png"
+                         class="h-100 w-100" style="object-fit: contain;"
+                         alt="Brazo Robótico de 6 Ejes" />
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h5 class="card-title fw-bold text-info">Brazo Robótico de 6 Ejes</h5>
-                        <i class="bi bi-gear-wide-connected text-secondary fs-4"></i>
+                        <h5 class="card-title fw-bold">@LangApp.Get("ProjRobotArmTitle")</h5>
+                        <i class="bi bi-gear-wide-connected fs-4" style="color: var(--text-secondary);"></i>
                     </div>
-                    <p class="card-text text-secondary">
-                        Diseño 3D integral y construcción física de un manipulador robótico. Implementación de algoritmos de cinemática para control de precisión. (Diseños y prototipo funcional).
-                    </p>
+                    <p class="card-text">@LangApp.Get("ProjRobotArmDesc")</p>
                     <div class="mt-3 mb-3">
                         <span class="badge badge-glass">Diseño CAD 3D</span>
                         <span class="badge badge-glass">Arduino/C++</span>
                         <span class="badge badge-glass">Mecánica</span>
                     </div>
-                     <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Sorteador de Obstáculos -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm project-card">
-                 <!-- Imagen de Portada -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; overflow: hidden; background-color: rgba(255,255,255,0.05);">
-                    <img src="ImagenesDocs/Diseño sorteador de obstaculos.png" class="card-img-top h-100 object-fit-cover" alt="Diseño Sorteador de Obstáculos">
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 200px; overflow: hidden;">
+                    <img src="ImagenesDocs/Diseño sorteador de obstaculos.png"
+                         class="h-100 w-100 object-fit-cover"
+                         alt="Diseño Sorteador de Obstáculos" />
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h5 class="card-title fw-bold text-info">Diseño Sorteador de Obstáculos</h5>
+                        <h5 class="card-title fw-bold">@LangApp.Get("ProjObstacleTitle")</h5>
                         <i class="bi bi-car-front-fill text-primary fs-4"></i>
                     </div>
-                    <p class="card-text text-secondary">
-                        Vehículo capaz de sortear obstáculos utilizando sensores ultrasónicos. Implementación de control PID para corrección de trayectoria y movimientos suaves.
-                    </p>
+                    <p class="card-text">@LangApp.Get("ProjObstacleDesc")</p>
                     <div class="mt-3 mb-3">
                         <span class="badge badge-glass">Control PID</span>
                         <span class="badge badge-glass">Ultrasonido</span>
-                        <span class="badge badge-glass">Sistemas Embebidos</span>
+                        <span class="badge badge-glass">Embebido</span>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Péndulo Invertido -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm project-card">
-                 <!-- Imagen de Portada -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; overflow: hidden; background-color: rgba(255,255,255,0.05);">
-                    <img src="ImagenesDocs/Balancin.png" class="card-img-top h-100 object-fit-cover" alt="Péndulo Invertido">
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 200px; overflow: hidden;">
+                    <img src="ImagenesDocs/Balancin.png"
+                         class="h-100 w-100 object-fit-cover"
+                         alt="Péndulo Invertido" />
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h5 class="card-title fw-bold text-info">Péndulo Invertido</h5>
+                        <h5 class="card-title fw-bold">@LangApp.Get("ProjPendulumTitle")</h5>
                         <i class="bi bi-activity text-danger fs-4"></i>
                     </div>
-                    <p class="card-text text-secondary">
-                        Sistema mecatrónico tipo "Balancín". Aplicación de teoría de control avanzada para estabilizar verticalmente un sistema inestable mediante retroalimentación.
-                    </p>
+                    <p class="card-text">@LangApp.Get("ProjPendulumDesc")</p>
                     <div class="mt-3 mb-3">
                         <span class="badge badge-glass">Control Moderno</span>
                         <span class="badge badge-glass">Modelado Dinámico</span>
                         <span class="badge badge-glass">Actuadores</span>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- Control de Flujos -->
         <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm project-card">
-                 <!-- Placeholder para imagen -->
-                <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 180px; background-color: rgba(255,255,255,0.05);">
+            <div class="card h-100 shadow-sm project-card scroll-reveal">
+                <div class="card-img-top d-flex align-items-center justify-content-center"
+                     style="height: 180px; background-color: rgba(99,102,241,0.06);">
                     <i class="bi bi-water fs-1 text-secondary"></i>
                 </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h5 class="card-title fw-bold text-info">Control de Flujos de Caudal</h5>
+                        <h5 class="card-title fw-bold">@LangApp.Get("ProjFlowTitle")</h5>
                         <i class="bi bi-droplet-half text-info fs-4"></i>
                     </div>
-                    <p class="card-text text-secondary">
-                        Proyecto de control de procesos enfocado en la regulación y automatización de flujo de caudal en sistemas hidráulicos, aplicando teoría de control clásico.
-                    </p>
+                    <p class="card-text">@LangApp.Get("ProjFlowDesc")</p>
                     <div class="mt-3 mb-3">
                         <span class="badge badge-glass">Instrumentación</span>
                         <span class="badge badge-glass">Lazos de Control</span>
                         <span class="badge badge-glass">Automatización</span>
                     </div>
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-disabled-elegance btn-sm"><i class="bi bi-file-earmark-text me-2"></i>Documentación (Pendiente)</button>
+                    <div class="d-grid">
+                        <button class="btn btn-disabled-elegance btn-sm">
+                            <i class="bi bi-file-earmark-text me-2"></i>@LangApp.Get("DocsPending")
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </div><!-- /row académicos -->
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        LangApp.OnLanguageChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+    }
+}

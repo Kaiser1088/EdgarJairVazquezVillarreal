@@ -1,85 +1,129 @@
-﻿@page "/"
+@page "/"
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@implements IDisposable
 
-<PageTitle>Sobre Mí</PageTitle>
+<PageTitle>@LangApp.Get("HomeTitle")</PageTitle>
 
-<h1>Sobre Mí</h1>
+<h1>@LangApp.Get("HomeTitle")</h1>
 
 <div class="row">
     <div class="col-md-8">
-        <p>Ingeniero en Mecatrónica con especialidad en Automatización de Procesos de Manufactura, enfocado en el desarrollo e implementación de soluciones tecnológicas para diferentes tipos de entornos. Cuento con experiencia en integración de software, electrónica y sistemas de control orientados a optimizar procesos productivos y mejorar la eficiencia operativa.</p>
-        <p>Me caracterizo por ser disciplinado, orientado a resultados y con alta capacidad de aprendizaje. Me adapto con rapidez a entornos dinámicos de manufactura, analizando problemas desde una perspectiva técnica y proponiendo soluciones funcionales y medibles. Valoro el trabajo en equipo y el crecimiento colectivo como parte esencial del desarrollo profesional.</p>
-        <p>Estoy listo para consolidarme en la industria, asumir nuevos retos técnicos y continuar fortaleciendo mis competencias en automatización, control y mejora continua.</p>
+        <p>@LangApp.Get("BioP1")</p>
+        <p>@LangApp.Get("BioP2")</p>
+        <p>@LangApp.Get("BioP3")</p>
+        <p>@LangApp.Get("BioP4")</p>
     </div>
     <div class="col-md-4">
-        <!-- Foto de perfil - Eliminada temporalmente -->
-        <!-- <div class="bg-light p-3 text-center mb-3">
-             <img src="ImagenesDocs/foto-perfil.jpg" class="img-fluid rounded-circle shadow" alt="Edgar Jair Vazquez Villarreal" style="max-width: 200px;" onerror="this.style.display='none'; this.parentElement.innerText='Foto no encontrada: Asegúrate de subir tu foto a wwwwroot/ImagenesDocs/foto-perfil.jpg';" />
-        </div> -->
         <div class="text-center">
-            <a href="ImagenesDocs/CVEdgarJairVazquezVillarreal.pdf" class="btn btn-primary w-100" target="_blank">
-                <i class="bi bi-file-earmark-pdf-fill me-2"></i>Descargar CV
+            <a href="ImagenesDocs/CVEdgarJairVazquezVillarreal.pdf"
+               class="btn btn-primary w-100" target="_blank">
+                <i class="bi bi-file-earmark-pdf-fill me-2"></i>@LangApp.Get("DownloadCV")
             </a>
         </div>
     </div>
 </div>
 
+<!-- Tarjetas de habilidades -->
 <div class="row mt-4">
     <div class="col-md-4 mb-4">
-        <div class="glass-card h-100 p-4">
-            <h3 class="mb-3 text-neon"><i class="bi bi-gear me-2"></i> Mecatrónica</h3>
+        <div class="glass-card scroll-reveal h-100 p-4">
+            <h3 class="mb-3 text-neon">
+                <i class="bi bi-gear me-2"></i>@LangApp.Get("MechatronicsTitle")
+            </h3>
             <ul class="tech-list">
-                <li>SOLIDWORKS (Certificado CSWP)</li>
-                <li>Programación de PLC Siemens</li>
-                <li>Diseño de PCB (ESP32-S3)</li>
-                <li>LabVIEW & MATLAB</li>
+                <li>@LangApp.Get("Solidworks")</li>
+                <li>@LangApp.Get("PLC")</li>
+                <li>@LangApp.Get("PCB")</li>
+                <li>@LangApp.Get("Labview")</li>
             </ul>
         </div>
     </div>
 
     <div class="col-md-4 mb-4">
-        <div class="glass-card h-100 p-4">
-            <h3 class="mb-3 text-neon"><i class="bi bi-code-slash me-2"></i> Software</h3>
+        <div class="glass-card scroll-reveal h-100 p-4">
+            <h3 class="mb-3 text-neon">
+                <i class="bi bi-code-slash me-2"></i>@LangApp.Get("SoftwareTitle")
+            </h3>
             <ul class="tech-list">
-                <li>C# / .NET 10 & Blazor</li>
-                <li>Arquitectura Cliente-Servidor</li>
-                <li>Apps Industriales</li>
-                <li>Integración con Hardware</li>
-                <li>SQL Server</li>
+                <li>@LangApp.Get("CSharp")</li>
+                <li>@LangApp.Get("AspNetCore")</li>
+                <li>@LangApp.Get("ClientServer")</li>
+                <li>@LangApp.Get("IndApps")</li>
+                <li>@LangApp.Get("WPF")</li>
+                <li>@LangApp.Get("HWInt")</li>
+                <li>@LangApp.Get("RestAPI")</li>
+                <li>@LangApp.Get("SQL")</li>
+                <li>@LangApp.Get("Postgres")</li>
+                <li>@LangApp.Get("Git")</li>
             </ul>
         </div>
     </div>
 
     <div class="col-md-4 mb-4">
-        <div class="glass-card h-100 p-4">
-            <h3 class="mb-3 text-neon"><i class="bi bi-rocket me-2"></i> Soluciones</h3>
+        <div class="glass-card scroll-reveal h-100 p-4">
+            <h3 class="mb-3 text-neon">
+                <i class="bi bi-rocket me-2"></i>@LangApp.Get("SolutionsTitle")
+            </h3>
             <ul class="tech-list">
-                <li>Sistemas CTPAT</li>
-                <li>Automatización ZPL</li>
-                <li>Gestión de Inventarios IT</li>
+                <li>@LangApp.Get("CTPAT")</li>
+                <li>@LangApp.Get("ZPL")</li>
+                <li>@LangApp.Get("ITInv")</li>
             </ul>
         </div>
     </div>
 </div>
 
+<!-- Logros y participaciones -->
 <div class="row mt-5">
     <div class="col-12 text-center">
-        <h4><i class="bi bi-trophy"></i> Trayectoria y Logros</h4>
+        <h4><i class="bi bi-trophy"></i> @LangApp.Get("CareerAndAchievements")</h4>
         <hr />
     </div>
+
     <div class="col-md-6">
-        <p><strong>Competencias de Robótica:</strong></p>
+        <p><strong>@LangApp.Get("RoboticsSkills"):</strong></p>
         <ul class="list-unstyled">
-            <li><i class="bi bi-trophy-fill text-warning me-2"></i><strong>Robot Battle 2018 (FIME Monclova):</strong> Participación con el equipo <em>Dynamo</em>.</li>
-            <li><i class="bi bi-trophy-fill text-warning me-2"></i><strong>Robot CIM (CDMX):</strong> Participación con el equipo <em>Dynamo</em> en categorías Megasumo, Minisumo, Seguidor de Línea y Campamento de 12 horas.</li>
-            <li><i class="bi bi-trophy-fill text-warning me-2"></i><strong>Estatal de Robótica (Nuevo León):</strong> 1er y 2do lugar en categorías Sumo y Minisumo (Nivel Bachillerato).</li>
+            <li>
+                <i class="bi bi-trophy-fill text-warning me-2"></i>
+                <strong>@LangApp.Get("RobotBattle2018"):</strong>
+                @LangApp.Get("ParticipationWithTeamDynamo")
+            </li>
+            <li>
+                <i class="bi bi-trophy-fill text-warning me-2"></i>
+                <strong>@LangApp.Get("RobotCIM"):</strong>
+                @LangApp.Get("ParticipationWithTeamDynamoInCategories")
+            </li>
+            <li>
+                <i class="bi bi-trophy-fill text-warning me-2"></i>
+                <strong>@LangApp.Get("StateRoboticsNL"):</strong>
+                @LangApp.Get("FirstAndSecondPlaceInSumoAndMinisumo")
+            </li>
         </ul>
     </div>
+
     <div class="col-md-6">
-        <p><strong>Innovación Tecnológica:</strong></p>
+        <p><strong>@LangApp.Get("TechnologicalInnovation"):</strong></p>
         <ul class="list-unstyled">
-            <li><i class="bi bi-award-fill text-warning me-2"></i>Participación en la Feria de Ciencias COECYT 2019 con el Instituto Central Coahuila (Proyecto: Generando el Futuro).</li>
-            <li><i class="bi bi-award-fill text-warning me-2"></i>Participación en la Feria de Ciencias COECYT 2020 con el Instituto Tecnológico de Saltillo (Proyecto: Generando el Futuro).</li>
+            <li>
+                <i class="bi bi-award-fill text-warning me-2"></i>
+                @LangApp.Get("ParticipationScienceFair2019")
+            </li>
+            <li>
+                <i class="bi bi-award-fill text-warning me-2"></i>
+                @LangApp.Get("ParticipationScienceFair2020")
+            </li>
         </ul>
     </div>
 </div>
 
+@code {
+    protected override void OnInitialized()
+    {
+        LangApp.OnLanguageChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+    }
+}

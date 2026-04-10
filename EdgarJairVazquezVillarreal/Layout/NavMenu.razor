@@ -1,4 +1,9 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@inject EdgarJairVazquezVillarreal.Services.ThemeService ThemeApp
+@implements IDisposable
+
+<!-- El sidebar tiene data-bs-theme="dark", así que navbar siempre es oscura -->
+<div class="top-row ps-3 navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Edgar Jair Vazquez V.</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
@@ -9,24 +14,46 @@
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="nav flex-column">
+
+        <!-- Controles de idioma y tema — stopPropagation evita cerrar el menú -->
+        <div class="nav-item px-3 mb-2 d-flex justify-content-center align-items-center gap-2"
+             @onclick:stopPropagation="true">
+            <div class="btn-group" role="group" aria-label="Idioma">
+                <button type="button"
+                        class="btn btn-sm @(LangApp.IsSpanish ? "btn-light" : "btn-outline-light")"
+                        @onclick="() => SetLang(true)">ES</button>
+                <button type="button"
+                        class="btn btn-sm @(!LangApp.IsSpanish ? "btn-light" : "btn-outline-light")"
+                        @onclick="() => SetLang(false)">EN</button>
+            </div>
+
+            <button class="btn btn-sm btn-outline-light" title="Cambiar tema" @onclick="ToggleThemeAsync">
+                @if (ThemeApp.IsDarkMode) {
+                    <i class="bi bi-moon-stars-fill" style="margin-right:0"></i>
+                } else {
+                    <i class="bi bi-sun-fill" style="margin-right:0"></i>
+                }
+            </button>
+        </div>
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> Sobre mí
+                <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @LangApp.Get("NavAboutMe")
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="projects">
-                <span class="bi bi-briefcase-fill-nav-menu" aria-hidden="true"></span> Proyectos
+                <span class="bi bi-briefcase-fill-nav-menu" aria-hidden="true"></span> @LangApp.Get("NavProjects")
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="experience">
-                <span class="bi bi-calendar-event-fill-nav-menu" aria-hidden="true"></span> Experiencia
+                <span class="bi bi-calendar-event-fill-nav-menu" aria-hidden="true"></span> @LangApp.Get("NavExperience")
             </NavLink>
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="contact">
-                <span class="bi bi-envelope-fill-nav-menu" aria-hidden="true"></span> Contacto
+                <span class="bi bi-envelope-fill-nav-menu" aria-hidden="true"></span> @LangApp.Get("NavContact")
             </NavLink>
         </div>
     </nav>
@@ -37,8 +64,31 @@
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    protected override void OnInitialized()
+    {
+        LangApp.OnLanguageChanged += StateHasChanged;
+        ThemeApp.OnThemeChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+        ThemeApp.OnThemeChanged -= StateHasChanged;
+    }
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    private void SetLang(bool isSpanish)
+    {
+        if (LangApp.IsSpanish != isSpanish)
+            LangApp.ToggleLanguage();
+    }
+
+    private async Task ToggleThemeAsync()
+    {
+        await ThemeApp.ToggleThemeAsync();
     }
 }

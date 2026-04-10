@@ -1,69 +1,105 @@
 @page "/contact"
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@implements IDisposable
 
-<PageTitle>Contacto</PageTitle>
+<PageTitle>@LangApp.Get("NavContact")</PageTitle>
 
 <div class="container mt-5">
+
+    <!-- Hero -->
     <div class="row justify-content-center">
         <div class="col-md-8 text-center mb-5">
-            <h2 class="fw-bold display-5">¿Hablamos?</h2>
-            <p class="lead text-secondary">Estoy disponible para nuevos proyectos, consultoría o simplemente para conectar.</p>
+            <h2 class="fw-bold display-5">@LangApp.Get("ContactHero")</h2>
+            <p class="lead text-secondary">@LangApp.Get("ContactSubtitle")</p>
         </div>
     </div>
 
+    <!-- Tarjetas de contacto -->
     <div class="row justify-content-center">
-        <!-- Tarjeta de Información -->
+
+        <!-- Email -->
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm">
+            <div class="card h-100 shadow-sm scroll-reveal">
                 <div class="card-body p-4 text-center">
-                    <div class="icon-box mb-3 text-info">
-                        <i class="bi bi-envelope-at-fill display-4"></i>
+                    <div class="mb-3" style="color: var(--accent-color);">
+                        <i class="bi bi-envelope-at-fill" style="font-size: 3rem;"></i>
                     </div>
-                    <h4 class="card-title fw-bold text-info">Correo Electrónico</h4>
-                    <p class="card-text text-secondary">ejairvv26@gmail.com</p>
-                    <p class="card-text text-secondary">Para consultas detalladas o propuestas.</p>
-                    <a href="mailto:ejairvv26@gmail.com" class="btn btn-outline-primary rounded-pill px-4">Enviar Correo</a>
+                    <h4 class="card-title fw-bold">@LangApp.Get("ContactEmailTitle")</h4>
+                    <p class="card-text">ejairvv26@gmail.com</p>
+                    <p class="card-text">@LangApp.Get("ContactEmailDesc")</p>
+                    <a href="mailto:ejairvv26@gmail.com" class="btn btn-outline-primary rounded-pill px-4">
+                        @LangApp.Get("ContactEmailBtn")
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Tarjeta de Teléfono -->
+        <!-- Teléfono / WhatsApp -->
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm">
+            <div class="card h-100 shadow-sm scroll-reveal">
                 <div class="card-body p-4 text-center">
-                    <div class="icon-box mb-3 text-info">
-                        <i class="bi bi-whatsapp display-4"></i>
+                    <div class="mb-3" style="color: var(--accent-color);">
+                        <i class="bi bi-whatsapp" style="font-size: 3rem;"></i>
                     </div>
-                    <h4 class="card-title fw-bold text-info">Teléfono</h4>
-                    <p class="card-text text-secondary">+52 866 210 2926</p>
-                    <p class="card-text text-secondary">Disponible para llamadas y mensajes.</p>
-                    <a href="https://wa.me/528662102926" target="_blank" class="btn btn-outline-primary rounded-pill px-4">Enviar Mensaje</a>
+                    <h4 class="card-title fw-bold">@LangApp.Get("ContactPhoneTitle")</h4>
+                    <p class="card-text">+52 866 210 2926</p>
+                    <p class="card-text">@LangApp.Get("ContactPhoneDesc")</p>
+                    <a href="https://wa.me/528662102926" target="_blank"
+                       class="btn btn-outline-primary rounded-pill px-4">
+                        @LangApp.Get("ContactPhoneBtn")
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Tarjeta de Redes -->
+        <!-- LinkedIn -->
         <div class="col-md-4 mb-4">
-            <div class="card h-100 border-0 shadow-sm">
+            <div class="card h-100 shadow-sm scroll-reveal">
                 <div class="card-body p-4 text-center">
-                    <div class="icon-box mb-3 text-info">
-                        <i class="bi bi-linkedin display-4"></i>
+                    <div class="mb-3" style="color: var(--accent-color);">
+                        <i class="bi bi-linkedin" style="font-size: 3rem;"></i>
                     </div>
-                    <h4 class="card-title fw-bold text-info">LinkedIn</h4>
-                    <p class="card-text text-secondary">Conectemos profesionalmente.</p>
-                    <!-- Actualiza este enlace con tu perfil real -->
-                    <a href="https://www.linkedin.com/in/edgar-vazquez-83b9431b8/" target="_blank" class="btn btn-outline-primary btn-social rounded-pill px-4"><i class="bi bi-linkedin me-2"></i>Ver Perfil</a>
+                    <h4 class="card-title fw-bold">LinkedIn</h4>
+                    <p class="card-text">@LangApp.Get("ContactLinkedInDesc")</p>
+                    <a href="https://www.linkedin.com/in/edgar-vazquez-83b9431b8/"
+                       target="_blank"
+                       class="btn btn-outline-primary btn-social rounded-pill px-4">
+                        <i class="bi bi-linkedin me-2"></i>@LangApp.Get("ContactLinkedInBtn")
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
 
+    </div><!-- /row tarjetas -->
+
+    <!-- GitHub -->
     <div class="row justify-content-center mt-4">
         <div class="col-md-8 text-center">
-            <div class="glass-card p-4">
-                <h5 class="fw-bold text-info"><i class="bi bi-github me-2"></i>GitHub</h5>
-                <p class="mb-3 text-secondary">Explora el código de mis proyectos open source y contribuciones.</p>
-                <a href="https://github.com/Kaiser1088" target="_blank" class="btn btn-link btn-social text-decoration-none fw-bold text-info"><i class="bi bi-github me-1"></i>github.com/Kaiser1088 <i class="bi bi-arrow-right"></i></a>
+            <div class="glass-card p-4 scroll-reveal">
+                <h5 class="fw-bold" style="color: var(--accent-color);">
+                    <i class="bi bi-github me-2"></i>GitHub
+                </h5>
+                <p class="mb-3 text-secondary">@LangApp.Get("ContactGitHubDesc")</p>
+                <a href="https://github.com/Kaiser1088" target="_blank"
+                   class="btn btn-link btn-social text-decoration-none fw-bold"
+                   style="color: var(--accent-color);">
+                    <i class="bi bi-github me-1"></i>github.com/Kaiser1088
+                    <i class="bi bi-arrow-right ms-1"></i>
+                </a>
             </div>
         </div>
     </div>
+
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        LangApp.OnLanguageChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+    }
+}

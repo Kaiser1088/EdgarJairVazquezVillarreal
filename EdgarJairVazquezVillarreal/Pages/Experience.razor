@@ -1,14 +1,17 @@
 @page "/experience"
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@implements IDisposable
 
-<PageTitle>Experiencia Profesional</PageTitle>
+<PageTitle>@LangApp.Get("NavExperience")</PageTitle>
 
 <div class="container mt-4">
     <div class="row mb-4">
         <div class="col-12 text-center">
-            <h2 class="fw-bold">Mi Trayectoria Profesional</h2>
-            <p class="text-secondary">Un recorrido por mi evolución técnica en la industria y el desarrollo de software.</p>
-            <a href="ImagenesDocs/CVEdgarJairVazquezVillarreal.pdf" class="btn btn-outline-primary mt-2" target="_blank">
-                <i class="bi bi-file-earmark-person me-2"></i>Descargar CV Completo
+            <h2 class="fw-bold">@LangApp.Get("NavExperience")</h2>
+            <p class="text-secondary">@LangApp.Get("ExpSubtitle")</p>
+            <a href="ImagenesDocs/CVEdgarJairVazquezVillarreal.pdf"
+               class="btn btn-outline-primary mt-2" target="_blank">
+                <i class="bi bi-file-earmark-person me-2"></i>@LangApp.Get("DownloadCVFull")
             </a>
         </div>
     </div>
@@ -16,25 +19,27 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="timeline-section">
+
+                <!-- ── Puesto 1: Julian Electric ─────────────────── -->
                 <div class="timeline-item mb-5">
                     <div class="row">
                         <div class="col-md-3 text-md-end">
                             <h5 class="fw-bold mb-1">2025</h5>
-                            <span class="badge bg-secondary">Finalizado</span>
+                            <span class="badge bg-secondary">@LangApp.Get("Exp1Status")</span>
                         </div>
                         <div class="col-md-9 timeline-connector ps-4 position-relative">
                             <div class="timeline-dot active"></div>
-                            <h4 class="text-info">Ingeniero de Desarrollo / IT – Área de Ingeniería</h4>
-                            <h6 class="text-secondary fst-italic mb-3">Julian Electric de México</h6>
-                            <p>Responsabilidades y logros:</p>
-                            <ul class="mb-3 text-secondary">
-                                <li>Diseño e implementación de un sistema de apoyo visual basado en tiras LED para líneas de producción, orientado a reducción de errores operativos y mejora en la identificación de estaciones críticas.</li>
-                                <li>Desarrollo de tarjeta electrónica de control para proyectos internos (alimentación 24V, integración con relevadores, optoacopladores y microcontrolador ESP32).</li>
-                                <li>Programación y desarrollo de aplicaciones internas utilizando C# y .NET, con integración a base de datos SQL para gestión y trazabilidad de información.</li>
-                                <li>Desarrollo de una aplicación de gestión de equipos para control, registro y seguimiento de activos en planta.</li>
-                                <li>Implementación de mejoras bajo metodología Lean Six Sigma, enfocadas en reducción de scrap, optimización de procesos y disminución de tiempos muertos.</li>
-                                <li>Gestión y atención de tickets técnicos del departamento de IT, brindando soporte a líneas de producción y resolviendo incidencias eléctricas, electrónicas y de control.</li>
-                                <li>Diseño e implementación de conexiones neumáticas para integración de actuadores en estaciones automatizadas.</li>
+                            <h4>@LangApp.Get("Exp1Title")</h4>
+                            <h6 class="fst-italic mb-3">@LangApp.Get("Exp1Company")</h6>
+                            <p>@LangApp.Get("Exp1Intro")</p>
+                            <ul class="mb-3">
+                                <li>@LangApp.Get("Exp1B1")</li>
+                                <li>@LangApp.Get("Exp1B2")</li>
+                                <li>@LangApp.Get("Exp1B3")</li>
+                                <li>@LangApp.Get("Exp1B4")</li>
+                                <li>@LangApp.Get("Exp1B5")</li>
+                                <li>@LangApp.Get("Exp1B6")</li>
+                                <li>@LangApp.Get("Exp1B7")</li>
                             </ul>
                             <div class="d-flex flex-wrap gap-2">
                                 <span class="badge badge-glass">C# .NET</span>
@@ -46,7 +51,20 @@
                         </div>
                     </div>
                 </div>
-            </div>
+
+            </div><!-- /timeline-section -->
         </div>
     </div>
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        LangApp.OnLanguageChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+    }
+}

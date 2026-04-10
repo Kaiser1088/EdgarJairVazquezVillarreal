@@ -1,6 +1,9 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
+@inject EdgarJairVazquezVillarreal.Services.ThemeService ThemeApp
+
 <div class="page">
-    <div class="sidebar">
+    <!-- El sidebar siempre es oscuro independientemente del tema global -->
+    <div class="sidebar" data-bs-theme="dark">
         <NavMenu />
     </div>
 
@@ -13,3 +16,11 @@
         </article>
     </main>
 </div>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        // Lee el tema desde localStorage y aplica data-bs-theme al elemento <html>
+        await ThemeApp.InitializeAsync();
+    }
+}
