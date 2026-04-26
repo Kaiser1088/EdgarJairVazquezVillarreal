@@ -209,7 +209,7 @@ namespace EdgarJairVazquezVillarreal.Services
 
             { "Exp1Status",  ("Finalizado", "Completed") },
             { "Exp1Title",
-                ("Ingeniero de Desarrollo / IT – Área de Ingeniería",
+                ("Residente de Desarrollo / IT – Área de Ingeniería",
                  "Development / IT Engineer – Engineering Department") },
             { "Exp1Company", ("Julian Electric de México", "Julian Electric de México") },
             { "Exp1Intro",   ("Responsabilidades y logros:", "Responsibilities and achievements:") },
