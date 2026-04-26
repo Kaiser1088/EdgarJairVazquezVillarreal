@@ -4,11 +4,16 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -22,12 +27,15 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Publish
-        run: dotnet publish EdgarJairVazquezVillarreal/EdgarJairVazquezVillarreal.csproj -c Release -o release
+        run: dotnet publish EdgarJairVazquezVillarreal/EdgarJairVazquezVillarreal.csproj -c Release -o release --nologo
 
-      - name: Fix GitHub Pages for Blazor
+      - name: Configure for GitHub Pages
         run: |
+          # Fix base href for GitHub Pages project repo path
           sed -i 's|<base href="/" />|<base href="/EdgarJairVazquezVillarreal/" />|g' release/wwwroot/index.html
+          # Prevent Jekyll from processing Blazor output files
           touch release/wwwroot/.nojekyll
+          # Copy index.html as 404.html so Blazor router handles deep-link navigation
           cp release/wwwroot/index.html release/wwwroot/404.html
 
       - name: Upload artifact

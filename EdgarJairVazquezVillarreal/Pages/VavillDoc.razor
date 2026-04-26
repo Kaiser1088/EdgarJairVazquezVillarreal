@@ -1,0 +1,423 @@
+@page "/docs/vavill"
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+<PageTitle>VAVILL - @(LangApp.IsSpanish ? "Documentación" : "Documentation")</PageTitle>
+
+<div class="container mt-4 mb-5">
+    <div class="d-flex align-items-center mb-4">
+        <a href="projects" class="btn btn-outline-primary btn-sm me-3"><i class="bi bi-arrow-left me-1"></i> @(LangApp.IsSpanish ? "Volver a Proyectos" : "Back to Projects")</a>
+        <h2 class="mb-0 text-primary fw-bold">VAVILL — @(LangApp.IsSpanish ? "ERP Empresarial Completo" : "Complete Business ERP")</h2>
+    </div>
+
+    <div class="glass-card p-4 p-md-5">
+        <div class="alert alert-info mb-4" style="background-color: rgba(13, 202, 240, 0.1); border-color: rgba(13, 202, 240, 0.3); color: var(--text-primary);">
+            <i class="bi bi-tools me-2 text-info"></i> <strong>@(LangApp.IsSpanish ? "Estado:" : "Status:")</strong> @(LangApp.IsSpanish ? "En desarrollo activo" : "In active development")
+        </div>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-info-circle me-2"></i> @(LangApp.IsSpanish ? "Descripción General" : "General Description")</h4>
+            <p class="text-secondary" style="font-size: 1.1rem;">
+                @(LangApp.IsSpanish ? "Sistema ERP completo desarrollado en .NET 8 con arquitectura modular. Integra gestión de recursos humanos, activos IT, cumplimiento normativo CTPAT, control de producción con métricas OEE y módulo de mantenimiento industrial con KPIs en tiempo real." : "Complete ERP system developed in .NET 8 with modular architecture. Integrates human resources, IT assets, CTPAT regulatory compliance, production control with OEE metrics, and an industrial maintenance module with real-time KPIs.")
+            </p>
+        </section>
+
+        <hr class="mb-5" />
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-boxes me-2"></i> @(LangApp.IsSpanish ? "Módulos Principales" : "Main Modules")</h4>
+            <div class="row">
+                <!-- RRHH -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card shadow">
+                        <h4 class="text-primary fw-bold border-bottom border-secondary pb-2 mb-3"><i class="bi bi-people me-2"></i> RRHH</h4>
+                        <p class="text-secondary small mb-3">
+                            @(LangApp.IsSpanish ? "Gestión integral del capital humano y desarrollo organizacional." : "Comprehensive human capital management and organizational development.")
+                        </p>
+                        <ul class="list-unstyled text-secondary small mb-0 tech-list">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Expediente digital de empleados" : "Digital employee records")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Control de asistencia y vacaciones" : "Attendance and vacation control")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Reclutamiento (Pipeline 8 estados)" : "Recruitment (8-stage pipeline)")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Evaluaciones de desempeño" : "Performance evaluations")</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Portal de autoservicio" : "Self-service portal")</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Inventario IT -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card shadow">
+                        <h4 class="text-info fw-bold border-bottom border-secondary pb-2 mb-3"><i class="bi bi-pc-display me-2"></i> Inventario IT</h4>
+                        <p class="text-secondary small mb-3">
+                            @(LangApp.IsSpanish ? "Control de activos tecnológicos, licencias y soporte." : "Technological assets, licenses, and support control.")
+                        </p>
+                        <ul class="list-unstyled text-secondary small mb-0 tech-list">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Gestión de equipos por categoría" : "Equipment management by category")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Control de licencias de software" : "Software license control")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Gestión de consumibles IT" : "IT consumables management")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Sistema de Tickets de soporte" : "Support Ticket system")</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "SLA por prioridad (Alta/Normal/Baja)" : "Priority-based SLA (High/Normal/Low)")</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- CTPAT -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card shadow">
+                        <h4 class="text-success fw-bold border-bottom border-secondary pb-2 mb-3"><i class="bi bi-shield-check me-2"></i> CTPAT</h4>
+                        <p class="text-secondary small mb-3">
+                            @(LangApp.IsSpanish ? "Cumplimiento normativo para cadena de suministro segura." : "Regulatory compliance for secure supply chain.")
+                        </p>
+                        <ul class="list-unstyled text-secondary small mb-0 tech-list">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Gestión de requisitos C-TPAT" : "C-TPAT requirements management")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Seguridad en comercio exterior EUA" : "US foreign trade security")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Auditorías de proveedores" : "Supplier audits")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Dashboard de cumplimiento" : "Compliance dashboard")</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Monitoreo de inspecciones" : "Inspection monitoring")</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Producción -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card shadow">
+                        <h4 class="text-warning fw-bold border-bottom border-secondary pb-2 mb-3"><i class="bi bi-gear-wide-connected me-2"></i> Producción</h4>
+                        <p class="text-secondary small mb-3">
+                            @(LangApp.IsSpanish ? "Control exhaustivo del piso de producción." : "Comprehensive shop floor control.")
+                        </p>
+                        <ul class="list-unstyled text-secondary small mb-0 tech-list">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Seguimiento de producción por pieza (PxP)" : "Piece-by-piece (PxP) production tracking")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Control de lotes de producción" : "Production batch control")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Métricas de eficiencia operativa (OEE)" : "Overall Equipment Effectiveness (OEE) metrics")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Asignación de producción por turno" : "Shift-based production allocation")</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Historial de rendimiento y desviaciones" : "Performance history and deviations")</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Mantenimiento -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card shadow">
+                        <h4 class="text-danger fw-bold border-bottom border-secondary pb-2 mb-3"><i class="bi bi-tools me-2"></i> Mantenimiento</h4>
+                        <p class="text-secondary small mb-3">
+                            @(LangApp.IsSpanish ? "Gestión y salud de la maquinaria industrial." : "Industrial machinery health and management.")
+                        </p>
+                        <ul class="list-unstyled text-secondary small mb-0 tech-list">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "KPIs de mantenimiento en tiempo real" : "Real-time maintenance KPIs")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Cálculo de OEE (Disponibilidad × Rendimiento × Calidad)" : "OEE Calculation (Availability × Performance × Quality)")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "MTTR (Tiempo medio de reparación) & MTBF" : "MTTR (Mean Time To Repair) & MTBF")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Planes de mantenimiento preventivo" : "Preventive maintenance plans")</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Registro de órdenes de trabajo" : "Work orders registration")</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Auditorías Internas -->
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card shadow">
+                        <h4 class="text-warning fw-bold border-bottom border-secondary pb-2 mb-3" style="color: #FFC107 !important;"><i class="bi bi-shield-check me-2"></i> @(LangApp.IsSpanish ? "Auditorías Internas" : "Internal Audits")</h4>
+                        <p class="text-secondary small mb-3">
+                            @(LangApp.IsSpanish ? "Sistema de gestión documental y seguimiento normativo." : "Document management and regulatory tracking system.")
+                        </p>
+                        <ul class="list-unstyled text-secondary small mb-0 tech-list">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Gestión de IATF 16949, ISO 9001/14001/45001" : "IATF 16949, ISO 9001/14001/45001 Management")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Explorador de archivos con árbol de carpetas" : "File explorer with folder tree")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Registro de hallazgos con severidad y planes CAPA" : "Findings registry and CAPA plans")</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Dashboard de cumplimiento y notificaciones" : "Compliance dashboard and notifications")</li>
+                            <li><i class="bi bi-check-circle-fill text-success me-2"></i>@(LangApp.IsSpanish ? "Control de acceso por rol (Auditor Líder, Auditor)" : "Role-based access control (Lead Auditor, Auditor)")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-bar-chart me-2"></i> @(LangApp.IsSpanish ? "Métricas del Proyecto" : "Project Metrics")</h4>
+            <div class="row text-center">
+                <div class="col-6 col-md-2 mb-3">
+                    <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="9">0</h3>
+                        <span class="text-muted small">@(LangApp.IsSpanish ? "Proyectos .NET" : ".NET Projects")</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 mb-3">
+                    <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
+                        <h3 class="text-white mb-0 fw-bold"><span class="counter" data-target="120">0</span>+</h3>
+                        <span class="text-muted small">Endpoints REST</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 mb-3">
+                    <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="100">0</h3>
+                        <span class="text-muted small">@(LangApp.IsSpanish ? "Entidades BD" : "DB Entities")</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 mb-3">
+                    <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="6">0</h3>
+                        <span class="text-muted small">@(LangApp.IsSpanish ? "Bases SQL" : "SQL DBs")</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 mb-3">
+                    <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="30">0</h3>
+                        <span class="text-muted small">@(LangApp.IsSpanish ? "Migraciones" : "Migrations")</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2 mb-3">
+                    <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
+                        <h3 class="text-white mb-0 fw-bold"><span class="counter" data-target="18">0</span>k+</h3>
+                        <span class="text-muted small">@(LangApp.IsSpanish ? "Líneas Código" : "Lines of Code")</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-diagram-3 me-2"></i> @(LangApp.IsSpanish ? "Arquitectura del Sistema" : "System Architecture")</h4>
+            <p class="text-secondary mb-4" style="font-size: 1.05rem;">
+                @(LangApp.IsSpanish ? "La plataforma sigue un diseño de Monolito Modular separando el backend, frontend y dominios de negocio. Cada área funcional está encapsulada en proyectos aislados, permitiendo compilación, pruebas y despliegue independientes." : "The platform follows a Modular Monolith design, separating backend, frontend, and business domains. Each functional area is encapsulated in isolated projects, allowing independent compilation, testing, and deployment.")
+            </p>
+
+            <div class="row g-4 mb-4">
+                <div class="col-lg-6">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card">
+                        <h5 class="text-info fw-bold border-bottom border-secondary pb-2 mb-3">1. @(LangApp.IsSpanish ? "Núcleo" : "Core") (Host & Client)</h5>
+                        <ul class="text-secondary small tech-list mb-0">
+                            <li><strong>VAVILL (Server):</strong> @(LangApp.IsSpanish ? "API REST en ASP.NET Core que orquesta la inyección de dependencias, contextos de base de datos compartidos y seguridad." : "ASP.NET Core REST API that orchestrates dependency injection, shared database contexts, and security.")</li>
+                            <li><strong>VAVILL.Client (WASM):</strong> @(LangApp.IsSpanish ? "Aplicación SPA en Blazor WebAssembly que consume la API y carga dinámicamente las interfaces de usuario." : "Blazor WebAssembly SPA application that consumes the API and dynamically loads user interfaces.")</li>
+                            <li><strong>VAVILL.Shared:</strong> @(LangApp.IsSpanish ? "Modelos de datos (DTOs) y servicios compartidos garantizando un tipado fuerte entre cliente y servidor." : "Data models (DTOs) and shared services ensuring strong typing between client and server.")</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100 bg-dark border-secondary p-4 project-card">
+                        <h5 class="text-success fw-bold border-bottom border-secondary pb-2 mb-3">2. @(LangApp.IsSpanish ? "Módulos de Dominio" : "Domain Modules") (RCL)</h5>
+                        <ul class="text-secondary small tech-list mb-0">
+                            <li><strong>Module.RH:</strong> @(LangApp.IsSpanish ? "Librería independiente con UI (Componentes Razor), Servicios e infraestructura de base de datos propia." : "Independent library with UI (Razor Components), Services, and its own database infrastructure.")</li>
+                            <li><strong>Module.GestionIT:</strong> @(LangApp.IsSpanish ? "Librería funcional enfocada en gestión de activos IT y tickets, conectada a su propia Base de Datos." : "Functional library focused on IT asset and ticket management, connected to its own Database.")</li>
+                            <li><strong>Module.CTPAT:</strong> @(LangApp.IsSpanish ? "Librería orientada a la lógica de cumplimiento aduanero." : "Library oriented to customs compliance logic.")</li>
+                            <li><strong>Module.Produccion:</strong> @(LangApp.IsSpanish ? "Gestión de piso de producción, conectada a VAVILL_PROD." : "Shop floor management, connected to VAVILL_PROD.")</li>
+                            <li><strong>Module.Mantto:</strong> @(LangApp.IsSpanish ? "Lógica e infraestructura de mantenimiento y órdenes de trabajo." : "Maintenance logic and work orders infrastructure.")</li>
+                            <li><strong>Module.Auditorias:</strong> @(LangApp.IsSpanish ? "Gestión de auditorías internas con explorador de documentos, hallazgos CAPA y soporte para IATF 16949, ISO 9001 e ISO 14001." : "Internal audits management with document explorer, CAPA findings and support for IATF 16949, ISO 9001 and ISO 14001.")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 border rounded overflow-hidden mt-4" style="background-color: #1a1e23; border-color: rgba(255,255,255,0.1);">
+                <h6 class="text-muted mb-4 text-center text-uppercase tracking-wider">@(LangApp.IsSpanish ? "Diagrama de Interacción" : "Interaction Diagram")</h6>
+
+                <div class="d-flex flex-column align-items-center position-relative py-3">
+                    <!-- Layer 1: Core -->
+                    <div class="d-flex gap-4 justify-content-center mb-5 position-relative w-100 z-1 flex-wrap flex-md-nowrap">
+                        <div class="card p-3 shadow text-center text-white text-truncate" style="background-color: #1F2937; border: 2px solid #10B981; border-radius: 12px; width: 220px; z-index:2;">
+                            <i class="bi bi-server text-success fs-3 mb-2"></i>
+                            <h6 class="mb-0 fw-bold">VAVILL (Server API)</h6>
+                        </div>
+
+                        <!-- Flecha bidireccional -->
+                        <div class="d-none d-md-flex align-items-center position-relative text-info" style="width: 100px; z-index:1;">
+                            <div style="flex-grow:1; height:2px; background-color:#10B981;"></div>
+                            <span class="px-2 small text-success fw-bold bg-dark position-absolute start-50 translate-middle" style="z-index: 2;">HTTP</span>
+                            <i class="bi bi-caret-left-fill position-absolute start-0 text-success" style="transform: translateX(-50%);"></i>
+                            <i class="bi bi-caret-right-fill position-absolute end-0 text-success" style="transform: translateX(50%);"></i>
+                        </div>
+
+                        <div class="card p-3 shadow text-center text-white text-truncate" style="background-color: #1F2937; border: 2px solid #10B981; border-radius: 12px; width: 220px; z-index:2;">
+                            <i class="bi bi-browser-chrome text-success fs-3 mb-2"></i>
+                            <h6 class="mb-0 fw-bold">VAVILL.Client (WASM)</h6>
+                        </div>
+                    </div>
+
+                    <!-- Linea de VAVILL.Shared -->
+                    <div class="position-relative w-100 d-flex justify-content-center mb-5 z-1">
+                        <div class="position-absolute start-50 top-0 translate-middle-x d-none d-md-block" style="height: 48px; width: 2px; background-color: rgba(16,185,129,0.5); transform: translateY(-100%);"></div>
+
+                        <div class="card p-2 shadow text-center text-white z-1 text-truncate" style="background-color: #1F2937; border: 1px dashed #10B981; border-radius: 8px; width: 200px;">
+                            <span class="small text-success fw-bold"><i class="bi bi-link-45deg me-1"></i>VAVILL.Shared</span>
+                        </div>
+                    </div>
+
+                    <!-- Separador -->
+                    <div class="w-100 border-top border-secondary position-relative mb-5" style="border-top-style: dashed !important; opacity:0.6;">
+                        <span class="position-absolute top-0 start-50 translate-middle px-3 text-muted small text-nowrap" style="background-color: #1a1e23;">@(LangApp.IsSpanish ? "Dependencias Módulos" : "Module Dependencies")</span>
+                    </div>
+
+                    <!-- Layer 2: Modules -->
+                    <div class="d-flex flex-wrap gap-3 justify-content-center position-relative w-100 z-1 mb-3">
+
+                        <!-- Módulo RH -->
+                        <div class="d-flex flex-column align-items-center" style="width: 170px;">
+                            <i class="bi bi-arrow-down text-success mb-2 fs-5"></i>
+                            <div class="card p-3 shadow text-center text-white w-100 mb-2" style="background-color: #1F2937; border: 1px solid #10B981; border-radius: 12px;">
+                                <h6 class="mb-1 fw-bold text-success text-truncate">RH</h6>
+                                <span class="small text-muted">(Razor Lib)</span>
+                            </div>
+                            <div class="card p-2 shadow text-center w-100 mt-1" style="background-color: #1F2937; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;">
+                                <i class="bi bi-database text-light mb-1"></i>
+                                <span class="small text-light" style="font-size:0.75rem;">VAVILL_RH</span>
+                            </div>
+                        </div>
+
+                        <!-- Módulo IT -->
+                        <div class="d-flex flex-column align-items-center" style="width: 170px;">
+                            <i class="bi bi-arrow-down text-success mb-2 fs-5"></i>
+                            <div class="card p-3 shadow text-center text-white w-100 mb-2" style="background-color: #1F2937; border: 1px solid #10B981; border-radius: 12px;">
+                                <h6 class="mb-1 fw-bold text-success text-truncate">IT</h6>
+                                <span class="small text-muted">(Razor Lib)</span>
+                            </div>
+                            <div class="card p-2 shadow text-center w-100 mt-1" style="background-color: #1F2937; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;">
+                                <i class="bi bi-database text-light mb-1"></i>
+                                <span class="small text-light" style="font-size:0.75rem;">VAVILL_IT</span>
+                            </div>
+                        </div>
+
+                        <!-- Módulo CTPAT -->
+                        <div class="d-flex flex-column align-items-center" style="width: 170px;">
+                            <i class="bi bi-arrow-down text-success mb-2 fs-5"></i>
+                            <div class="card p-3 shadow text-center text-white w-100 h-100" style="background-color: #1F2937; border: 1px solid #10B981; border-radius: 12px;">
+                                <h6 class="mb-1 fw-bold text-success text-truncate">CTPAT</h6>
+                                <span class="small text-muted">(Razor Lib)</span>
+                            </div>
+                        </div>
+
+                        <!-- Módulo Producción -->
+                        <div class="d-flex flex-column align-items-center" style="width: 170px;">
+                            <i class="bi bi-arrow-down text-success mb-2 fs-5"></i>
+                            <div class="card p-3 shadow text-center text-white w-100 mb-2" style="background-color: #1F2937; border: 1px solid #10B981; border-radius: 12px;">
+                                <h6 class="mb-1 fw-bold text-success text-truncate">Prod</h6>
+                                <span class="small text-muted">(Razor Lib)</span>
+                            </div>
+                            <div class="card p-2 shadow text-center w-100 mt-1" style="background-color: #1F2937; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;">
+                                <i class="bi bi-database text-light mb-1"></i>
+                                <span class="small text-light" style="font-size:0.75rem;">VAVILL_PROD</span>
+                            </div>
+                        </div>
+
+                        <!-- Módulo Mantto -->
+                        <div class="d-flex flex-column align-items-center" style="width: 170px;">
+                            <i class="bi bi-arrow-down text-success mb-2 fs-5"></i>
+                            <div class="card p-3 shadow text-center text-white w-100 mb-2" style="background-color: #1F2937; border: 1px solid #10B981; border-radius: 12px;">
+                                <h6 class="mb-1 fw-bold text-success text-truncate">Mantto</h6>
+                                <span class="small text-muted">(Razor Lib)</span>
+                            </div>
+                            <div class="card p-2 shadow text-center w-100 mt-1" style="background-color: #1F2937; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;">
+                                <i class="bi bi-database text-light mb-1"></i>
+                                <span class="small text-light" style="font-size:0.75rem;">VAVILL_MANTTO</span>
+                            </div>
+                        </div>
+
+                        <!-- Módulo Auditorías -->
+                        <div class="d-flex flex-column align-items-center" style="width: 170px;">
+                            <i class="bi bi-arrow-down text-success mb-2 fs-5"></i>
+                            <div class="card p-3 shadow text-center text-white w-100 mb-2" style="background-color: #1F2937; border: 1px solid #10B981; border-radius: 12px;">
+                                <h6 class="mb-1 fw-bold text-success text-truncate">Auditorías</h6>
+                                <span class="small text-muted">(Razor Lib)</span>
+                            </div>
+                            <div class="card p-2 shadow text-center w-100 mt-1" style="background-color: #1F2937; border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;">
+                                <i class="bi bi-database text-light mb-1"></i>
+                                <span class="small text-light" style="font-size:0.75rem;">VAVILL_Auditorias</span>
+                                <div class="border-top border-secondary mt-2 pt-2">
+                                    <i class="bi bi-folder2-open text-warning mb-1"></i>
+                                    <br />
+                                    <span class="small text-light" style="font-size:0.70rem;">@(LangApp.IsSpanish ? "File Storage (Local)" : "File Storage (Local)")</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-5">
+            <h4 class="text-neon mb-3"><i class="bi bi-code-square me-2"></i> @(LangApp.IsSpanish ? "Stack Tecnológico" : "Technology Stack")</h4>
+            <div class="p-3 rounded border border-secondary mb-3 d-flex flex-wrap gap-2" style="background-color: #1a1e23;">
+                <span class="badge" style="background-color: #512BD4; font-size: 0.9rem;">ASP.NET Core 8</span>
+                <span class="badge" style="background-color: #68217A; font-size: 0.9rem;">Blazor WebAssembly</span>
+                <span class="badge" style="background-color: #68217A; font-size: 0.9rem;">Blazor Server</span>
+                <span class="badge" style="background-color: #CC2927; font-size: 0.9rem;">SQL Server</span>
+                <span class="badge" style="background-color: #68B723; font-size: 0.9rem;">Entity Framework Core 8</span>
+                <span class="badge" style="background-color: #239120; font-size: 0.9rem;">C# 12</span>
+                <span class="badge bg-secondary" style="font-size: 0.9rem;">RCL (Razor Class Libraries)</span>
+                <span class="badge bg-secondary" style="font-size: 0.9rem;">Dependency Injection</span>
+                <span class="badge bg-secondary" style="font-size: 0.9rem;">DTOs</span>
+                <span class="badge bg-secondary" style="font-size: 0.9rem;">SHA-256</span>
+                <span class="badge bg-secondary" style="font-size: 0.9rem;">File System I/O</span>
+                <span class="badge bg-secondary" style="font-size: 0.9rem;">Multipart Form Data</span>
+            </div>
+        </section>
+
+        <section>
+            <h4 class="text-neon mb-3"><i class="bi bi-lightbulb me-2"></i> @(LangApp.IsSpanish ? "Puntos Destacables de Arquitectura" : "Architecture Highlights")</h4>
+            <div class="row text-secondary">
+                <div class="col-12">
+                    <div class="p-4 mb-3 border border-primary rounded" style="background-color: rgba(99, 102, 241, 0.05);">
+                        <ul class="mb-0 tech-list" style="line-height: 1.8;">
+                            <li><strong>@(LangApp.IsSpanish ? "Arquitectura modular con Razor Class Libraries:" : "Modular architecture with Razor Class Libraries:")</strong> @(LangApp.IsSpanish ? "Nivel empresarial. Cada módulo compila independientemente, tiene su propio contexto BD y UI." : "Enterprise level. Each module compiles independently, with its own DB context and UI.")</li>
+                            <li><strong>@(LangApp.IsSpanish ? "Integración cross-módulo controlada:" : "Controlled cross-module integration:")</strong> @(LangApp.IsSpanish ? "Permite que el módulo RH consulte activos de IT asignados sin acoplar sus bases de datos." : "Allows the HR module to query assigned IT assets without coupling their databases.")</li>
+                            <li><strong>@(LangApp.IsSpanish ? "Portal de autoservicio para colaboradores:" : "Employee self-service portal:")</strong> @(LangApp.IsSpanish ? "Separación de roles clara con un portal dedicado, permitiendo la autogestión del personal." : "Clear role separation with a dedicated portal, allowing staff self-management.")</li>
+                            <li><strong>@(LangApp.IsSpanish ? "Módulo CTPAT:" : "CTPAT Module:")</strong> @(LangApp.IsSpanish ? "Diferenciador de dominio industrial garantizando el cumplimiento de normativas de seguridad de EUA." : "Industrial domain differentiator ensuring security compliance with US regulations.")</li>
+                            <li><strong>@(LangApp.IsSpanish ? "Sistema de Gestión Documental:" : "Document Management System:")</strong> @(LangApp.IsSpanish ? "Explorador de archivos con árbol de carpetas por norma, subida/descarga de documentos y almacenamiento físico en servidor local — nivel de funcionalidad comparable a sistemas DMS empresariales." : "File explorer with folder tree by standard, document upload/download and physical storage on local server — functionality level comparable to enterprise DMS systems.")</li>
+                            <li><strong>@(LangApp.IsSpanish ? "Cobertura normativa completa:" : "Complete regulatory coverage:")</strong> @(LangApp.IsSpanish ? "Soporte nativo para IATF 16949, ISO 9001, ISO 14001 e ISO 45001 — estándares requeridos por la industria automotriz y de manufactura global." : "Native support for IATF 16949, ISO 9001, ISO 14001 and ISO 45001 — standards required by the global automotive and manufacturing industry.")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("eval", @"
+                window.startVavillCounters = () => {
+                    const counters = document.querySelectorAll('.counter');
+                    if(!counters.length) return;
+
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.1
+                    };
+
+                    const observer = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const counter = entry.target;
+                                const target = +counter.getAttribute('data-target');
+                                const duration = 1500; // ms
+                                const step = target / (duration / 16);
+                                let current = 0;
+
+                                const updateCounter = () => {
+                                    current += step;
+                                    if (current < target) {
+                                        counter.innerText = Math.ceil(current);
+                                        requestAnimationFrame(updateCounter);
+                                    } else {
+                                        counter.innerText = target;
+                                    }
+                                };
+                                updateCounter();
+                                observer.unobserve(counter);
+                            }
+                        });
+                    }, observerOptions);
+
+                    counters.forEach(counter => {
+                        observer.observe(counter);
+                    });
+                };
+                window.startVavillCounters();
+            ");
+        }
+
+        LangApp.OnLanguageChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+    }
+}

@@ -129,6 +129,17 @@ namespace EdgarJairVazquezVillarreal.Services
                 ("Sistema empresarial completo desarrollado desde cero para una tortillería. Cubre ventas, inventario, recursos humanos, proveedores y finanzas, con arquitectura distribuida entre dos ciudades.",
                  "Full-featured business system built from scratch for a tortilla manufacturer. Covers sales, inventory, HR, suppliers and finance, with a distributed architecture across two cities.") },
 
+            // VAVILL
+            { "ProjVavillSubtitle", 
+                ("ERP Empresarial Completo — Manufactura e Industrial", 
+                 "Complete Business ERP — Manufacturing and Industrial") },
+            { "ProjVavillDesc", 
+                ("Sistema ERP completo desarrollado en .NET 8 con arquitectura modular. Integra gestión de recursos humanos, activos IT, cumplimiento normativo CTPAT, control de producción con métricas OEE y módulo de mantenimiento industrial con KPIs en tiempo real.", 
+                 "Complete ERP system developed in .NET 8 with modular architecture. Integrates human resources, IT assets, CTPAT regulatory compliance, production control with OEE metrics, and an industrial maintenance module with real-time KPIs.") },
+            { "StatusInDevelopment",
+                ("En desarrollo activo", 
+                 "In active development") },
+
             // App de Gestión
             { "ProjMgmtTitle",  ("App de Gestión Empresarial", "Business Management App") },
             { "ProjMgmtDesc",
