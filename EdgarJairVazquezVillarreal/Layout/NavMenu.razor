@@ -1,5 +1,6 @@
 @inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
 @inject EdgarJairVazquezVillarreal.Services.ThemeService ThemeApp
+@inject IJSRuntime JS
 @implements IDisposable
 
 <!-- El sidebar tiene data-bs-theme="dark", así que navbar siempre es oscura -->
@@ -21,10 +22,10 @@
             <div class="btn-group" role="group" aria-label="Idioma">
                 <button type="button"
                         class="btn btn-sm @(LangApp.IsSpanish ? "btn-light" : "btn-outline-light")"
-                        @onclick="() => SetLang(true)">ES</button>
+                        @onclick="() => SetLangAsync(true)">ES</button>
                 <button type="button"
                         class="btn btn-sm @(!LangApp.IsSpanish ? "btn-light" : "btn-outline-light")"
-                        @onclick="() => SetLang(false)">EN</button>
+                        @onclick="() => SetLangAsync(false)">EN</button>
             </div>
 
             <button class="btn btn-sm btn-outline-light" title="Cambiar tema" @onclick="ToggleThemeAsync">
@@ -81,10 +82,15 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-    private void SetLang(bool isSpanish)
+    private async Task SetLangAsync(bool isSpanish)
     {
-        if (LangApp.IsSpanish != isSpanish)
-            LangApp.ToggleLanguage();
+        if (LangApp.IsSpanish == isSpanish)
+            return;
+
+        LangApp.ToggleLanguage();
+
+        // Mantiene <html lang> acorde al idioma visible (lectores de pantalla y traductor del navegador)
+        await JS.InvokeVoidAsync("document.documentElement.setAttribute", "lang", isSpanish ? "es" : "en");
     }
 
     private async Task ToggleThemeAsync()
