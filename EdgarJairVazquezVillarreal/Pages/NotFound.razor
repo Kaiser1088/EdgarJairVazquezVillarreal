@@ -1,5 +1,27 @@
 ﻿@page "/not-found"
-@layout MainLayout
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+@implements IDisposable
 
-<h3>Not Found</h3>
-<p>Sorry, the content you are looking for does not exist.</p>
+<PageTitle>@LangApp.Get("NotFoundTitle")</PageTitle>
+
+<!-- También se muestra para cualquier ruta desconocida (ver App.razor) -->
+<section class="not-found">
+    <p class="not-found-code text-gradient" aria-hidden="true">404</p>
+    <h1 class="h3 fw-bold">@LangApp.Get("NotFoundTitle")</h1>
+    <p class="text-secondary mb-4">@LangApp.Get("NotFoundText")</p>
+    <a href="" class="btn btn-primary">
+        <i class="bi bi-house-fill me-2"></i>@LangApp.Get("BackHome")
+    </a>
+</section>
+
+@code {
+    protected override void OnInitialized()
+    {
+        LangApp.OnLanguageChanged += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        LangApp.OnLanguageChanged -= StateHasChanged;
+    }
+}

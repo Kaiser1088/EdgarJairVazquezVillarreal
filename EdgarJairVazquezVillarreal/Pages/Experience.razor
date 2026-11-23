@@ -18,9 +18,50 @@
 
     <div class="row">
         <div class="col-md-10 offset-md-1">
+
+            <!-- ── Experiencia laboral ───────────────────────────── -->
+            <div class="section-head scroll-reveal">
+                <h3 class="section-heading"><i class="bi bi-briefcase-fill"></i>@LangApp.Get("ExpWorkTitle")</h3>
+            </div>
+
             <div class="timeline-section">
 
-                <!-- ── Puesto 1: Julian Electric ─────────────────── -->
+                <!-- Puesto actual: Magna. Sin cliente final, proyecto ni planta. -->
+                <div class="timeline-item scroll-reveal mb-5">
+                    <div class="row">
+                        <div class="col-md-3 text-md-end">
+                            <h5 class="fw-bold mb-1">2026</h5>
+                            <span class="badge badge-current">@LangApp.Get("Exp0Status")</span>
+                        </div>
+                        <div class="col-md-9 timeline-connector ps-4 position-relative">
+                            <div class="timeline-dot active"></div>
+                            <h4>@LangApp.Get("Exp0Title")</h4>
+                            <h6 class="fst-italic mb-1">@LangApp.Get("Exp0Company")</h6>
+                            <p class="timeline-meta">
+                                <span><i class="bi bi-calendar3"></i>@LangApp.Get("Exp0Period")</span>
+                                <span><i class="bi bi-geo-alt-fill"></i>@LangApp.Get("Exp0Location")</span>
+                            </p>
+                            <ul class="mb-3">
+                                <li>@LangApp.Get("Exp0B1")</li>
+                                <li>@LangApp.Get("Exp0B2")</li>
+                                <li>@LangApp.Get("Exp0B3")</li>
+                                <li>@LangApp.Get("Exp0B4")</li>
+                                <li>@LangApp.Get("Exp0B5")</li>
+                                <li>@LangApp.Get("Exp0B6")</li>
+                            </ul>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge badge-glass">I/O check</span>
+                                <span class="badge badge-glass">Power-up</span>
+                                <span class="badge badge-glass">KUKA</span>
+                                <span class="badge badge-glass">FANUC</span>
+                                <span class="badge badge-glass">C# / WPF</span>
+                                <span class="badge badge-glass">FluidNC</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Julian Electric -->
                 <div class="timeline-item scroll-reveal mb-5">
                     <div class="row">
                         <div class="col-md-3 text-md-end">
@@ -28,15 +69,19 @@
                             <span class="badge bg-secondary">@LangApp.Get("Exp1Status")</span>
                         </div>
                         <div class="col-md-9 timeline-connector ps-4 position-relative">
-                            <div class="timeline-dot active"></div>
+                            <div class="timeline-dot"></div>
                             <h4>@LangApp.Get("Exp1Title")</h4>
-                            <h6 class="fst-italic mb-3">@LangApp.Get("Exp1Company")</h6>
+                            <h6 class="fst-italic mb-1">@LangApp.Get("Exp1Company")</h6>
+                            <p class="timeline-meta">
+                                <span><i class="bi bi-geo-alt-fill"></i>@LangApp.Get("Exp1Location")</span>
+                            </p>
                             <p>@LangApp.Get("Exp1Intro")</p>
                             <ul class="mb-3">
                                 <li>@LangApp.Get("Exp1B1")</li>
                                 <li>@LangApp.Get("Exp1B2")</li>
                                 <li>@LangApp.Get("Exp1B3")</li>
                                 <li>@LangApp.Get("Exp1B4")</li>
+                                <li>@LangApp.Get("Exp1B8")</li>
                                 <li>@LangApp.Get("Exp1B5")</li>
                                 <li>@LangApp.Get("Exp1B6")</li>
                                 <li>@LangApp.Get("Exp1B7")</li>
@@ -46,18 +91,116 @@
                                 <span class="badge badge-glass">SQL Server</span>
                                 <span class="badge badge-glass">ESP32</span>
                                 <span class="badge badge-glass">PLC Allen-Bradley</span>
+                                <span class="badge badge-glass">FANUC</span>
+                                <span class="badge badge-glass">SCADA</span>
                                 <span class="badge badge-glass">Lean Six Sigma</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div><!-- /timeline-section -->
+            </div><!-- /timeline experiencia -->
+
+            <!-- ── Formación académica ───────────────────────────── -->
+            <div class="section-head scroll-reveal mt-2">
+                <h3 class="section-heading"><i class="bi bi-mortarboard-fill"></i>@LangApp.Get("ExpEduTitle")</h3>
+            </div>
+
+            <div class="timeline-section">
+
+                <div class="timeline-item scroll-reveal mb-5">
+                    <div class="row">
+                        <div class="col-md-3 text-md-end">
+                            <h5 class="fw-bold mb-1">2025</h5>
+                        </div>
+                        <div class="col-md-9 timeline-connector ps-4 position-relative">
+                            <div class="timeline-dot"></div>
+                            <h4>@LangApp.Get("Edu1Degree")</h4>
+                            <h6 class="fst-italic mb-1">@LangApp.Get("Edu1School")</h6>
+                            <p class="timeline-meta">
+                                <span><i class="bi bi-geo-alt-fill"></i>@LangApp.Get("Edu1Location")</span>
+                            </p>
+                            <p class="mb-2">@LangApp.Get("Edu1Specialty")</p>
+                            <ul class="mb-0">
+                                <li>@LangApp.Get("Edu1B1")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item scroll-reveal mb-5">
+                    <div class="row">
+                        <div class="col-md-3 text-md-end">
+                            <h5 class="fw-bold mb-1">2017</h5>
+                        </div>
+                        <div class="col-md-9 timeline-connector ps-4 position-relative">
+                            <div class="timeline-dot"></div>
+                            <h4>@LangApp.Get("Edu2School")</h4>
+                            <p class="timeline-meta">
+                                <span><i class="bi bi-geo-alt-fill"></i>@LangApp.Get("Edu2Location")</span>
+                            </p>
+                            <ul class="mb-0">
+                                <li>@LangApp.Get("Edu2B1")</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /timeline formación -->
+
+            <!-- ── Certificaciones y cursos ──────────────────────── -->
+            <div class="section-head scroll-reveal mt-2">
+                <h3 class="section-heading"><i class="bi bi-patch-check-fill"></i>@LangApp.Get("ExpCertTitle")</h3>
+            </div>
+
+            <div class="row mb-4">
+                @foreach (var cert in Certifications)
+                {
+                    <div class="col-md-6 mb-4">
+                        <div class="glass-card mini-card scroll-reveal h-100">
+                            <span class="mini-icon"><i class="bi @cert.Icon"></i></span>
+                            <div>
+                                <h4 class="mini-name">@T(cert.Name)</h4>
+                                <p class="mini-detail">@T(cert.Detail)</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
         </div>
     </div>
 </div>
 
 @code {
+    private record Certification(string Icon, (string Es, string En) Name, (string Es, string En) Detail);
+
+    // Para agregar una certificación o curso basta una línea más.
+    private static readonly Certification[] Certifications =
+    {
+        new("bi-box-fill",
+            ("CSWP · Certified SOLIDWORKS Professional", "CSWP · Certified SOLIDWORKS Professional"),
+            ("Dassault Systèmes", "Dassault Systèmes")),
+        new("bi-graph-up-arrow",
+            ("Lean Six Sigma White Belt", "Lean Six Sigma White Belt"),
+            ("Folio SSWB1455-586", "ID SSWB1455-586")),
+        new("bi-code-slash",
+            ("C# / .NET", "C# / .NET"),
+            ("Microsoft Learn", "Microsoft Learn")),
+        new("bi-cup-hot-fill",
+            ("Java", "Java"),
+            ("Oracle / Alura", "Oracle / Alura")),
+        new("bi-database-fill",
+            ("SQL Server", "SQL Server"),
+            ("Alura", "Alura")),
+        new("bi-shield-fill-check",
+            ("Seguridad industrial", "Industrial safety"),
+            ("LOTO · seguridad eléctrica (NOM-029-STPS / NFPA 70E) · trabajos en caliente · maquinaria rotativa",
+             "LOTO · electrical safety (NOM-029-STPS / NFPA 70E) · hot work · rotating machinery")),
+    };
+
+    private string T((string Es, string En) text) => LangApp.IsSpanish ? text.Es : text.En;
+
     protected override void OnInitialized()
     {
         LangApp.OnLanguageChanged += StateHasChanged;

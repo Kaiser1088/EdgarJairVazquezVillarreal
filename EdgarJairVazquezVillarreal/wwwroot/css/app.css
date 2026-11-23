@@ -320,24 +320,6 @@ html.js-anim .scroll-reveal:not([data-revealed]) { opacity: 0; }
     box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.25);
 }
 
-/* Botón pendiente / deshabilitado */
-.btn-disabled-elegance {
-    background: transparent;
-    border: 1px dashed var(--border-color);
-    color: var(--text-secondary);
-    opacity: 0.72;
-    cursor: not-allowed;
-    transition: all 0.25s ease;
-}
-.btn-disabled-elegance:hover {
-    border-color: var(--text-secondary);
-    opacity: 0.9;
-    background: transparent;
-    box-shadow: none;
-    transform: none;
-    color: var(--text-secondary);
-}
-
 /* Botones sociales */
 .btn-social {
     display: inline-block;
@@ -464,6 +446,56 @@ ul.tech-list li::before {
 .timeline-dot.active {
     background-color: var(--accent-color);
     animation: pulse-accent 2s infinite;
+}
+
+/* Lugar debajo de la empresa o escuela */
+.timeline-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.1rem;
+    margin-bottom: 0.9rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+.timeline-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.timeline-meta i { color: var(--accent-color); font-size: 0.8rem; }
+
+/* Insignia del puesto actual */
+.badge-current {
+    background-color: rgba(var(--accent-rgb), 0.14);
+    color: var(--accent-color);
+    border: 1px solid rgba(var(--accent-rgb), 0.45);
+}
+
+/* Tarjeta compacta: ícono + título + detalle (certificaciones, otros proyectos) */
+.mini-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+}
+.mini-icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    color: var(--accent-color);
+    background-color: rgba(var(--accent-rgb), 0.12);
+}
+.mini-name {
+    margin: 0 0 0.2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.mini-detail {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
 }
 
 
@@ -698,6 +730,20 @@ ul.tech-list li::before {
     max-width: 46rem;
 }
 
+/* Idiomas, debajo de las tarjetas de habilidades */
+.lang-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+.lang-row-title {
+    margin-right: 0.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.lang-row-title i { color: var(--accent-color); }
+
 /* Tarjetas de proyectos destacados */
 .featured-icon {
     flex: 0 0 auto;
@@ -927,6 +973,9 @@ ul.tech-list-cols li { margin-bottom: 0; }
     gap: 1.25rem;
 }
 .doc-figure { margin: 0; }
+/* Una sola imagen: no se estira a todo el ancho ni se recorta */
+.doc-figure:only-child { max-width: 40rem; }
+.doc-figure:only-child img { aspect-ratio: auto; }
 .doc-figure img {
     width: 100%;
     aspect-ratio: 16 / 10;
@@ -1235,3 +1284,72 @@ hr {
     50%  { transform: translateX(0);     }
     100% { transform: translateX(100%);  }
 }
+
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  PÁGINA NO ENCONTRADA                               ║
+   ╚══════════════════════════════════════════════════════╝ */
+.not-found {
+    max-width: 34rem;
+    margin: 4rem auto;
+    text-align: center;
+}
+.not-found-code {
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(4rem, 12vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+}
+
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  PROYECTOS — REJILLA                                ║
+   ╚══════════════════════════════════════════════════════╝ */
+/* Cabecera de la tarjeta: imagen del proyecto o, si no hay, un ícono */
+.project-media {
+    display: grid;
+    place-items: center;
+    height: 200px;
+    overflow: hidden;
+}
+.project-media img {
+    width: 100%;
+    height: 100%;
+}
+.project-media-icon { background-color: rgba(99, 102, 241, 0.06); }
+.project-media-icon i {
+    font-size: 2.5rem;
+    color: var(--accent2-color);
+}
+
+/* Meta del inicio: hacia dónde voy */
+.about-goal {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    max-width: 46rem;
+    margin: 1.25rem 0 0;
+    padding: 0.85rem 1.1rem;
+    border-left: 3px solid var(--accent-color);
+    border-radius: 0 10px 10px 0;
+    background-color: rgba(var(--accent-rgb), 0.07);
+    color: var(--text-secondary);
+}
+.about-goal i { color: var(--accent-color); margin-top: 0.15rem; }
+.about-goal strong { color: var(--text-primary); }
+
+/* Aviso dentro de una página de documentación (p. ej. confidencialidad) */
+.doc-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--accent-color);
+    border-radius: 0 10px 10px 0;
+    background-color: rgba(var(--accent-rgb), 0.07);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.doc-note i { color: var(--accent-color); }

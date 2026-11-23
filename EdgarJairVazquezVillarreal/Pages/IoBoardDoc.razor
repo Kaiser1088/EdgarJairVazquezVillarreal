@@ -1,0 +1,111 @@
+@page "/docs/placa-io"
+@inherits DocPageBase
+
+<PageTitle>@T("Placa industrial de I/O", "Industrial I/O board") - @T("Documentación", "Documentation")</PageTitle>
+
+<DocPage Title="@T("Placa industrial de I/O", "Industrial I/O Board")"
+         Subtitle="@T("Tarjeta de control con ESP32-S3 y E/S aisladas a 24 V", "ESP32-S3 control board with isolated 24 V I/O")"
+         Icon="bi-motherboard"
+         Tags="@Tags">
+
+    <DocSection Id="descripcion" Icon="bi-info-circle" Title="@T("Descripción General", "Overview")">
+        <p class="doc-lead scroll-reveal">
+            @T("Tarjeta de control de diseño propio basada en ESP32-S3. La desarrollé durante mi residencia profesional para estandarizar los proyectos de automatización internos: lleva las señales de 24 V de planta al microcontrolador con aislamiento.",
+               "Self-designed control board based on the ESP32-S3. I developed it during my professional residency to standardize internal automation projects: it brings 24 V plant signals to the microcontroller with isolation.")
+        </p>
+
+        <div class="doc-metrics mt-4">
+            <DocMetric Value="4" Label="@T("Canales de relevador", "Relay channels")" />
+            <DocMetric Value="2" Label="@T("Puertos UART para sensores", "UART ports for sensors")" />
+            <DocMetric Value="2" Label="@T("Salidas para tiras LED", "LED strip outputs")" />
+            <DocMetric Value="24" Suffix=" V" Label="@T("Señales de planta", "Plant signals")" />
+        </div>
+    </DocSection>
+
+    @if (Gallery.Length > 0)
+    {
+        <DocSection Id="imagenes" Icon="bi-images" Title="@T("Imágenes", "Images")">
+            <DocGallery Images="@Gallery" />
+        </DocSection>
+    }
+
+    <DocSection Id="bloques" Icon="bi-diagram-3" Title="@T("Bloques de la Tarjeta", "Board Blocks")">
+        <div class="doc-grid">
+            @foreach (var block in Blocks)
+            {
+                <DocCard Icon="@block.Icon" Title="@T(block.Title)" Description="@T(block.Detail)" />
+            }
+        </div>
+    </DocSection>
+
+    <DocSection Id="uso" Icon="bi-rulers" Title="@T("Dónde se Usó", "Where It Was Used")">
+        <p class="doc-text scroll-reveal mb-0">
+            @T("Fue la base del sistema de apoyo visual en medición: una aplicación en C# envía por puerto serie el nominal y las tolerancias, y la tarjeta enciende sobre la mesa de corte la zona válida con tiras LED WS2812B.",
+               "It was the base of the visual aid system for measurement: a C# application sends the nominal value and tolerances over the serial port, and the board lights up the valid zone on the cutting table with WS2812B LED strips.")
+        </p>
+    </DocSection>
+
+    <DocSection Id="siguiente" Icon="bi-signpost-split" Title="@T("En Desarrollo", "In Development")">
+        <div class="doc-callout scroll-reveal">
+            <p class="mb-3">
+                @T("Evolución a una controladora CNC de hasta 6 ejes, pensada para retrofit de máquinas CNC y robótica educativa:",
+                   "Evolution into a CNC controller with up to 6 axes, intended for CNC machine retrofits and educational robotics:")
+            </p>
+            <ul class="tech-list tech-list-cols">
+                @foreach (var item in NextSteps)
+                {
+                    <li>@T(item)</li>
+                }
+            </ul>
+        </div>
+    </DocSection>
+</DocPage>
+
+@code {
+    private static readonly string[] Tags =
+    {
+        "ESP32-S3", "PCB", "24 V", "UART", "WS2812B",
+    };
+
+    // Guarda las imágenes en wwwroot/ImagenesDocs/ y agrega una línea por cada una.
+    private static readonly DocImage[] Gallery =
+    {
+        new("ImagenesDocs/Tarjeta de control 1 diseño.png", "Diseño de la PCB (render 3D)", "PCB design (3D render)"),
+    };
+
+    private static readonly (string Icon, (string Es, string En) Title, (string Es, string En) Detail)[] Blocks =
+    {
+        ("bi-box-arrow-in-right",
+         ("Entradas aisladas", "Isolated inputs"),
+         ("Entradas digitales de 24 V aisladas con optoacopladores LTV-814.",
+          "24 V digital inputs isolated with LTV-814 optocouplers.")),
+        ("bi-box-arrow-right",
+         ("Salidas protegidas", "Protected outputs"),
+         ("Salidas digitales protegidas con optoacopladores PC817.",
+          "Digital outputs protected with PC817 optocouplers.")),
+        ("bi-toggles",
+         ("Relevadores", "Relays"),
+         ("4 canales de relevador para conmutar cargas.",
+          "4 relay channels for switching loads.")),
+        ("bi-broadcast",
+         ("Puertos para sensores", "Sensor ports"),
+         ("2 puertos UART, usados con sensores LiDAR TF-Luna.",
+          "2 UART ports, used with TF-Luna LiDAR sensors.")),
+        ("bi-lightbulb",
+         ("Tiras LED", "LED strips"),
+         ("2 salidas de señal para tiras LED direccionables.",
+          "2 signal outputs for addressable LED strips.")),
+        ("bi-cpu",
+         ("Microcontrolador", "Microcontroller"),
+         ("Módulo ESP32-S3 montado sobre la tarjeta.",
+          "ESP32-S3 module mounted on the board.")),
+    };
+
+    private static readonly (string Es, string En)[] NextSteps =
+    {
+        ("Drivers de motor externos.",          "External motor drivers."),
+        ("Borneras enchufables.",               "Pluggable terminal blocks."),
+        ("Diseño modular en KiCad.",            "Modular design in KiCad."),
+        ("Carcasa co-diseñada en SOLIDWORKS.",  "Enclosure co-designed in SOLIDWORKS."),
+    };
+}

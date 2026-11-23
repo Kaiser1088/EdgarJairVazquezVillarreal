@@ -38,7 +38,11 @@ namespace EdgarJairVazquezVillarreal.Services
             { "NavContact",     ("Contacto",   "Contact")    },
             { "DownloadCV",     ("Descargar CV","Download CV") },
             { "DownloadCVFull", ("Descargar CV Completo","Download Full CV") },
-            { "DocsPending",    ("Documentación (Pendiente)","Documentation (Pending)") },
+            { "NotFoundTitle",  ("Página no encontrada", "Page not found") },
+            { "NotFoundText",
+                ("La dirección que buscas no existe o cambió de lugar.",
+                 "The page you are looking for doesn't exist or has moved.") },
+            { "BackHome",       ("Volver al inicio", "Back to home") },
             { "ViewDocs",       ("Ver Documentación Completa","View Full Documentation") },
 
             // ══════════════════════════════════════════
@@ -48,53 +52,42 @@ namespace EdgarJairVazquezVillarreal.Services
 
             // Hero
             { "HeroGreeting", ("Hola, soy", "Hi, I'm") },
-            { "HeroRole1",    ("Ingeniero en Mecatrónica",           "Mechatronics Engineer")           },
-            { "HeroRole2",    ("Desarrollador .NET y Blazor",        ".NET & Blazor Developer")         },
-            { "HeroRole3",    ("Integración de software y hardware", "Software & hardware integration") },
+            { "HeroRole1",    ("Ingeniero en Mecatrónica",             "Mechatronics Engineer")            },
+            { "HeroRole2",    ("Arranque de líneas de producción",     "Production line commissioning")    },
+            { "HeroRole3",    ("Desarrollador C# / .NET",              "C# / .NET Developer")              },
+            { "HeroRole4",    ("Automatización industrial y robótica", "Industrial automation & robotics") },
             { "HeroTagline", (
-                "Desarrollo software industrial en .NET y lo integro con la electrónica y el control de las líneas de producción.",
-                "I build industrial software in .NET and integrate it with the electronics and controls of production lines.") },
+                "Trabajo en los dos lados de la automatización: en piso, instalando y arrancando líneas de producción, y en software, construyendo las herramientas que conectan ambos.",
+                "I work on both sides of automation: on the floor, installing and commissioning production lines, and in software, building the tools that connect the two.") },
             { "ViewProjects",   ("Ver proyectos", "View projects") },
             { "HeroCodeDegree", ("Mecatrónica",   "Mechatronics")  },
 
             // Cifras
-            { "StatErp",           ("Sistemas ERP desarrollados",    "ERP systems built")              },
-            { "StatEndpoints",     ("Endpoints REST en VAVILL",      "REST endpoints in VAVILL")       },
-            { "StatCswp",          ("Certificación SOLIDWORKS",      "SOLIDWORKS certification")       },
-            { "StatRoboticsValue", ("1er",                           "1st")                            },
-            { "StatRobotics",      ("lugar · Estatal de Robótica NL", "place · NL State Robotics")     },
+            { "StatErp",       ("Sistemas ERP desarrollados",      "ERP systems built")         },
+            { "StatEndpoints", ("Endpoints REST en VAVILL",        "REST endpoints in VAVILL")  },
+            { "StatTests",     ("Pruebas automatizadas en CNCIMS", "Automated tests in CNCIMS") },
+            { "StatCswp",      ("Certificación SOLIDWORKS",        "SOLIDWORKS certification")  },
 
             { "BioP1", (
-                "Ingeniero en Mecatrónica con enfoque en el desarrollo e implementación de soluciones tecnológicas para entornos industriales. Cuento con experiencia en integración de software, electrónica y sistemas de control, orientados a mejorar la eficiencia y el desempeño de procesos productivos.",
-                "Mechatronics Engineer focused on developing and implementing technological solutions for industrial environments. I have experience in software integration, electronics, and control systems, aimed at improving the efficiency and performance of production processes.") },
+                "Soy ingeniero en mecatrónica con experiencia en instalación y arranque de líneas de producción automotriz, y desarrollador de software industrial en C# / .NET. Mi día a día mezcla el conexionado eléctrico de tableros, sensores y motores, las pruebas funcionales y el power-up de equipos con la coordinación de materiales y cambios de ingeniería.",
+                "I'm a mechatronics engineer with experience installing and commissioning automotive production lines, and an industrial software developer in C# / .NET. My day-to-day mixes electrical wiring of panels, sensors and motors, functional testing and equipment power-up with coordinating materials and engineering changes.") },
+            { "BioP2", (
+                "En paralelo diseño y programo mis propias soluciones: desde un ERP modular y un punto de venta en producción hasta el software CAM y el firmware de una estación CNC de grabado. Me gusta la presión de los proyectos: encontrar la solución y sacarlos adelante.",
+                "Alongside that, I design and build my own solutions: from a modular ERP and a point of sale running in production to the CAM software and firmware of a CNC engraving station. I enjoy the pressure of projects: finding the solution and getting them over the line.") },
+            { "BioGoalLabel", ("Hacia dónde voy", "Where I'm headed") },
+            { "BioGoal", (
+                "De electromecánico a controles y robótica, y de ahí a la integración de sistemas MES / IT.",
+                "From electromechanical work to controls and robotics, and from there to MES / IT systems integration.") },
 
             // Proyectos destacados
             { "HomeFeaturedTitle", ("Proyectos destacados",    "Featured projects") },
             { "HomeAllProjects",   ("Ver todos los proyectos", "View all projects") },
 
-            // Habilidades
-            { "HomeSkillsTitle",   ("Habilidades",  "Skills")       },
-            { "MechatronicsTitle", ("Mecatrónica",  "Mechatronics") },
-            { "SoftwareTitle",     ("Software",     "Software")     },
-            { "SolutionsTitle",    ("Soluciones",   "Solutions")    },
-
-            { "Solidworks",    ("SOLIDWORKS (Certificado CSWP)", "SOLIDWORKS (CSWP Certified)")   },
-            { "PLC",           ("Programación de PLC Siemens",  "Siemens PLC Programming")        },
-            { "PCB",           ("Diseño de PCB (ESP32-S3)",     "PCB Design (ESP32-S3)")          },
-            { "Labview",       ("LabVIEW & MATLAB",             "LabVIEW & MATLAB")               },
-            { "CSharp",        ("C# / .NET 10 & Blazor",        "C# / .NET 10 & Blazor")          },
-            { "AspNetCore",    ("ASP.NET Core 10",              "ASP.NET Core 10")                },
-            { "ClientServer",  ("Arquitectura Cliente-Servidor","Client-Server Architecture")      },
-            { "IndApps",       ("Apps Industriales",            "Industrial Apps")                },
-            { "WPF",           ("WPF Desktop Apps",             "WPF Desktop Apps")               },
-            { "HWInt",         ("Integración con Hardware",     "Hardware Integration")           },
-            { "RestAPI",       ("REST APIs / Web Services",     "REST APIs / Web Services")       },
-            { "SQL",           ("SQL Server",                   "SQL Server")                     },
-            { "Postgres",      ("PostgreSQL & EF Core 10",      "PostgreSQL & EF Core 10")        },
-            { "Git",           ("Git & Control de Versiones",   "Git & Version Control")          },
-            { "CTPAT",         ("Sistemas CTPAT",               "CTPAT Systems")                  },
-            { "ZPL",           ("Automatización ZPL",           "ZPL Automation")                 },
-            { "ITInv",         ("Gestión de Inventarios IT",    "IT Inventory Management")        },
+            // Habilidades (el detalle de cada tarjeta vive en Home.razor)
+            { "HomeSkillsTitle", ("Habilidades",      "Skills")           },
+            { "LanguagesTitle",  ("Idiomas",          "Languages")        },
+            { "LangSpanish",     ("Español (nativo)", "Spanish (native)") },
+            { "LangEnglish",     ("Inglés (B2)",      "English (B2)")     },
 
             // Logros y participaciones
             { "CareerAndAchievements", ("Logros y Participaciones", "Achievements & Participations") },
@@ -151,65 +144,19 @@ namespace EdgarJairVazquezVillarreal.Services
                 ("En desarrollo activo", 
                  "In active development") },
 
-            // App de Gestión
-            { "ProjMgmtTitle",  ("App de Gestión Empresarial", "Business Management App") },
-            { "ProjMgmtDesc",
-                ("Plataforma integral diseñada para la administración de activos, control de inventarios IT y automatización de flujos de trabajo empresariales.",
-                 "Comprehensive platform designed for asset management, IT inventory control, and business workflow automation.") },
-            { "ProjMgmtB1",
-                ("Implementación de módulos para cumplimiento CTPAT.",
-                 "Implementation of CTPAT compliance modules.") },
-            { "ProjMgmtB2",
-                ("Gestión de bases de datos relacionales en SQL Server.",
-                 "Relational database management with SQL Server.") },
+            // CNCIMS
+            { "ProjCncSubtitle",
+                ("Estación CNC de grabado con software CAM propio",
+                 "CNC engraving station with custom CAM software") },
+            { "ProjCncDesc",
+                ("Conversión de una cortadora láser CO2 recuperada en una estación CNC de grabado mecánico para placas de identificación de tableros. Puesta en marcha completa: hardware, firmware y una aplicación CAM de escritorio.",
+                 "Conversion of a salvaged CO2 laser cutter into a mechanical CNC engraving station for control panel nameplates. Full bring-up: hardware, firmware and a desktop CAM application.") },
 
-            // Controlador Hardware
-            { "ProjHardwareTitle", ("Controlador de Hardware Industrial", "Industrial Hardware Controller") },
-            { "ProjHardwareDesc",
-                ("Diseño y prototipado de una PCB personalizada basada en el microcontrolador ESP32-S3 para aplicaciones de control y monitoreo industrial.",
-                 "Design and prototyping of a custom PCB based on the ESP32-S3 microcontroller for industrial control and monitoring applications.") },
-            { "ProjHardwareB1",
-                ("Integración de periféricos y protocolos de comunicación IoT.",
-                 "Integration of peripherals and IoT communication protocols.") },
-            { "ProjHardwareB2",
-                ("Modelado mecánico de componentes y ensamblaje.",
-                 "Mechanical modeling of components and assembly.") },
-
-            // Sistema ZPL
-            { "ProjZPLTitle", ("Sistema de Etiquetado ZPL", "ZPL Labeling System") },
-            { "ProjZPLDesc",
-                ("Desarrollo de una solución en C# para la generación dinámica de etiquetas en formato ZPL, optimizando procesos de impresión en líneas de producción.",
-                 "Development of a C# solution for dynamic ZPL label generation, optimizing printing processes on production lines.") },
-            { "ProjZPLB1",
-                ("Comunicación directa con impresoras industriales de etiquetas.",
-                 "Direct communication with industrial label printers.") },
-            { "ProjZPLB2",
-                ("Estandarización de formatos para logística y envíos.",
-                 "Format standardization for logistics and shipping.") },
-
-            // Brazo Robótico
-            { "ProjRobotArmTitle", ("Brazo Robótico de 6 Ejes", "6-Axis Robotic Arm") },
-            { "ProjRobotArmDesc",
-                ("Diseño 3D integral y construcción física de un manipulador robótico. Implementación de algoritmos de cinemática para control de precisión. (Diseños y prototipo funcional).",
-                 "Full 3D design and physical construction of a robotic manipulator. Implementation of kinematics algorithms for precision control. (Designs and functional prototype).") },
-
-            // Sorteador de Obstáculos
-            { "ProjObstacleTitle", ("Diseño Sorteador de Obstáculos", "Obstacle Avoidance Vehicle") },
-            { "ProjObstacleDesc",
-                ("Vehículo capaz de sortear obstáculos utilizando sensores ultrasónicos. Implementación de control PID para corrección de trayectoria y movimientos suaves.",
-                 "Vehicle capable of avoiding obstacles using ultrasonic sensors. PID control implementation for trajectory correction and smooth movements.") },
-
-            // Péndulo Invertido
-            { "ProjPendulumTitle", ("Péndulo Invertido", "Inverted Pendulum") },
-            { "ProjPendulumDesc",
-                ("Sistema mecatrónico tipo \"Balancín\". Aplicación de teoría de control avanzada para estabilizar verticalmente un sistema inestable mediante retroalimentación.",
-                 "Mechatronic \"Rocker\" system. Application of advanced control theory to vertically stabilize an unstable system through feedback.") },
-
-            // Control de Flujos
-            { "ProjFlowTitle", ("Control de Flujos de Caudal", "Flow Rate Control System") },
-            { "ProjFlowDesc",
-                ("Proyecto de control de procesos enfocado en la regulación y automatización de flujo de caudal en sistemas hidráulicos, aplicando teoría de control clásico.",
-                 "Process control project focused on the regulation and automation of flow rate in hydraulic systems, applying classical control theory.") },
+            // Secciones y botones de Proyectos (el detalle de cada tarjeta vive en Projects.razor)
+            { "ProjMoreTitle",   ("Más proyectos",     "More projects")      },
+            { "ProjOthersTitle", ("Otros proyectos",   "Other projects")     },
+            { "ViewDocsShort",   ("Ver documentación", "View documentation") },
+            { "ViewDemo",        ("Ver demo",          "View demo")          },
 
             // ══════════════════════════════════════════
             //  EXPERIENCE — Experiencia
@@ -247,6 +194,59 @@ namespace EdgarJairVazquezVillarreal.Services
                 ("Diseño e implementación de conexiones neumáticas para integración de actuadores en estaciones automatizadas.",
                  "Design and implementation of pneumatic connections for actuator integration in automated stations.") },
 
+            { "Exp1B8",
+                ("Programación de PLC, robótica FANUC, SCADA y seguimiento de OEE; actividades de calidad bajo IATF 16949.",
+                 "PLC programming, FANUC robotics, SCADA and OEE tracking; quality activities under IATF 16949.") },
+            { "Exp1Location", ("Saltillo, Coahuila", "Saltillo, Coahuila, Mexico") },
+
+            { "ExpWorkTitle", ("Experiencia laboral",      "Work experience")           },
+            { "ExpEduTitle",  ("Formación académica",      "Education")                 },
+            { "ExpCertTitle", ("Certificaciones y cursos", "Certifications & courses")  },
+
+            // Puesto actual. No se publica cliente final, proyecto ni planta: se describe en genérico.
+            { "Exp0Status",   ("Actual", "Current") },
+            { "Exp0Title",    ("Técnico Electromecánico", "Electromechanical Technician") },
+            { "Exp0Company",  ("Magna · CIMS (Cosma International)", "Magna · CIMS (Cosma International)") },
+            { "Exp0Period",   ("Jun 2026 – actual", "Jun 2026 – present") },
+            { "Exp0Location",
+                ("Saltillo, Coahuila · asignado a una planta en EE. UU.",
+                 "Saltillo, Mexico · assigned to a plant in the USA") },
+            { "Exp0B1",
+                ("Instalación y arranque de líneas de producción automotriz: conexionado eléctrico de tableros, sensores y motores; pruebas funcionales, I/O check y power-up.",
+                 "Installation and commissioning of automotive production lines: electrical wiring of panels, sensors and motors; functional testing, I/O check and power-up.") },
+            { "Exp0B2",
+                ("Coordinación de materiales y cambios de ingeniería para que las líneas avancen; control de inventario contra BOM (cable, manguera, conectores, guardas).",
+                 "Coordination of materials and engineering changes to keep the lines moving; inventory control against the BOM (cable, hose, connectors, guarding).") },
+            { "Exp0B3",
+                ("Cuadre del layout eléctrico contra diagramas de red, I/O y alimentación.",
+                 "Reconciling the electrical layout against network, I/O and power diagrams.") },
+            { "Exp0B4",
+                ("Desarrollo de una estación CNC de grabado: hardware, firmware y software CAM propio.",
+                 "Development of a CNC engraving station: hardware, firmware and custom CAM software.") },
+            { "Exp0B5",
+                ("Producción de placas de identificación (lamicoid) con láser de diodo.",
+                 "Production of nameplates (lamicoid) with a diode laser.") },
+            { "Exp0B6",
+                ("Operación de robots KUKA y FANUC.",
+                 "Operation of KUKA and FANUC robots.") },
+
+            // Formación (datos del CV)
+            { "Edu1Degree",    ("Ingeniería en Mecatrónica", "Mechatronics Engineering") },
+            { "Edu1Specialty",
+                ("Especialidad en Automatización de Procesos de Manufactura",
+                 "Specialization in Manufacturing Process Automation") },
+            { "Edu1School",    ("Instituto Tecnológico de Saltillo", "Instituto Tecnológico de Saltillo") },
+            { "Edu1Location",  ("Saltillo, Coahuila",  "Saltillo, Coahuila, Mexico") },
+            { "Edu1B1",
+                ("Coordinación de equipos de trabajo para proyectos académicos integrales.",
+                 "Coordinated work teams for comprehensive academic projects.") },
+
+            { "Edu2School",    ("Instituto Central Coahuila", "Instituto Central Coahuila") },
+            { "Edu2Location",  ("Monclova, Coahuila",  "Monclova, Coahuila, Mexico") },
+            { "Edu2B1",
+                ("Líder del equipo de robótica “Dynamo”: coordinación de 10 personas para competencias estatales y nacionales.",
+                 "Leader of the “Dynamo” robotics team: coordinated 10 people for state and national competitions.") },
+
             // ══════════════════════════════════════════
             //  CONTACT — Contacto
             // ══════════════════════════════════════════
@@ -258,10 +258,6 @@ namespace EdgarJairVazquezVillarreal.Services
             { "ContactEmailTitle", ("Correo Electrónico", "Email") },
             { "ContactEmailDesc",  ("Para consultas detalladas o propuestas.", "For detailed inquiries or proposals.") },
             { "ContactEmailBtn",   ("Enviar Correo",  "Send Email")   },
-
-            { "ContactPhoneTitle", ("Teléfono", "Phone") },
-            { "ContactPhoneDesc",  ("Disponible para llamadas y mensajes.", "Available for calls and messages.") },
-            { "ContactPhoneBtn",   ("Enviar Mensaje", "Send Message") },
 
             { "ContactLinkedInDesc", ("Conectemos profesionalmente.", "Let's connect professionally.") },
             { "ContactLinkedInBtn",  ("Ver Perfil", "View Profile")  },

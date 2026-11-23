@@ -59,9 +59,10 @@
                         <div class="code-line"><span class="tk-kw">var</span> edgar = <span class="tk-kw">new</span> <span class="tk-type">Engineer</span></div>
                         <div class="code-line">{</div>
                         <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Degree</span> = <span class="tk-str">"@LangApp.Get("HeroCodeDegree")"</span>,</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Backend</span> = [<span class="tk-str">"C#"</span>, <span class="tk-str">".NET"</span>, <span class="tk-str">"SQL"</span>],</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Frontend</span> = [<span class="tk-str">"Blazor"</span>, <span class="tk-str">"WPF"</span>],</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Hardware</span> = [<span class="tk-str">"ESP32"</span>, <span class="tk-str">"PLC"</span>, <span class="tk-str">"PCB"</span>],</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Software</span> = [<span class="tk-str">"C#"</span>, <span class="tk-str">".NET"</span>, <span class="tk-str">"SQL"</span>],</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Controls</span> = [<span class="tk-str">"PLC"</span>, <span class="tk-str">"SCADA"</span>],</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Robots</span> = [<span class="tk-str">"FANUC"</span>, <span class="tk-str">"KUKA"</span>],</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Hardware</span> = [<span class="tk-str">"ESP32"</span>, <span class="tk-str">"PCB"</span>, <span class="tk-str">"CNC"</span>],</div>
                         <div class="code-line">};</div>
                     </div>
                 </div>
@@ -81,12 +82,12 @@
         <div class="stat-label">@LangApp.Get("StatEndpoints")</div>
     </div>
     <div class="stat">
-        <div class="stat-value">CSWP</div>
-        <div class="stat-label">@LangApp.Get("StatCswp")</div>
+        <div class="stat-value"><span class="counter" data-target="900">900</span>+</div>
+        <div class="stat-label">@LangApp.Get("StatTests")</div>
     </div>
     <div class="stat">
-        <div class="stat-value">@LangApp.Get("StatRoboticsValue")</div>
-        <div class="stat-label">@LangApp.Get("StatRobotics")</div>
+        <div class="stat-value">CSWP</div>
+        <div class="stat-label">@LangApp.Get("StatCswp")</div>
     </div>
 </section>
 
@@ -100,111 +101,79 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100 featured-card scroll-reveal">
-                <div class="card-body p-4 d-flex flex-column">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="featured-icon"><i class="bi bi-shop"></i></div>
-                        <div>
-                            <h3 class="h5 card-title mb-0">EsmeraldaPoint</h3>
-                            <div class="featured-subtitle">@LangApp.Get("ProjEsmeraldaSubtitle")</div>
+        @foreach (var project in Featured)
+        {
+            <div class="@(project.Wide ? "col-12" : "col-lg-6") mb-4">
+                <div class="card h-100 featured-card scroll-reveal">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="featured-icon"><i class="bi @project.Icon"></i></div>
+                            <div>
+                                <h3 class="h5 card-title mb-0">@project.Name</h3>
+                                <div class="featured-subtitle">@LangApp.Get(project.SubtitleKey)</div>
+                            </div>
                         </div>
+                        <p class="card-text">@LangApp.Get(project.DescKey)</p>
+                        <div class="d-flex flex-wrap gap-2 mb-4">
+                            @foreach (var tag in project.Tags)
+                            {
+                                <span class="badge badge-glass">@tag</span>
+                            }
+                        </div>
+                        <a href="@project.Href" class="featured-link stretched-link mt-auto">
+                            @LangApp.Get("ViewDocs")<i class="bi bi-arrow-right ms-2"></i>
+                        </a>
                     </div>
-                    <p class="card-text">@LangApp.Get("ProjEsmeraldaDesc")</p>
-                    <div class="d-flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-glass">ASP.NET Core 10</span>
-                        <span class="badge badge-glass">Blazor</span>
-                        <span class="badge badge-glass">WPF</span>
-                        <span class="badge badge-glass">PostgreSQL</span>
-                    </div>
-                    <a href="docs/esmeraldapoint" class="featured-link stretched-link mt-auto">
-                        @LangApp.Get("ViewDocs")<i class="bi bi-arrow-right ms-2"></i>
-                    </a>
                 </div>
             </div>
-        </div>
-
-        <div class="col-lg-6 mb-4">
-            <div class="card h-100 featured-card scroll-reveal">
-                <div class="card-body p-4 d-flex flex-column">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="featured-icon"><i class="bi bi-buildings"></i></div>
-                        <div>
-                            <h3 class="h5 card-title mb-0">VAVILL</h3>
-                            <div class="featured-subtitle">@LangApp.Get("ProjVavillSubtitle")</div>
-                        </div>
-                    </div>
-                    <p class="card-text">@LangApp.Get("ProjVavillDesc")</p>
-                    <div class="d-flex flex-wrap gap-2 mb-4">
-                        <span class="badge badge-glass">.NET 8</span>
-                        <span class="badge badge-glass">Blazor WebAssembly</span>
-                        <span class="badge badge-glass">RCL Modular</span>
-                        <span class="badge badge-glass">SQL Server</span>
-                    </div>
-                    <a href="docs/vavill" class="featured-link stretched-link mt-auto">
-                        @LangApp.Get("ViewDocs")<i class="bi bi-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
+        }
     </div>
 </section>
 
-<!-- ── Sobre mí + habilidades ─────────────────────────────────────── -->
+<!-- ── Sobre mí ───────────────────────────────────────────────────── -->
 <section class="home-section">
     <div class="section-head scroll-reveal">
         <h2 class="section-heading"><i class="bi bi-person-fill"></i>@LangApp.Get("HomeTitle")</h2>
     </div>
 
     <p class="about-lead scroll-reveal">@LangApp.Get("BioP1")</p>
+    <p class="about-lead scroll-reveal">@LangApp.Get("BioP2")</p>
 
-    <div class="row mt-4">
-        <div class="col-md-4 mb-4">
-            <div class="glass-card scroll-reveal h-100 p-4">
-                <h3 class="h4 mb-3 text-neon">
-                    <i class="bi bi-gear me-2"></i>@LangApp.Get("MechatronicsTitle")
-                </h3>
-                <ul class="tech-list">
-                    <li>@LangApp.Get("Solidworks")</li>
-                    <li>@LangApp.Get("PLC")</li>
-                    <li>@LangApp.Get("PCB")</li>
-                    <li>@LangApp.Get("Labview")</li>
-                </ul>
-            </div>
-        </div>
+    <p class="about-goal scroll-reveal">
+        <i class="bi bi-signpost-split-fill"></i>
+        <span><strong>@LangApp.Get("BioGoalLabel"):</strong> @LangApp.Get("BioGoal")</span>
+    </p>
+</section>
 
-        <div class="col-md-4 mb-4">
-            <div class="glass-card scroll-reveal h-100 p-4">
-                <h3 class="h4 mb-3 text-neon">
-                    <i class="bi bi-code-slash me-2"></i>@LangApp.Get("SoftwareTitle")
-                </h3>
-                <ul class="tech-list">
-                    <li>@LangApp.Get("CSharp")</li>
-                    <li>@LangApp.Get("AspNetCore")</li>
-                    <li>@LangApp.Get("ClientServer")</li>
-                    <li>@LangApp.Get("IndApps")</li>
-                    <li>@LangApp.Get("WPF")</li>
-                    <li>@LangApp.Get("HWInt")</li>
-                    <li>@LangApp.Get("RestAPI")</li>
-                    <li>@LangApp.Get("SQL")</li>
-                    <li>@LangApp.Get("Postgres")</li>
-                    <li>@LangApp.Get("Git")</li>
-                </ul>
-            </div>
-        </div>
+<!-- ── Habilidades ────────────────────────────────────────────────── -->
+<section class="home-section">
+    <div class="section-head scroll-reveal">
+        <h2 class="section-heading"><i class="bi bi-tools"></i>@LangApp.Get("HomeSkillsTitle")</h2>
+    </div>
 
-        <div class="col-md-4 mb-4">
-            <div class="glass-card scroll-reveal h-100 p-4">
-                <h3 class="h4 mb-3 text-neon">
-                    <i class="bi bi-rocket me-2"></i>@LangApp.Get("SolutionsTitle")
-                </h3>
-                <ul class="tech-list">
-                    <li>@LangApp.Get("CTPAT")</li>
-                    <li>@LangApp.Get("ZPL")</li>
-                    <li>@LangApp.Get("ITInv")</li>
-                </ul>
+    <div class="row">
+        @foreach (var group in Skills)
+        {
+            <div class="col-md-6 col-xl-4 mb-4">
+                <div class="glass-card scroll-reveal h-100 p-4">
+                    <h3 class="h5 mb-3 text-neon">
+                        <i class="bi @group.Icon me-2"></i>@T(group.Title)
+                    </h3>
+                    <ul class="tech-list">
+                        @foreach (var item in group.Items)
+                        {
+                            <li>@T(item)</li>
+                        }
+                    </ul>
+                </div>
             </div>
-        </div>
+        }
+    </div>
+
+    <div class="lang-row scroll-reveal">
+        <span class="lang-row-title"><i class="bi bi-translate me-2"></i>@LangApp.Get("LanguagesTitle")</span>
+        <span class="badge badge-glass">@LangApp.Get("LangSpanish")</span>
+        <span class="badge badge-glass">@LangApp.Get("LangEnglish")</span>
     </div>
 </section>
 
@@ -253,13 +222,88 @@
 </section>
 
 @code {
+    private record FeaturedProject(string Name, string Icon, string SubtitleKey, string DescKey, string Href, string[] Tags, bool Wide = false);
+
+    private record SkillGroup(string Icon, (string Es, string En) Title, (string Es, string En)[] Items);
+
     // Frases que se teclean en el hero
     private string[] Roles => new[]
     {
         LangApp.Get("HeroRole1"),
         LangApp.Get("HeroRole2"),
         LangApp.Get("HeroRole3"),
+        LangApp.Get("HeroRole4"),
     };
+
+    private static readonly FeaturedProject[] Featured =
+    {
+        new("CNCIMS", "bi-vector-pen", "ProjCncSubtitle", "ProjCncDesc", "docs/cncims",
+            new[] { "C# / .NET 10", "WPF", "ESP32-S3", "FluidNC", "G-code", "DXF" }, Wide: true),
+        new("VAVILL", "bi-buildings", "ProjVavillSubtitle", "ProjVavillDesc", "docs/vavill",
+            new[] { ".NET 8", "Blazor WebAssembly", "RCL Modular", "SQL Server" }),
+        new("EsmeraldaPoint", "bi-shop", "ProjEsmeraldaSubtitle", "ProjEsmeraldaDesc", "docs/esmeraldapoint",
+            new[] { "ASP.NET Core 10", "Blazor", "WPF", "PostgreSQL" }),
+    };
+
+    // Habilidades por área. Para agregar una basta una línea en su grupo.
+    private static readonly SkillGroup[] Skills =
+    {
+        new("bi-cpu", ("PLC y controles", "PLC & controls"), new[]
+        {
+            ("Siemens TIA Portal (S7-1200)", "Siemens TIA Portal (S7-1200)"),
+            ("Allen-Bradley: CompactLogix y MicroLogix", "Allen-Bradley: CompactLogix & MicroLogix"),
+            ("Studio 5000: Ladder y Structured Text", "Studio 5000: Ladder & Structured Text"),
+            ("Estándar IEC 61131-3", "IEC 61131-3 standard"),
+            ("SCADA / HMI", "SCADA / HMI"),
+            ("Factory I/O, LabVIEW y MATLAB", "Factory I/O, LabVIEW & MATLAB"),
+        }),
+        new("bi-robot", ("Robótica y CNC", "Robotics & CNC"), new[]
+        {
+            ("Robots FANUC", "FANUC robots"),
+            ("Robots KUKA (KR C4 / smartPAD)", "KUKA robots (KR C4 / smartPAD)"),
+            ("Robots ABB (RAPID, nivel básico)", "ABB robots (RAPID, basic level)"),
+            ("CNC con FluidNC y G-code", "CNC with FluidNC & G-code"),
+            ("Neumática y electroneumática", "Pneumatics & electro-pneumatics"),
+        }),
+        new("bi-lightning-charge", ("Piso y eléctrico", "Shop floor & electrical"), new[]
+        {
+            ("Cableado de tableros, sensores y motores", "Wiring of panels, sensors and motors"),
+            ("I/O check y power-up de equipos", "I/O check and equipment power-up"),
+            ("Lectura de diagramas (Ethernet, I/O, 24 V, 120 V)", "Reading diagrams (Ethernet, I/O, 24 V, 120 V)"),
+            ("Manejo de BOM y control de materiales", "BOM handling and material control"),
+            ("Seguridad: LOTO y NFPA 70E", "Safety: LOTO and NFPA 70E"),
+        }),
+        new("bi-motherboard", ("Embebidos y diseño", "Embedded & design"), new[]
+        {
+            ("ESP32 / ESP32-S3", "ESP32 / ESP32-S3"),
+            ("Diseño de PCB (I/O aisladas a 24 V)", "PCB design (isolated 24 V I/O)"),
+            ("KiCad", "KiCad"),
+            ("SOLIDWORKS (certificado CSWP)", "SOLIDWORKS (CSWP certified)"),
+            ("AutoCAD", "AutoCAD"),
+        }),
+        new("bi-code-slash", ("Software", "Software"), new[]
+        {
+            ("C# / .NET 10", "C# / .NET 10"),
+            ("ASP.NET Core Web API y EF Core", "ASP.NET Core Web API & EF Core"),
+            ("Blazor (Server y WebAssembly)", "Blazor (Server & WebAssembly)"),
+            ("WPF y WinForms", "WPF & WinForms"),
+            ("SQL Server, PostgreSQL y Supabase", "SQL Server, PostgreSQL & Supabase"),
+            ("TypeScript, React y Next.js", "TypeScript, React & Next.js"),
+            ("Python, Java y C++", "Python, Java & C++"),
+            ("Git", "Git"),
+        }),
+        new("bi-building-gear", ("Manufactura", "Manufacturing"), new[]
+        {
+            ("OEE e IATF 16949", "OEE & IATF 16949"),
+            ("Lean Six Sigma", "Lean Six Sigma"),
+            ("Troqueles progresivos de estampado", "Progressive stamping dies"),
+            ("Sistemas CTPAT", "CTPAT systems"),
+            ("Etiquetado ZPL", "ZPL labeling"),
+            ("Gestión de inventarios IT", "IT inventory management"),
+        }),
+    };
+
+    private string T((string Es, string En) text) => LangApp.IsSpanish ? text.Es : text.En;
 
     protected override void OnInitialized()
     {

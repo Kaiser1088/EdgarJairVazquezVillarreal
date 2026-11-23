@@ -1,0 +1,178 @@
+@page "/docs/cncims"
+@inherits DocPageBase
+
+<PageTitle>CNCIMS - @T("Documentación", "Documentation")</PageTitle>
+
+<DocPage Title="CNCIMS"
+         Subtitle="@LangApp.Get("ProjCncSubtitle")"
+         Icon="bi-vector-pen"
+         Tags="@Tags">
+
+    <DocSection Id="descripcion" Icon="bi-info-circle" Title="@T("Descripción General", "Overview")">
+        <p class="doc-lead scroll-reveal">
+            @T("Conversión de una cortadora láser CO2 recuperada en una estación CNC de grabado mecánico para placas de identificación de tableros (lamicoid), con un software CAM de escritorio hecho a la medida. Me encargué de la puesta en marcha completa: hardware, firmware y software.",
+               "Conversion of a salvaged CO2 laser cutter into a mechanical CNC engraving station for control panel nameplates (lamicoid), with a custom desktop CAM application. I handled the full bring-up: hardware, firmware and software.")
+        </p>
+
+        <div class="doc-metrics mt-4">
+            <DocMetric Value="900" Suffix="+" Label="@T("Pruebas automatizadas", "Automated tests")" />
+            <DocMetric Value="47" Label="@T("Pruebas en el protocolo de validación", "Tests in the validation protocol")" />
+            <DocMetric Value="3" Label="@T("Capas: hardware, firmware y software", "Layers: hardware, firmware and software")" />
+        </div>
+
+        <p class="doc-note scroll-reveal mt-4">
+            <i class="bi bi-shield-lock-fill"></i>
+            <span>
+                @T("Es un proyecto de mi trabajo: por confidencialidad no se muestran planos, datos de producción ni código fuente.",
+                   "This is a project from my job: for confidentiality, no drawings, production data or source code are shown.")
+            </span>
+        </p>
+    </DocSection>
+
+    @if (Gallery.Length > 0)
+    {
+        <DocSection Id="capturas" Icon="bi-images" Title="@T("Capturas", "Screenshots")">
+            <DocGallery Images="@Gallery" />
+        </DocSection>
+    }
+
+    <DocSection Id="hardware" Icon="bi-cpu" Title="@T("Hardware y Puesta en Marcha", "Hardware & Bring-up")">
+        <p class="doc-text scroll-reveal">
+            @T("La máquina base era una cortadora láser fuera de uso. Antes de poder grabar hubo que dejar confiable la parte eléctrica y el control de movimiento:",
+               "The base machine was a decommissioned laser cutter. Before it could engrave, the electrical side and the motion control had to be made reliable:")
+        </p>
+        <DocCard>
+            <ul class="tech-list">
+                @foreach (var item in Hardware)
+                {
+                    <li>@T(item)</li>
+                }
+            </ul>
+        </DocCard>
+    </DocSection>
+
+    <DocSection Id="software" Icon="bi-window-stack" Title="@T("Software CAM", "CAM Software")">
+        <div class="doc-grid doc-grid-2">
+            @foreach (var feature in CamFeatures)
+            {
+                <DocCard Icon="@feature.Icon" Title="@T(feature.Title)" Description="@T(feature.Detail)" />
+            }
+        </div>
+    </DocSection>
+
+    <DocSection Id="ejecucion" Icon="bi-play-circle" Title="@T("Ejecución y Seguridad", "Execution & Safety")">
+        <DocCard>
+            <ul class="tech-list">
+                @foreach (var item in Execution)
+                {
+                    <li>@T(item)</li>
+                }
+            </ul>
+        </DocCard>
+    </DocSection>
+
+    <DocSection Id="calidad" Icon="bi-check2-square" Title="@T("Calidad y Validación", "Quality & Validation")">
+        <p class="doc-text scroll-reveal">
+            @T("La lógica (comunicación con el controlador, generación de G-code y ciclo de grabado) vive en una capa sin dependencias de la interfaz, lo que permite probarla de forma automática.",
+               "The logic (controller communication, G-code generation and the engraving cycle) lives in a layer with no UI dependencies, which makes it possible to test it automatically.")
+        </p>
+        <DocCard>
+            <ul class="tech-list">
+                @foreach (var item in Quality)
+                {
+                    <li>@T(item)</li>
+                }
+            </ul>
+        </DocCard>
+    </DocSection>
+
+    <DocSection Id="depuracion" Icon="bi-bug" Title="@T("Problemas que Resolví", "Problems I Solved")">
+        <div class="doc-callout scroll-reveal">
+            <ul class="tech-list">
+                @foreach (var bug in Debugging)
+                {
+                    <li><strong>@T(bug.Title):</strong> @T(bug.Detail)</li>
+                }
+            </ul>
+        </div>
+    </DocSection>
+</DocPage>
+
+@code {
+    private static readonly string[] Tags =
+    {
+        "C# / .NET 10", "WPF", "xUnit", "ESP32-S3", "FluidNC v4", "G-code", "DXF",
+    };
+
+    // Capturas: solo con datos de ejemplo (sin planos reales, logotipos ni datos de producción).
+    // Guarda los archivos en wwwroot/ImagenesDocs/cncims/ y agrega una línea por imagen.
+    //   new("ImagenesDocs/cncims/editor.png", "Editor con un trabajo de ejemplo", "Editor with a sample job"),
+    private static readonly DocImage[] Gallery = { };
+
+    private static readonly (string Es, string En)[] Hardware =
+    {
+        ("Diagnóstico de una fuente de alimentación subdimensionada.",
+         "Diagnosis of an undersized power supply."),
+        ("Configuración de los drivers de los motores y definición del pinout del controlador.",
+         "Motor driver configuration and definition of the controller pinout."),
+        ("Filtro RC contra el ruido eléctrico en los finales de carrera.",
+         "RC filter against electrical noise on the limit switches."),
+        ("Controlador ESP32-S3 con firmware FluidNC v4.",
+         "ESP32-S3 controller running FluidNC v4 firmware."),
+    };
+
+    private static readonly (string Icon, (string Es, string En) Title, (string Es, string En) Detail)[] CamFeatures =
+    {
+        ("bi-file-earmark-code",
+         ("Importador DXF", "DXF importer"),
+         ("Lee planos exportados de EPLAN: maneja unidades y atributos, agrupa automáticamente por tarjeta y omite el marco de la hoja.",
+          "Reads drawings exported from EPLAN: handles units and attributes, groups automatically by nameplate and skips the sheet frame.")),
+        ("bi-image",
+         ("Vectorización de imágenes", "Image vectorization"),
+         ("Convierte imágenes en trayectorias: binarización, detección de contornos y simplificación Douglas-Peucker.",
+          "Turns images into toolpaths: binarization, contour detection and Douglas-Peucker simplification.")),
+        ("bi-bezier2",
+         ("Backplot y corte de contorno", "Backplot & contour cutting"),
+         ("Muestra la trayectoria antes de grabar y corta el contorno en varias pasadas, dejando puentes.",
+          "Shows the toolpath before engraving and cuts the contour in multiple passes, leaving tabs.")),
+        ("bi-layout-sidebar",
+         ("Interfaz tipo CAD", "CAD-style interface"),
+         ("Ribbon, árbol de objetos, lienzo y panel de propiedades, con un “radar” del área de trabajo.",
+          "Ribbon, object tree, canvas and properties panel, with a “radar” of the work area.")),
+    };
+
+    private static readonly (string Es, string En)[] Execution =
+    {
+        ("El trabajo se sube por XMODEM y corre desde la memoria del ESP32, así que una caída del USB no lo interrumpe.",
+         "The job is uploaded over XMODEM and runs from the ESP32's memory, so a USB dropout does not interrupt it."),
+        ("Paro de emergencia mediante comandos de tiempo real.",
+         "Emergency stop through real-time commands."),
+        ("Validación de límites antes de ejecutar.",
+         "Limit validation before running."),
+        ("Trazabilidad de cada trabajo en CSV.",
+         "Traceability of every job in CSV."),
+    };
+
+    private static readonly (string Es, string En)[] Quality =
+    {
+        ("Más de 900 pruebas automatizadas con xUnit.",
+         "More than 900 automated tests with xUnit."),
+        ("Protocolo de validación de 47 pruebas.",
+         "Validation protocol with 47 tests."),
+        ("Expediente técnico del equipo.",
+         "Technical file for the equipment."),
+    };
+
+    private static readonly ((string Es, string En) Title, (string Es, string En) Detail)[] Debugging =
+    {
+        (("Eje Z invertido", "Inverted Z axis"),
+         ("La dirección invertida del eje falseaba el homing.",
+          "The inverted axis direction was producing a false homing.")),
+        (("Desfase del cero", "Zero offset"),
+         ("Aparecía al fijar el cero con G92; se corrigió usando G10 L20.",
+          "It appeared when setting zero with G92; fixed by using G10 L20.")),
+        (("Cierre inesperado de la aplicación", "Application crash"),
+         ("La interfaz se estaba modificando desde el hilo del puerto serie.",
+          "The UI was being modified from the serial port thread.")),
+    };
+}
