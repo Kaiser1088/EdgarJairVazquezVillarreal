@@ -1,0 +1,33 @@
+<!-- Sección de una página de documentación. Aparece sola en el índice de DocPage. -->
+<section id="@Id" class="doc-section">
+    <div class="section-head scroll-reveal">
+        <h2 class="section-heading"><i class="bi @Icon"></i>@Title</h2>
+    </div>
+    @ChildContent
+</section>
+
+@code {
+    [CascadingParameter] private DocPage? Page { get; set; }
+
+    [Parameter, EditorRequired] public string Id { get; set; } = "";
+    [Parameter, EditorRequired] public string Title { get; set; } = "";
+    [Parameter] public string Icon { get; set; } = "bi-dot";
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private string? _shownTitle;
+
+    protected override void OnInitialized()
+    {
+        Page?.Register(this);
+    }
+
+    protected override void OnParametersSet()
+    {
+        // DocPage dibuja su índice antes de que esta sección reciba el título
+        // nuevo (cambio de idioma), así que se le pide redibujarlo.
+        if (_shownTitle is not null && _shownTitle != Title)
+            Page?.Refresh();
+
+        _shownTitle = Title;
+    }
+}

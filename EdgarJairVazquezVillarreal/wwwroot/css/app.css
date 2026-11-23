@@ -277,7 +277,8 @@ html.js-anim .scroll-reveal:not([data-revealed]) { opacity: 0; }
     .float-soft,
     .text-gradient,
     .typed-text::after,
-    .timeline-dot.active {
+    .timeline-dot.active,
+    .doc-status-dot {
         animation: none;
     }
 }
@@ -718,6 +719,405 @@ ul.tech-list li::before {
 .featured-link {
     font-size: 0.92rem;
     font-weight: 600;
+}
+
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  DOCUMENTACIÓN DE PROYECTOS                         ║
+   ║  Plantilla: Components/Docs (DocPage, DocSection…)  ║
+   ║  Todo usa variables del tema: sirve en claro/oscuro ║
+   ╚══════════════════════════════════════════════════════╝ */
+.doc-back {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.doc-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.doc-header .featured-icon {
+    width: 64px; height: 64px;
+    margin-right: 0;
+    font-size: 1.9rem;
+}
+.doc-title {
+    margin: 0;
+    font-size: clamp(1.7rem, 2vw + 1rem, 2.4rem);
+    line-height: 1.15;
+}
+.doc-subtitle {
+    margin: 0.2rem 0 0;
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+}
+
+.doc-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+    padding: 0.35rem 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    background-color: rgba(var(--accent-rgb), 0.1);
+    border: 1px solid rgba(var(--accent-rgb), 0.35);
+    border-radius: 50px;
+}
+.doc-status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    animation: pulse-accent 2s infinite;
+}
+
+.doc-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Índice de secciones: se queda fijo bajo la barra superior */
+.doc-nav {
+    position: sticky;
+    top: 3.5rem;
+    z-index: 1;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0.6rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.doc-nav::-webkit-scrollbar { display: none; }
+
+[data-bs-theme="dark"]  .doc-nav { background-color: rgba(17, 24, 39, 0.88); }
+[data-bs-theme="light"] .doc-nav { background-color: rgba(248, 250, 252, 0.88); }
+
+/* En móvil la barra superior no es fija */
+@media (max-width: 640.98px) {
+    .doc-nav { top: 0; }
+}
+
+.doc-nav-link {
+    flex: 0 0 auto;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    white-space: nowrap;
+    color: var(--text-secondary);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+.doc-nav-link:hover {
+    color: var(--accent-color);
+    border-color: rgba(var(--accent-rgb), 0.5);
+}
+.doc-nav-link[data-active] {
+    color: #FFFFFF;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.doc-section {
+    margin-top: 3rem;
+    scroll-margin-top: 8rem; /* barra superior + índice */
+}
+
+.doc-lead {
+    max-width: 52rem;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+.doc-text { color: var(--text-secondary); }
+
+/* Rejillas: se adaptan al ancho real (el sidebar lo reduce) con tope de 3 o 2 columnas */
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(240px, 30%), 1fr));
+    gap: 1.25rem;
+}
+.doc-grid-2 { grid-template-columns: repeat(auto-fit, minmax(max(280px, 45%), 1fr)); }
+
+.doc-card {
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.25s ease, border-color 0.2s ease;
+}
+.doc-card:hover { border-color: rgba(var(--accent-rgb), 0.45); }
+
+.doc-card-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.doc-card-title i { color: var(--accent-color); }
+.doc-card-desc {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.doc-card ul.tech-list,
+.doc-callout ul.tech-list {
+    margin-bottom: 0;
+    font-size: 0.92rem;
+}
+.doc-card ul.tech-list li:last-child,
+.doc-callout ul.tech-list li:last-child { margin-bottom: 0; }
+.doc-card strong,
+.doc-callout strong { color: var(--text-primary); }
+
+/* Lista larga repartida en dos columnas cuando hay espacio.
+   Rejilla y no "columns": con columnas CSS el icono ::before (absoluto)
+   del elemento que queda en el corte se dibuja en la columna equivocada. */
+ul.tech-list-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(260px, 40%), 1fr));
+    gap: 0.5rem 2rem;
+}
+ul.tech-list-cols li { margin-bottom: 0; }
+
+.doc-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+}
+.doc-metric {
+    padding: 1.1rem 0.75rem;
+    text-align: center;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Recuadro destacado */
+.doc-callout {
+    padding: 1.25rem 1.5rem;
+    background-color: rgba(var(--accent-rgb), 0.06);
+    border: 1px solid rgba(var(--accent-rgb), 0.35);
+    border-radius: 12px;
+}
+
+/* Galería de capturas */
+.doc-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(max(260px, 30%), 1fr));
+    gap: 1.25rem;
+}
+.doc-figure { margin: 0; }
+.doc-figure img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.doc-figure a:hover img {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-md);
+}
+.doc-figure figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* Diagrama de arquitectura hecho con cajas */
+.doc-diagram {
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.doc-diagram-title {
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.diagram-node {
+    padding: 0.9rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--text-primary);
+    background-color: var(--primary-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 12px;
+    transition: background-color 0.25s ease;
+}
+.diagram-node small {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+.diagram-node-main {
+    width: 220px;
+    border-width: 2px;
+}
+.diagram-node-main i {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-size: 1.6rem;
+    color: var(--accent-color);
+}
+
+.diagram-core {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 0;
+}
+
+/* Línea con flechas en ambos extremos y etiqueta al centro */
+.diagram-link {
+    position: relative;
+    width: 100px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+.diagram-link::before,
+.diagram-link::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    border: 6px solid transparent;
+    transform: translateY(-50%);
+}
+.diagram-link::before { left: -2px;  border-left: 0;  border-right-color: var(--accent-color); }
+.diagram-link::after  { right: -2px; border-right: 0; border-left-color:  var(--accent-color); }
+.diagram-link span {
+    position: absolute;
+    top: 50%; left: 50%;
+    padding: 0 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    background-color: var(--card-bg);
+    transform: translate(-50%, -50%);
+}
+
+/* En pantallas angostas los dos nodos se apilan y la línea sobra */
+@media (max-width: 991.98px) {
+    .diagram-core { flex-direction: column; }
+    .diagram-link { display: none; }
+}
+
+.diagram-shared {
+    position: relative;
+    width: fit-content;
+    margin: 2.5rem auto 0;
+    padding: 0.45rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    background-color: var(--primary-bg);
+    border: 1px dashed var(--accent-color);
+    border-radius: 8px;
+}
+.diagram-shared::before {
+    content: "";
+    position: absolute;
+    bottom: 100%; left: 50%;
+    width: 2px;
+    height: 2.5rem;
+    background-color: rgba(var(--accent-rgb), 0.5);
+}
+
+.diagram-divider {
+    margin: 2.5rem 0 1.5rem;
+    line-height: 0;
+    text-align: center;
+    border-top: 1px dashed var(--border-color);
+}
+.diagram-divider span {
+    padding: 0 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background-color: var(--card-bg);
+}
+
+.diagram-modules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+.diagram-module {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    width: 150px;
+}
+.diagram-module > .bi { color: var(--accent-color); font-size: 1.1rem; }
+.diagram-module .diagram-node { width: 100%; }
+
+.diagram-db {
+    width: 100%;
+    padding: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-align: center;
+    color: var(--text-secondary);
+    background-color: var(--primary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.diagram-db {
+    overflow-wrap: anywhere;
+}
+.diagram-db i {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-size: 1rem;
+}
+
+/* En móvil, dos módulos por fila en vez de una columna larga */
+@media (max-width: 575.98px) {
+    .doc-diagram    { padding: 1.25rem 1rem; }
+    .diagram-module { width: calc(50% - 0.5rem); }
+    .diagram-db     { padding: 0.5rem 0.25rem; font-size: 0.62rem; }
+}
+.diagram-db-extra {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
 }
 
 

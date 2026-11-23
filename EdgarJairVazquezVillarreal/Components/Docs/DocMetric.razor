@@ -1,0 +1,14 @@
+<!-- Cifra con contador animado. Va dentro de un <div class="doc-metrics">. -->
+<div class="doc-metric scroll-reveal">
+    <div class="stat-value"><span class="counter" data-target="@Value">@Value</span>@Suffix</div>
+    <div class="stat-label">@Label</div>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public int Value { get; set; }
+
+    /// <summary>Texto pegado al número, p. ej. "+" o "k+".</summary>
+    [Parameter] public string? Suffix { get; set; }
+
+    [Parameter, EditorRequired] public string Label { get; set; } = "";
+}

@@ -1,120 +1,194 @@
 @page "/docs/esmeraldapoint"
+@inherits DocPageBase
 
-<PageTitle>EsmeraldaPoint - Documentación</PageTitle>
+<PageTitle>EsmeraldaPoint - @T("Documentación", "Documentation")</PageTitle>
 
-<div class="container mt-4 mb-5">
-    <div class="d-flex align-items-center mb-4">
-        <a href="projects" class="btn btn-outline-primary btn-sm me-3"><i class="bi bi-arrow-left me-1"></i> Volver a Proyectos</a>
-        <h2 class="mb-0 text-info fw-bold">EsmeraldaPoint — Sistema de Punto de Venta y ERP</h2>
-    </div>
+<DocPage Title="EsmeraldaPoint"
+         Subtitle="@LangApp.Get("ProjEsmeraldaSubtitle")"
+         Icon="bi-shop"
+         Tags="@Tags">
 
-    <div class="glass-card p-4 p-md-5">
-        <section class="mb-5">
-            <h4 class="text-neon mb-3"><i class="bi bi-info-circle me-2"></i> Descripción General</h4>
-            <p class="text-secondary" style="font-size: 1.1rem;">
-                Sistema empresarial completo desarrollado desde cero para una tortillería en Monclova, Coahuila. Cubre ventas, inventario, recursos humanos, proveedores y finanzas, con arquitectura distribuida entre dos ciudades.
-            </p>
-        </section>
+    <DocSection Id="descripcion" Icon="bi-info-circle" Title="@T("Descripción General", "Overview")">
+        <p class="doc-lead scroll-reveal">
+            @T("Sistema empresarial completo desarrollado desde cero para una tortillería en Monclova, Coahuila. Cubre ventas, inventario, recursos humanos, proveedores y finanzas, con arquitectura distribuida entre dos ciudades.",
+               "Full-featured business system built from scratch for a tortilla manufacturer in Monclova, Coahuila. It covers sales, inventory, human resources, suppliers and finance, with an architecture distributed across two cities.")
+        </p>
 
-        <hr class="mb-5" />
+        <div class="doc-metrics mt-4">
+            <DocMetric Value="5"  Label="@T("Proyectos .NET", ".NET projects")" />
+            <DocMetric Value="20" Label="@T("Tablas en la base de datos", "Database tables")" />
+            <DocMetric Value="6"  Label="@T("Módulos de datos", "Data modules")" />
+            <DocMetric Value="2"  Label="@T("Ciudades conectadas", "Connected cities")" />
+        </div>
+    </DocSection>
 
-        <section class="mb-5">
-            <h4 class="text-neon mb-3"><i class="bi bi-diagram-3 me-2"></i> Arquitectura</h4>
-            <p class="text-secondary">Es una solución con 5 proyectos en <strong>.NET 10</strong>:</p>
-            <ul class="text-secondary tech-list">
-                <li><strong>EsmeraldaAPI:</strong> El núcleo — una API REST en ASP.NET Core que centraliza toda la lógica de negocio y sirve como puente entre las demás aplicaciones.</li>
-                <li><strong>SharedEsmeralda:</strong> Biblioteca de modelos compartidos que usan todos los proyectos, evitando duplicación de código.</li>
-                <li><strong>TortEsmeralda:</strong> Aplicación de escritorio en <strong>WPF</strong> que corre en el punto de venta físico en Monclova.</li>
-                <li><strong>GestionEsmeralda:</strong> Back-office en <strong>Blazor Server</strong> accesible desde cualquier navegador.</li>
-                <li><strong>GestionEsmeralda.Client:</strong> Cliente <strong>Blazor WebAssembly</strong>.</li>
+    @if (Gallery.Length > 0)
+    {
+        <DocSection Id="capturas" Icon="bi-images" Title="@T("Capturas", "Screenshots")">
+            <DocGallery Images="@Gallery" />
+        </DocSection>
+    }
+
+    <DocSection Id="arquitectura" Icon="bi-diagram-3" Title="@T("Arquitectura", "Architecture")">
+        <p class="doc-text scroll-reveal">
+            @T("Es una solución con 5 proyectos en .NET 10:", "A solution with 5 projects on .NET 10:")
+        </p>
+        <DocCard>
+            <ul class="tech-list">
+                @foreach (var project in SolutionProjects)
+                {
+                    <li><strong>@project.Name:</strong> @T(project.Es, project.En)</li>
+                }
             </ul>
-        </section>
+        </DocCard>
+    </DocSection>
 
-        <section class="mb-5">
-            <h4 class="text-neon mb-3"><i class="bi bi-database me-2"></i> Base de Datos</h4>
-            <div class="bg-dark p-3 rounded border border-secondary mb-3">
-                <span class="badge badge-glass me-2">PostgreSQL</span>
-                <span class="badge badge-glass me-2">Entity Framework Core 10</span>
-                <span class="badge badge-glass me-2">Code First</span>
-            </div>
-            <p class="text-secondary">
-                Base de datos <strong>PostgreSQL</strong> con 20 tablas diseñadas y normalizadas, organizadas en 6 módulos:
-            </p>
-            <ul class="text-secondary tech-list">
-                <li>Núcleo de ventas e inventario.</li>
-                <li>Recursos humanos.</li>
-                <li>Proveedores.</li>
-                <li>Finanzas y turnos.</li>
-                <li>Sistema y configuración.</li>
-                <li>Notificaciones.</li>
+    <DocSection Id="base-de-datos" Icon="bi-database" Title="@T("Base de Datos", "Database")">
+        <div class="doc-tags mb-3 scroll-reveal">
+            <span class="badge badge-glass">PostgreSQL</span>
+            <span class="badge badge-glass">Entity Framework Core 10</span>
+            <span class="badge badge-glass">Code First</span>
+        </div>
+        <p class="doc-text scroll-reveal">
+            @T("Base de datos PostgreSQL con 20 tablas diseñadas y normalizadas, organizadas en 6 módulos:",
+               "PostgreSQL database with 20 designed and normalized tables, organized into 6 modules:")
+        </p>
+        <DocCard>
+            <ul class="tech-list tech-list-cols">
+                @foreach (var module in DataModules)
+                {
+                    <li>@T(module)</li>
+                }
             </ul>
-            <p class="text-secondary">
-                Implementada con <strong>Entity Framework Core 10</strong> usando enfoque <em>Code First</em> con migraciones, índices únicos y relaciones bien definidas.
-            </p>
-        </section>
+        </DocCard>
+        <p class="doc-text mt-3 mb-0 scroll-reveal">
+            @T("Implementada con Entity Framework Core 10 usando enfoque Code First con migraciones, índices únicos y relaciones bien definidas.",
+               "Implemented with Entity Framework Core 10 using a Code First approach with migrations, unique indexes and well-defined relationships.")
+        </p>
+    </DocSection>
 
-        <section class="mb-5">
-            <h4 class="text-neon mb-3"><i class="bi bi-code-square me-2"></i> Tecnologías Utilizadas</h4>
-            <div class="row text-secondary">
-                <div class="col-md-6 mb-3">
-                    <h6 class="text-info fw-bold">Backend</h6>
-                    <ul class="tech-list">
-                        <li>ASP.NET Core 10</li>
-                        <li>Entity Framework Core 10</li>
-                        <li>PostgreSQL & Npgsql</li>
-                        <li>Swashbuckle (Swagger)</li>
-                    </ul>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <h6 class="text-info fw-bold">Frontend & Herramientas</h6>
-                    <ul class="tech-list">
-                        <li>WPF (.NET 10)</li>
-                        <li>Blazor Server / WebAssembly</li>
-                        <li>Visual Studio 2026</li>
-                        <li>pgAdmin 4, dotnet-ef CLI, Git</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <DocSection Id="tecnologias" Icon="bi-code-square" Title="@T("Tecnologías Utilizadas", "Technologies Used")">
+        <div class="doc-grid doc-grid-2">
+            <DocCard Icon="bi-hdd-rack" Title="Backend">
+                <ul class="tech-list">
+                    <li>ASP.NET Core 10</li>
+                    <li>Entity Framework Core 10</li>
+                    <li>PostgreSQL &amp; Npgsql</li>
+                    <li>Swashbuckle (Swagger)</li>
+                </ul>
+            </DocCard>
+            <DocCard Icon="bi-window-stack" Title="@T("Frontend y Herramientas", "Frontend & Tools")">
+                <ul class="tech-list">
+                    <li>WPF (.NET 10)</li>
+                    <li>Blazor Server / WebAssembly</li>
+                    <li>Visual Studio 2026</li>
+                    <li>pgAdmin 4, dotnet-ef CLI, Git</li>
+                </ul>
+            </DocCard>
+        </div>
+    </DocSection>
 
-        <section class="mb-5">
-            <h4 class="text-neon mb-3"><i class="bi bi-check2-square me-2"></i> Funcionalidades Implementadas</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="text-secondary tech-list">
-                        <li>Gestión de sucursales con catálogo de productos por sucursal.</li>
-                        <li>Control de inventario con stock mínimo y movimientos.</li>
-                        <li>Sistema de turnos matutino y vespertino con corte de caja.</li>
-                        <li>Registro de ventas con <strong>Mercado Pago</strong> integrado.</li>
-                        <li>Módulo de RRHH con nómina semanal y cálculo de finiquitos.</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="text-secondary tech-list">
-                        <li>Gestión de proveedores con cuentas por pagar.</li>
-                        <li>Reportes financieros diarios por turno.</li>
-                        <li>Sistema de notificaciones para stock bajo, pagos pendientes y finiquitos próximos.</li>
-                        <li>Historial de precios, bitácora de accesos y configuración centralizada.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <DocSection Id="funcionalidades" Icon="bi-check2-square" Title="@T("Funcionalidades Implementadas", "Implemented Features")">
+        <DocCard>
+            <ul class="tech-list tech-list-cols">
+                @foreach (var feature in Features)
+                {
+                    <li>@T(feature)</li>
+                }
+            </ul>
+        </DocCard>
+    </DocSection>
 
-        <section>
-            <h4 class="text-neon mb-3"><i class="bi bi-lightbulb me-2"></i> Decisiones de Arquitectura Destacables</h4>
-            <div class="row text-secondary">
-                <div class="col-12">
-                    <div class="p-3 mb-3 border border-info rounded" style="background-color: rgba(0, 212, 255, 0.05);">
-                        <ul class="mb-0" style="line-height: 1.8;">
-                            <li><strong>Separación cliente-servidor:</strong> Conexión entre Monclova (POS) y Saltillo (servidor central) conectados por internet.</li>
-                            <li><strong>Patrón multi-sucursal:</strong> Catálogos y existencias independientes por sucursal.</li>
-                            <li><strong>Patrón DTO (Data Transfer Object):</strong> Utilizado exhaustivamente para evitar over-posting y prevenir referencias circulares en JSON.</li>
-                            <li><strong>Soft Delete:</strong> Implementación de eliminación lógica en lugar de eliminación física para preservar la integridad histórica de los registros.</li>
-                            <li><strong>Bulk Endpoints:</strong> Desarrollo de endpoints especiales para operaciones masivas eficientes.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-</div>
+    <DocSection Id="decisiones" Icon="bi-lightbulb" Title="@T("Decisiones de Arquitectura Destacables", "Notable Architecture Decisions")">
+        <div class="doc-callout scroll-reveal">
+            <ul class="tech-list">
+                @foreach (var decision in Decisions)
+                {
+                    <li><strong>@T(decision.Title):</strong> @T(decision.Detail)</li>
+                }
+            </ul>
+        </div>
+    </DocSection>
+</DocPage>
+
+@code {
+    private static readonly string[] Tags =
+    {
+        "ASP.NET Core 10", "Blazor", "WPF", "PostgreSQL", "EF Core 10",
+    };
+
+    // Capturas del sistema: guarda los archivos en wwwroot/ImagenesDocs/esmeraldapoint/
+    // y agrega una línea por imagen. La sección "Capturas" aparece sola al haber una.
+    //   new("ImagenesDocs/esmeraldapoint/ventas.png", "Pantalla de ventas", "Sales screen"),
+    private static readonly DocImage[] Gallery = { };
+
+    private static readonly (string Name, string Es, string En)[] SolutionProjects =
+    {
+        ("EsmeraldaAPI",
+            "El núcleo — una API REST en ASP.NET Core que centraliza toda la lógica de negocio y sirve como puente entre las demás aplicaciones.",
+            "The core — an ASP.NET Core REST API that centralizes all business logic and bridges the other applications."),
+        ("SharedEsmeralda",
+            "Biblioteca de modelos compartidos que usan todos los proyectos, evitando duplicación de código.",
+            "Shared model library used by every project, avoiding code duplication."),
+        ("TortEsmeralda",
+            "Aplicación de escritorio en WPF que corre en el punto de venta físico en Monclova.",
+            "WPF desktop application that runs at the physical point of sale in Monclova."),
+        ("GestionEsmeralda",
+            "Back-office en Blazor Server accesible desde cualquier navegador.",
+            "Blazor Server back office accessible from any browser."),
+        ("GestionEsmeralda.Client",
+            "Cliente Blazor WebAssembly.",
+            "Blazor WebAssembly client."),
+    };
+
+    private static readonly (string Es, string En)[] DataModules =
+    {
+        ("Núcleo de ventas e inventario.", "Sales and inventory core."),
+        ("Recursos humanos.",              "Human resources."),
+        ("Proveedores.",                   "Suppliers."),
+        ("Finanzas y turnos.",             "Finance and shifts."),
+        ("Sistema y configuración.",       "System and configuration."),
+        ("Notificaciones.",                "Notifications."),
+    };
+
+    private static readonly (string Es, string En)[] Features =
+    {
+        ("Gestión de sucursales con catálogo de productos por sucursal.",
+         "Branch management with a per-branch product catalog."),
+        ("Control de inventario con stock mínimo y movimientos.",
+         "Inventory control with minimum stock and movements."),
+        ("Sistema de turnos matutino y vespertino con corte de caja.",
+         "Morning and evening shift system with cash register closing."),
+        ("Registro de ventas con Mercado Pago integrado.",
+         "Sales recording with Mercado Pago integration."),
+        ("Módulo de RRHH con nómina semanal y cálculo de finiquitos.",
+         "HR module with weekly payroll and severance calculation."),
+        ("Gestión de proveedores con cuentas por pagar.",
+         "Supplier management with accounts payable."),
+        ("Reportes financieros diarios por turno.",
+         "Daily financial reports per shift."),
+        ("Sistema de notificaciones para stock bajo, pagos pendientes y finiquitos próximos.",
+         "Notification system for low stock, pending payments and upcoming severance payments."),
+        ("Historial de precios, bitácora de accesos y configuración centralizada.",
+         "Price history, access log and centralized configuration."),
+    };
+
+    private static readonly ((string Es, string En) Title, (string Es, string En) Detail)[] Decisions =
+    {
+        (("Separación cliente-servidor", "Client-server separation"),
+         ("Conexión entre Monclova (POS) y Saltillo (servidor central) conectados por internet.",
+          "Monclova (POS) and Saltillo (central server) connected over the internet.")),
+        (("Patrón multi-sucursal", "Multi-branch pattern"),
+         ("Catálogos y existencias independientes por sucursal.",
+          "Independent catalogs and stock per branch.")),
+        (("Patrón DTO (Data Transfer Object)", "DTO (Data Transfer Object) pattern"),
+         ("Utilizado exhaustivamente para evitar over-posting y prevenir referencias circulares en JSON.",
+          "Used extensively to avoid over-posting and prevent circular references in JSON.")),
+        (("Soft Delete", "Soft Delete"),
+         ("Implementación de eliminación lógica en lugar de eliminación física para preservar la integridad histórica de los registros.",
+          "Logical deletion instead of physical deletion to preserve the historical integrity of records.")),
+        (("Bulk Endpoints", "Bulk Endpoints"),
+         ("Desarrollo de endpoints especiales para operaciones masivas eficientes.",
+          "Dedicated endpoints for efficient bulk operations.")),
+    };
+}

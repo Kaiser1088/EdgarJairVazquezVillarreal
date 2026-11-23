@@ -1,0 +1,73 @@
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+
+<!-- Plantilla de una página de documentación: encabezado, etiquetas,
+     índice de secciones y cuerpo. Las secciones (DocSection) se registran solas. -->
+<div class="container doc-page mt-4 mb-5">
+    <a href="projects" class="doc-back">
+        <i class="bi bi-arrow-left me-2"></i>@(LangApp.IsSpanish ? "Volver a Proyectos" : "Back to Projects")
+    </a>
+
+    <header class="doc-header scroll-reveal">
+        <div class="featured-icon"><i class="bi @Icon"></i></div>
+        <div>
+            <h1 class="doc-title">@Title</h1>
+            @if (!string.IsNullOrEmpty(Subtitle))
+            {
+                <p class="doc-subtitle">@Subtitle</p>
+            }
+        </div>
+        @if (!string.IsNullOrEmpty(Status))
+        {
+            <span class="doc-status"><span class="doc-status-dot"></span>@Status</span>
+        }
+    </header>
+
+    @if (Tags.Count > 0)
+    {
+        <div class="doc-tags scroll-reveal">
+            @foreach (var tag in Tags)
+            {
+                <span class="badge badge-glass">@tag</span>
+            }
+        </div>
+    }
+
+    @if (_sections.Count > 1)
+    {
+        <!-- js/animations.js hace el scroll (data-scroll-to) y marca la sección activa -->
+        <nav class="doc-nav" aria-label="@(LangApp.IsSpanish ? "Secciones" : "Sections")">
+            @foreach (var section in _sections)
+            {
+                <button type="button" class="doc-nav-link" data-scroll-to="@section.Id" @key="section.Id">
+                    @section.Title
+                </button>
+            }
+        </nav>
+    }
+
+    <CascadingValue Value="this" IsFixed="true">
+        @ChildContent
+    </CascadingValue>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Title { get; set; } = "";
+    [Parameter] public string? Subtitle { get; set; }
+    [Parameter] public string Icon { get; set; } = "bi-journal-text";
+
+    /// <summary>Estado del proyecto (opcional), p. ej. "En desarrollo activo".</summary>
+    [Parameter] public string? Status { get; set; }
+
+    [Parameter] public IReadOnlyList<string> Tags { get; set; } = Array.Empty<string>();
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    private readonly List<DocSection> _sections = new();
+
+    internal void Register(DocSection section)
+    {
+        _sections.Add(section);
+        StateHasChanged();
+    }
+
+    internal void Refresh() => StateHasChanged();
+}

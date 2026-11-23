@@ -1,0 +1,20 @@
+@inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
+
+<!-- Galería de capturas. Cada imagen abre en tamaño completo en otra pestaña. -->
+<div class="doc-gallery">
+    @foreach (var image in Images)
+    {
+        var caption = LangApp.IsSpanish ? image.CaptionEs : image.CaptionEn;
+
+        <figure class="doc-figure scroll-reveal" @key="image.Src">
+            <a href="@image.Src" target="_blank">
+                <img src="@image.Src" alt="@caption" loading="lazy" />
+            </a>
+            <figcaption>@caption</figcaption>
+        </figure>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public IReadOnlyList<DocImage> Images { get; set; } = Array.Empty<DocImage>();
+}

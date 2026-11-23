@@ -7,6 +7,8 @@
 //   .scroll-reveal            → aparece al entrar en pantalla
 //   .counter[data-target]     → cuenta de 0 hasta data-target
 //   [data-typed="a|b|c"]      → teclea y borra las frases en ciclo
+//   [data-scroll-to="id"]     → al hacer clic lleva a la sección con ese id
+//   .doc-section[id]          → marca [data-active] en su botón del índice
 (function () {
     'use strict';
 
@@ -138,8 +140,74 @@
     }
 
 
+    // ── Índice de secciones (páginas de documentación) ──────────────────
+    // Los botones [data-scroll-to="id"] llevan a la sección con ese id. No se
+    // usan enlaces "#id" porque con <base href> apuntarían a la página de inicio.
+    document.addEventListener('click', function (e) {
+        var trigger = e.target.closest ? e.target.closest('[data-scroll-to]') : null;
+        if (!trigger) return;
+
+        var target = document.getElementById(trigger.getAttribute('data-scroll-to'));
+        if (!target) return;
+
+        // Se marca la sección elegida y se pausa el seguimiento mientras dura
+        // el scroll: cerca del final de la página ganaría la última sección.
+        markActiveSection(target.id);
+        spyPausedUntil = performance.now() + SPY_PAUSE_MS;
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    var SPY_PAUSE_MS = 1000;
+    var spyPausedUntil = 0;
+
+    function markActiveSection(id) {
+        document.querySelectorAll('[data-scroll-to]').forEach(function (link) {
+            var active = link.getAttribute('data-scroll-to') === id;
+            if (active === link.hasAttribute('data-active')) return;
+
+            link.toggleAttribute('data-active', active);
+
+            // Mantiene visible el botón activo cuando el índice se desplaza en horizontal
+            if (active && link.parentElement) {
+                var nav = link.parentElement;
+                nav.scrollLeft = link.offsetLeft - (nav.clientWidth - link.offsetWidth) / 2;
+            }
+        });
+    }
+
+    // La sección activa es la última cuyo inicio ya pasó el tercio superior de
+    // la pantalla; al llegar al final de la página, la última sección.
+    var spyQueued = false;
+
+    function updateActiveSection() {
+        spyQueued = false;
+        if (performance.now() < spyPausedUntil) return;
+
+        var sections = document.querySelectorAll('.doc-section[id]');
+        if (!sections.length) return;
+
+        var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        var line = window.innerHeight * 0.3;
+        var current = sections[0];
+
+        sections.forEach(function (section) {
+            if (atBottom || section.getBoundingClientRect().top <= line) current = section;
+        });
+        markActiveSection(current.id);
+    }
+
+    function queueSectionSpy() {
+        if (spyQueued) return;
+        spyQueued = true;
+        requestAnimationFrame(updateActiveSection);
+    }
+
+    window.addEventListener('scroll', queueSectionSpy, { passive: true });
+    window.addEventListener('resize', queueSectionSpy);
+
+
     // ── Registro de elementos ───────────────────────────────────────────
-    var SELECTOR = '.scroll-reveal, .counter[data-target], [data-typed]';
+    var SELECTOR = '.scroll-reveal, .counter[data-target], [data-typed], .doc-section[id]';
 
     function register(el) {
         if (seen.has(el)) return;
@@ -158,6 +226,9 @@
         }
         if (el.matches('[data-typed]')) {
             startTyping(el);
+        }
+        if (el.matches('.doc-section[id]')) {
+            queueSectionSpy();
         }
     }
 
