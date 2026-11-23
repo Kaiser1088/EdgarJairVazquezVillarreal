@@ -119,6 +119,11 @@
 /* ╔══════════════════════════════════════════════════════╗
    ║  ESTILOS BASE                                       ║
    ╚══════════════════════════════════════════════════════╝ */
+/* Bootstrap activa scroll suave en :root. Al navegar, Blazor regresa al inicio
+   de la página; con scroll suave la página nueva se vería deslizándose
+   mientras hace su animación de entrada. */
+:root { scroll-behavior: auto; }
+
 html, body {
     font-family: var(--font-heading);
     min-height: 100vh;
@@ -196,20 +201,86 @@ a:hover {
 
 
 /* ╔══════════════════════════════════════════════════════╗
-   ║  ANIMACIONES CSS PURAS                              ║
+   ║  ANIMACIONES                                        ║
+   ║  js/animations.js marca [data-revealed] cuando el   ║
+   ║  elemento entra en pantalla y fija --reveal-delay   ║
    ╚══════════════════════════════════════════════════════╝ */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(22px); }
-    to   { opacity: 1; transform: translateY(0);    }
+
+/* Sin "to": la animación termina en el estilo normal del elemento,
+   así no pisa el transform del hover de las tarjetas. */
+@keyframes reveal-up {
+    from { opacity: 0; transform: translateY(24px); }
 }
 
-.scroll-reveal { animation: fadeInUp 0.5s ease-out both; }
+/* Solo se oculta si animations.js cargó (html.js-anim) */
+html.js-anim .scroll-reveal:not([data-revealed]) { opacity: 0; }
 
-.scroll-reveal:nth-child(2) { animation-delay: 0.07s; }
-.scroll-reveal:nth-child(3) { animation-delay: 0.14s; }
-.scroll-reveal:nth-child(4) { animation-delay: 0.21s; }
-.scroll-reveal:nth-child(5) { animation-delay: 0.28s; }
-.scroll-reveal:nth-child(6) { animation-delay: 0.35s; }
+.scroll-reveal[data-revealed] {
+    animation: reveal-up 0.6s cubic-bezier(0.22, 0.8, 0.3, 1) backwards;
+    animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* Entrada de cada página al navegar (MainLayout recrea el contenedor) */
+@keyframes page-in {
+    from { opacity: 0; transform: translateY(10px); }
+}
+
+.page-transition { animation: page-in 0.35s ease-out; }
+
+/* Flotación suave para elementos decorativos */
+@keyframes float-soft {
+    0%, 100% { transform: translateY(0);    }
+    50%      { transform: translateY(-8px); }
+}
+
+.float-soft { animation: float-soft 6s ease-in-out infinite; }
+
+/* Texto con degradado en movimiento */
+@keyframes gradient-shift {
+    to { background-position: 200% center; }
+}
+
+.text-gradient {
+    background: linear-gradient(
+        100deg,
+        var(--accent-color),
+        var(--accent2-color),
+        var(--accent-color)
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-shift 8s linear infinite;
+}
+
+/* Texto tecleado: el contenido lo escribe animations.js */
+@keyframes caret-blink {
+    50% { opacity: 0; }
+}
+
+.typed-text::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 3px;
+    vertical-align: text-bottom;
+    background-color: var(--accent-color);
+    animation: caret-blink 1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .scroll-reveal[data-revealed],
+    .page-transition,
+    .float-soft,
+    .text-gradient,
+    .typed-text::after,
+    .timeline-dot.active {
+        animation: none;
+    }
+}
 
 
 /* ╔══════════════════════════════════════════════════════╗
@@ -392,6 +463,261 @@ ul.tech-list li::before {
 .timeline-dot.active {
     background-color: var(--accent-color);
     animation: pulse-accent 2s infinite;
+}
+
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  INICIO — HERO                                      ║
+   ╚══════════════════════════════════════════════════════╝ */
+.hero { padding: 1rem 0 2.5rem; }
+
+.hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+.hero-name {
+    font-size: clamp(1.9rem, 3.1vw + 0.4rem, 3.2rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.9rem;
+}
+
+.hero-role {
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 0.6vw + 0.75rem, 1.15rem);
+    color: var(--text-primary);
+    min-height: 1.7em; /* evita saltos de altura mientras se teclea */
+    margin-bottom: 1rem;
+}
+.hero-role-prompt {
+    color: var(--accent-color);
+    margin-right: 0.5rem;
+}
+
+.hero-tagline {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 34rem;
+    margin-bottom: 1.6rem;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+.hero-actions .btn-outline-primary {
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.hero-social {
+    display: flex;
+    gap: 1.1rem;
+    margin-top: 1.4rem;
+}
+.hero-social a {
+    display: inline-block;
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.hero-social a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Tarjeta de código decorativa */
+.hero-visual { position: relative; }
+
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 8% 6%;
+    background: radial-gradient(circle, rgba(var(--accent-rgb), 0.35), transparent 70%);
+    filter: blur(42px);
+    pointer-events: none;
+}
+
+.code-card {
+    position: relative;
+    background-color: #0B1220;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    overflow: hidden;
+}
+
+.code-card-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.6rem 0.9rem;
+    background-color: rgba(255,255,255,0.04);
+    border-bottom: 1px solid var(--border-color);
+}
+.code-card-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background-color: #EF4444;
+}
+.code-card-dot:nth-child(2) { background-color: #F59E0B; }
+.code-card-dot:nth-child(3) { background-color: #10B981; }
+.code-card-file {
+    margin-left: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.code-card-body {
+    padding: 1rem 1rem 1.1rem 0;
+    overflow-x: auto;
+    line-height: 1.75;
+    color: #D1D5DB;
+    counter-reset: code-line;
+}
+.code-line { white-space: nowrap; }
+.code-line::before {
+    counter-increment: code-line;
+    content: counter(code-line);
+    display: inline-block;
+    width: 2.4rem;
+    padding-right: 0.9rem;
+    text-align: right;
+    color: #4B5563;
+    user-select: none;
+}
+
+.tk-kw   { color: #818CF8; }
+.tk-type { color: #34D399; }
+.tk-str  { color: #FCD34D; }
+.tk-prop {
+    display: inline-block;
+    min-width: 8ch; /* alinea los "=" */
+    color: #E5E7EB;
+}
+
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  INICIO — CIFRAS                                    ║
+   ╚══════════════════════════════════════════════════════╝ */
+.stat-band {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.stat {
+    padding: 1.25rem 1rem;
+    text-align: center;
+    border-left: 1px solid var(--border-color);
+}
+.stat:first-child { border-left: 0; }
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 1.6vw + 0.8rem, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--accent-color);
+}
+.stat-label {
+    margin-top: 0.25rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+
+/* El sidebar ocupa 260px, así que el contenido es angosto hasta ~992px */
+@media (max-width: 991.98px) {
+    .stat-band { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(odd)  { border-left: 0; }
+    .stat:nth-child(n+3)  { border-top: 1px solid var(--border-color); }
+}
+
+
+/* ╔══════════════════════════════════════════════════════╗
+   ║  INICIO — SECCIONES                                 ║
+   ╚══════════════════════════════════════════════════════╝ */
+.home-section { margin-top: 3.5rem; }
+
+.section-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Título seguido de una línea que se desvanece */
+.section-heading {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    font-size: 1.5rem;
+}
+.section-heading i { color: var(--accent-color); font-size: 1.2rem; }
+.section-heading::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border-color), transparent);
+}
+
+.section-link {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.section-link i,
+.featured-link i {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+.section-link:hover i,
+.featured-card:hover .featured-link i { transform: translateX(4px); }
+
+.about-lead {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 46rem;
+}
+
+/* Tarjetas de proyectos destacados */
+.featured-icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 52px; height: 52px;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    background-color: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    border-radius: 12px;
+}
+.featured-subtitle {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--text-secondary);
+}
+.featured-link {
+    font-size: 0.92rem;
+    font-weight: 600;
 }
 
 

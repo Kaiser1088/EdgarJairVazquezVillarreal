@@ -1,6 +1,5 @@
 @page "/docs/vavill"
 @inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
-@inject IJSRuntime JSRuntime
 @implements IDisposable
 
 <PageTitle>VAVILL - @(LangApp.IsSpanish ? "Documentación" : "Documentation")</PageTitle>
@@ -132,37 +131,37 @@
             <div class="row text-center">
                 <div class="col-6 col-md-2 mb-3">
                     <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
-                        <h3 class="text-white mb-0 fw-bold counter" data-target="9">0</h3>
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="9">9</h3>
                         <span class="text-muted small">@(LangApp.IsSpanish ? "Proyectos .NET" : ".NET Projects")</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-2 mb-3">
                     <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
-                        <h3 class="text-white mb-0 fw-bold"><span class="counter" data-target="120">0</span>+</h3>
+                        <h3 class="text-white mb-0 fw-bold"><span class="counter" data-target="120">120</span>+</h3>
                         <span class="text-muted small">Endpoints REST</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-2 mb-3">
                     <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
-                        <h3 class="text-white mb-0 fw-bold counter" data-target="100">0</h3>
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="100">100</h3>
                         <span class="text-muted small">@(LangApp.IsSpanish ? "Entidades BD" : "DB Entities")</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-2 mb-3">
                     <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
-                        <h3 class="text-white mb-0 fw-bold counter" data-target="6">0</h3>
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="6">6</h3>
                         <span class="text-muted small">@(LangApp.IsSpanish ? "Bases SQL" : "SQL DBs")</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-2 mb-3">
                     <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
-                        <h3 class="text-white mb-0 fw-bold counter" data-target="30">0</h3>
+                        <h3 class="text-white mb-0 fw-bold counter" data-target="30">30</h3>
                         <span class="text-muted small">@(LangApp.IsSpanish ? "Migraciones" : "Migrations")</span>
                     </div>
                 </div>
                 <div class="col-6 col-md-2 mb-3">
                     <div class="p-3 border border-secondary rounded bg-dark h-100 project-card shadow">
-                        <h3 class="text-white mb-0 fw-bold"><span class="counter" data-target="18">0</span>k+</h3>
+                        <h3 class="text-white mb-0 fw-bold"><span class="counter" data-target="18">18</span>k+</h3>
                         <span class="text-muted small">@(LangApp.IsSpanish ? "Líneas Código" : "Lines of Code")</span>
                     </div>
                 </div>
@@ -366,53 +365,9 @@
 </div>
 
 @code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    // Los contadores (.counter) los anima js/animations.js al entrar en pantalla.
+    protected override void OnInitialized()
     {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("eval", @"
-                window.startVavillCounters = () => {
-                    const counters = document.querySelectorAll('.counter');
-                    if(!counters.length) return;
-
-                    const observerOptions = {
-                        root: null,
-                        rootMargin: '0px',
-                        threshold: 0.1
-                    };
-
-                    const observer = new IntersectionObserver((entries, observer) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                const counter = entry.target;
-                                const target = +counter.getAttribute('data-target');
-                                const duration = 1500; // ms
-                                const step = target / (duration / 16);
-                                let current = 0;
-
-                                const updateCounter = () => {
-                                    current += step;
-                                    if (current < target) {
-                                        counter.innerText = Math.ceil(current);
-                                        requestAnimationFrame(updateCounter);
-                                    } else {
-                                        counter.innerText = target;
-                                    }
-                                };
-                                updateCounter();
-                                observer.unobserve(counter);
-                            }
-                        });
-                    }, observerOptions);
-
-                    counters.forEach(counter => {
-                        observer.observe(counter);
-                    });
-                };
-                window.startVavillCounters();
-            ");
-        }
-
         LangApp.OnLanguageChanged += StateHasChanged;
     }
 

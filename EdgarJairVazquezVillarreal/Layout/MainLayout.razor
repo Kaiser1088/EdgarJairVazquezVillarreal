@@ -1,5 +1,6 @@
 @inherits LayoutComponentBase
 @inject EdgarJairVazquezVillarreal.Services.ThemeService ThemeApp
+@inject NavigationManager Nav
 
 <div class="page">
     <!-- El sidebar siempre es oscuro independientemente del tema global -->
@@ -12,7 +13,10 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <!-- La key es la URL: al navegar se recrea el contenedor y se repite la animación de entrada -->
+            <div class="page-transition" @key="Nav.Uri">
+                @Body
+            </div>
         </article>
     </main>
 </div>

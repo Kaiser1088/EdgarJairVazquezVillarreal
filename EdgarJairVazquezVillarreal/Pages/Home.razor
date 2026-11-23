@@ -2,121 +2,265 @@
 @inject EdgarJairVazquezVillarreal.Services.LanguageService LangApp
 @implements IDisposable
 
-<PageTitle>@LangApp.Get("HomeTitle")</PageTitle>
+<PageTitle>Edgar Jair Vazquez V. — @LangApp.Get("HeroRole1")</PageTitle>
 
-<h1>@LangApp.Get("HomeTitle")</h1>
+<!-- ── Hero ───────────────────────────────────────────────────────── -->
+<section class="hero">
+    <div class="row align-items-center g-4">
+        <div class="col-xl-7">
+            <p class="hero-eyebrow scroll-reveal">@LangApp.Get("HeroGreeting")</p>
 
-<div class="row">
-    <div class="col-md-8">
-        <p>@LangApp.Get("BioP1")</p>
-        <p>@LangApp.Get("BioP2")</p>
-        <p>@LangApp.Get("BioP3")</p>
-        <p>@LangApp.Get("BioP4")</p>
-    </div>
-    <div class="col-md-4">
-        <div class="text-center">
-            <a href="ImagenesDocs/CVEdgarJairVazquezVillarreal.pdf"
-               class="btn btn-primary w-100" target="_blank">
-                <i class="bi bi-file-earmark-pdf-fill me-2"></i>@LangApp.Get("DownloadCV")
-            </a>
+            <h1 class="hero-name scroll-reveal">
+                Edgar Jair <span class="text-gradient d-block">Vazquez Villarreal</span>
+            </h1>
+
+            <!-- El texto lo teclea js/animations.js a partir de data-typed -->
+            <p class="hero-role scroll-reveal">
+                <span class="hero-role-prompt" aria-hidden="true">&gt;</span><span class="typed-text" data-typed="@string.Join('|', Roles)" aria-hidden="true"></span>
+                <span class="visually-hidden">@string.Join(", ", Roles)</span>
+            </p>
+
+            <p class="hero-tagline scroll-reveal">@LangApp.Get("HeroTagline")</p>
+
+            <div class="hero-actions scroll-reveal">
+                <a href="projects" class="btn btn-primary">
+                    <i class="bi bi-grid-1x2-fill me-2"></i>@LangApp.Get("ViewProjects")
+                </a>
+                <a href="ImagenesDocs/CVEdgarJairVazquezVillarreal.pdf"
+                   class="btn btn-outline-primary" target="_blank">
+                    <i class="bi bi-file-earmark-pdf-fill me-2"></i>@LangApp.Get("DownloadCV")
+                </a>
+            </div>
+
+            <div class="hero-social scroll-reveal">
+                <a href="https://github.com/Kaiser1088" target="_blank" aria-label="GitHub">
+                    <i class="bi bi-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/edgar-vazquez-83b9431b8/" target="_blank" aria-label="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+                <a href="contact" aria-label="@LangApp.Get("NavContact")">
+                    <i class="bi bi-envelope-fill"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Tarjeta de código decorativa (siempre oscura, como el sidebar) -->
+        <div class="col-xl-5 d-none d-xl-block" aria-hidden="true">
+            <div class="hero-visual scroll-reveal">
+                <div class="code-card float-soft" data-bs-theme="dark">
+                    <div class="code-card-bar">
+                        <span class="code-card-dot"></span>
+                        <span class="code-card-dot"></span>
+                        <span class="code-card-dot"></span>
+                        <span class="code-card-file">Perfil.cs</span>
+                    </div>
+                    <div class="code-card-body">
+                        <div class="code-line"><span class="tk-kw">var</span> edgar = <span class="tk-kw">new</span> <span class="tk-type">Engineer</span></div>
+                        <div class="code-line">{</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Degree</span> = <span class="tk-str">"@LangApp.Get("HeroCodeDegree")"</span>,</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Backend</span> = [<span class="tk-str">"C#"</span>, <span class="tk-str">".NET"</span>, <span class="tk-str">"SQL"</span>],</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Frontend</span> = [<span class="tk-str">"Blazor"</span>, <span class="tk-str">"WPF"</span>],</div>
+                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Hardware</span> = [<span class="tk-str">"ESP32"</span>, <span class="tk-str">"PLC"</span>, <span class="tk-str">"PCB"</span>],</div>
+                        <div class="code-line">};</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</section>
 
-<!-- Tarjetas de habilidades -->
-<div class="row mt-4">
-    <div class="col-md-4 mb-4">
-        <div class="glass-card scroll-reveal h-100 p-4">
-            <h3 class="mb-3 text-neon">
-                <i class="bi bi-gear me-2"></i>@LangApp.Get("MechatronicsTitle")
-            </h3>
-            <ul class="tech-list">
-                <li>@LangApp.Get("Solidworks")</li>
-                <li>@LangApp.Get("PLC")</li>
-                <li>@LangApp.Get("PCB")</li>
-                <li>@LangApp.Get("Labview")</li>
+<!-- ── Cifras ─────────────────────────────────────────────────────── -->
+<section class="stat-band scroll-reveal">
+    <div class="stat">
+        <div class="stat-value"><span class="counter" data-target="2">2</span></div>
+        <div class="stat-label">@LangApp.Get("StatErp")</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value"><span class="counter" data-target="120">120</span>+</div>
+        <div class="stat-label">@LangApp.Get("StatEndpoints")</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">CSWP</div>
+        <div class="stat-label">@LangApp.Get("StatCswp")</div>
+    </div>
+    <div class="stat">
+        <div class="stat-value">@LangApp.Get("StatRoboticsValue")</div>
+        <div class="stat-label">@LangApp.Get("StatRobotics")</div>
+    </div>
+</section>
+
+<!-- ── Proyectos destacados ───────────────────────────────────────── -->
+<section class="home-section">
+    <div class="section-head scroll-reveal">
+        <h2 class="section-heading"><i class="bi bi-stars"></i>@LangApp.Get("HomeFeaturedTitle")</h2>
+        <a href="projects" class="section-link">
+            @LangApp.Get("HomeAllProjects")<i class="bi bi-arrow-right ms-1"></i>
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 featured-card scroll-reveal">
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="featured-icon"><i class="bi bi-shop"></i></div>
+                        <div>
+                            <h3 class="h5 card-title mb-0">EsmeraldaPoint</h3>
+                            <div class="featured-subtitle">@LangApp.Get("ProjEsmeraldaSubtitle")</div>
+                        </div>
+                    </div>
+                    <p class="card-text">@LangApp.Get("ProjEsmeraldaDesc")</p>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="badge badge-glass">ASP.NET Core 10</span>
+                        <span class="badge badge-glass">Blazor</span>
+                        <span class="badge badge-glass">WPF</span>
+                        <span class="badge badge-glass">PostgreSQL</span>
+                    </div>
+                    <a href="docs/esmeraldapoint" class="featured-link stretched-link mt-auto">
+                        @LangApp.Get("ViewDocs")<i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 mb-4">
+            <div class="card h-100 featured-card scroll-reveal">
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="featured-icon"><i class="bi bi-buildings"></i></div>
+                        <div>
+                            <h3 class="h5 card-title mb-0">VAVILL</h3>
+                            <div class="featured-subtitle">@LangApp.Get("ProjVavillSubtitle")</div>
+                        </div>
+                    </div>
+                    <p class="card-text">@LangApp.Get("ProjVavillDesc")</p>
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="badge badge-glass">.NET 8</span>
+                        <span class="badge badge-glass">Blazor WebAssembly</span>
+                        <span class="badge badge-glass">RCL Modular</span>
+                        <span class="badge badge-glass">SQL Server</span>
+                    </div>
+                    <a href="docs/vavill" class="featured-link stretched-link mt-auto">
+                        @LangApp.Get("ViewDocs")<i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Sobre mí + habilidades ─────────────────────────────────────── -->
+<section class="home-section">
+    <div class="section-head scroll-reveal">
+        <h2 class="section-heading"><i class="bi bi-person-fill"></i>@LangApp.Get("HomeTitle")</h2>
+    </div>
+
+    <p class="about-lead scroll-reveal">@LangApp.Get("BioP1")</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-4">
+            <div class="glass-card scroll-reveal h-100 p-4">
+                <h3 class="h4 mb-3 text-neon">
+                    <i class="bi bi-gear me-2"></i>@LangApp.Get("MechatronicsTitle")
+                </h3>
+                <ul class="tech-list">
+                    <li>@LangApp.Get("Solidworks")</li>
+                    <li>@LangApp.Get("PLC")</li>
+                    <li>@LangApp.Get("PCB")</li>
+                    <li>@LangApp.Get("Labview")</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="glass-card scroll-reveal h-100 p-4">
+                <h3 class="h4 mb-3 text-neon">
+                    <i class="bi bi-code-slash me-2"></i>@LangApp.Get("SoftwareTitle")
+                </h3>
+                <ul class="tech-list">
+                    <li>@LangApp.Get("CSharp")</li>
+                    <li>@LangApp.Get("AspNetCore")</li>
+                    <li>@LangApp.Get("ClientServer")</li>
+                    <li>@LangApp.Get("IndApps")</li>
+                    <li>@LangApp.Get("WPF")</li>
+                    <li>@LangApp.Get("HWInt")</li>
+                    <li>@LangApp.Get("RestAPI")</li>
+                    <li>@LangApp.Get("SQL")</li>
+                    <li>@LangApp.Get("Postgres")</li>
+                    <li>@LangApp.Get("Git")</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="glass-card scroll-reveal h-100 p-4">
+                <h3 class="h4 mb-3 text-neon">
+                    <i class="bi bi-rocket me-2"></i>@LangApp.Get("SolutionsTitle")
+                </h3>
+                <ul class="tech-list">
+                    <li>@LangApp.Get("CTPAT")</li>
+                    <li>@LangApp.Get("ZPL")</li>
+                    <li>@LangApp.Get("ITInv")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Logros y participaciones ───────────────────────────────────── -->
+<section class="home-section mb-5">
+    <div class="section-head scroll-reveal">
+        <h2 class="section-heading"><i class="bi bi-trophy-fill"></i>@LangApp.Get("CareerAndAchievements")</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 scroll-reveal">
+            <p><strong>@LangApp.Get("RoboticsSkills"):</strong></p>
+            <ul class="list-unstyled">
+                <li>
+                    <i class="bi bi-trophy-fill text-warning me-2"></i>
+                    <strong>@LangApp.Get("RobotBattle2018"):</strong>
+                    @LangApp.Get("ParticipationWithTeamDynamo")
+                </li>
+                <li>
+                    <i class="bi bi-trophy-fill text-warning me-2"></i>
+                    <strong>@LangApp.Get("RobotCIM"):</strong>
+                    @LangApp.Get("ParticipationWithTeamDynamoInCategories")
+                </li>
+                <li>
+                    <i class="bi bi-trophy-fill text-warning me-2"></i>
+                    <strong>@LangApp.Get("StateRoboticsNL"):</strong>
+                    @LangApp.Get("FirstAndSecondPlaceInSumoAndMinisumo")
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-md-6 scroll-reveal">
+            <p><strong>@LangApp.Get("TechnologicalInnovation"):</strong></p>
+            <ul class="list-unstyled">
+                <li>
+                    <i class="bi bi-award-fill text-warning me-2"></i>
+                    @LangApp.Get("ParticipationScienceFair2019")
+                </li>
+                <li>
+                    <i class="bi bi-award-fill text-warning me-2"></i>
+                    @LangApp.Get("ParticipationScienceFair2020")
+                </li>
             </ul>
         </div>
     </div>
-
-    <div class="col-md-4 mb-4">
-        <div class="glass-card scroll-reveal h-100 p-4">
-            <h3 class="mb-3 text-neon">
-                <i class="bi bi-code-slash me-2"></i>@LangApp.Get("SoftwareTitle")
-            </h3>
-            <ul class="tech-list">
-                <li>@LangApp.Get("CSharp")</li>
-                <li>@LangApp.Get("AspNetCore")</li>
-                <li>@LangApp.Get("ClientServer")</li>
-                <li>@LangApp.Get("IndApps")</li>
-                <li>@LangApp.Get("WPF")</li>
-                <li>@LangApp.Get("HWInt")</li>
-                <li>@LangApp.Get("RestAPI")</li>
-                <li>@LangApp.Get("SQL")</li>
-                <li>@LangApp.Get("Postgres")</li>
-                <li>@LangApp.Get("Git")</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="col-md-4 mb-4">
-        <div class="glass-card scroll-reveal h-100 p-4">
-            <h3 class="mb-3 text-neon">
-                <i class="bi bi-rocket me-2"></i>@LangApp.Get("SolutionsTitle")
-            </h3>
-            <ul class="tech-list">
-                <li>@LangApp.Get("CTPAT")</li>
-                <li>@LangApp.Get("ZPL")</li>
-                <li>@LangApp.Get("ITInv")</li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- Logros y participaciones -->
-<div class="row mt-5">
-    <div class="col-12 text-center">
-        <h4><i class="bi bi-trophy"></i> @LangApp.Get("CareerAndAchievements")</h4>
-        <hr />
-    </div>
-
-    <div class="col-md-6">
-        <p><strong>@LangApp.Get("RoboticsSkills"):</strong></p>
-        <ul class="list-unstyled">
-            <li>
-                <i class="bi bi-trophy-fill text-warning me-2"></i>
-                <strong>@LangApp.Get("RobotBattle2018"):</strong>
-                @LangApp.Get("ParticipationWithTeamDynamo")
-            </li>
-            <li>
-                <i class="bi bi-trophy-fill text-warning me-2"></i>
-                <strong>@LangApp.Get("RobotCIM"):</strong>
-                @LangApp.Get("ParticipationWithTeamDynamoInCategories")
-            </li>
-            <li>
-                <i class="bi bi-trophy-fill text-warning me-2"></i>
-                <strong>@LangApp.Get("StateRoboticsNL"):</strong>
-                @LangApp.Get("FirstAndSecondPlaceInSumoAndMinisumo")
-            </li>
-        </ul>
-    </div>
-
-    <div class="col-md-6">
-        <p><strong>@LangApp.Get("TechnologicalInnovation"):</strong></p>
-        <ul class="list-unstyled">
-            <li>
-                <i class="bi bi-award-fill text-warning me-2"></i>
-                @LangApp.Get("ParticipationScienceFair2019")
-            </li>
-            <li>
-                <i class="bi bi-award-fill text-warning me-2"></i>
-                @LangApp.Get("ParticipationScienceFair2020")
-            </li>
-        </ul>
-    </div>
-</div>
+</section>
 
 @code {
+    // Frases que se teclean en el hero
+    private string[] Roles => new[]
+    {
+        LangApp.Get("HeroRole1"),
+        LangApp.Get("HeroRole2"),
+        LangApp.Get("HeroRole3"),
+    };
+
     protected override void OnInitialized()
     {
         LangApp.OnLanguageChanged += StateHasChanged;

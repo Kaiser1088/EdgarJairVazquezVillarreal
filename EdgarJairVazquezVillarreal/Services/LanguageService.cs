@@ -46,23 +46,34 @@ namespace EdgarJairVazquezVillarreal.Services
             // ══════════════════════════════════════════
             { "HomeTitle", ("Sobre Mí", "About Me") },
 
+            // Hero
+            { "HeroGreeting", ("Hola, soy", "Hi, I'm") },
+            { "HeroRole1",    ("Ingeniero en Mecatrónica",           "Mechatronics Engineer")           },
+            { "HeroRole2",    ("Desarrollador .NET y Blazor",        ".NET & Blazor Developer")         },
+            { "HeroRole3",    ("Integración de software y hardware", "Software & hardware integration") },
+            { "HeroTagline", (
+                "Desarrollo software industrial en .NET y lo integro con la electrónica y el control de las líneas de producción.",
+                "I build industrial software in .NET and integrate it with the electronics and controls of production lines.") },
+            { "ViewProjects",   ("Ver proyectos", "View projects") },
+            { "HeroCodeDegree", ("Mecatrónica",   "Mechatronics")  },
+
+            // Cifras
+            { "StatErp",           ("Sistemas ERP desarrollados",    "ERP systems built")              },
+            { "StatEndpoints",     ("Endpoints REST en VAVILL",      "REST endpoints in VAVILL")       },
+            { "StatCswp",          ("Certificación SOLIDWORKS",      "SOLIDWORKS certification")       },
+            { "StatRoboticsValue", ("1er",                           "1st")                            },
+            { "StatRobotics",      ("lugar · Estatal de Robótica NL", "place · NL State Robotics")     },
+
             { "BioP1", (
                 "Ingeniero en Mecatrónica con enfoque en el desarrollo e implementación de soluciones tecnológicas para entornos industriales. Cuento con experiencia en integración de software, electrónica y sistemas de control, orientados a mejorar la eficiencia y el desempeño de procesos productivos.",
                 "Mechatronics Engineer focused on developing and implementing technological solutions for industrial environments. I have experience in software integration, electronics, and control systems, aimed at improving the efficiency and performance of production processes.") },
 
-            { "BioP2", (
-                "Me caracterizo por una sólida capacidad analítica, pensamiento estructurado y facilidad para adaptarme a nuevos retos. Disfruto resolver problemas desde una perspectiva práctica, proponiendo soluciones funcionales y enfocadas en resultados.",
-                "I stand out for strong analytical capacity, structured thinking, and easy adaptation to new challenges. I enjoy solving problems from a practical perspective, proposing functional and result-focused solutions.") },
-
-            { "BioP3", (
-                "Tengo interés en el aprendizaje continuo y en la aplicación de nuevas tecnologías para optimizar procesos. Valoro el trabajo en equipo y la colaboración como elementos clave para el desarrollo de proyectos exitosos.",
-                "I am interested in continuous learning and applying new technologies to optimize processes. I value teamwork and collaboration as key elements for successful project development.") },
-
-            { "BioP4", (
-                "Busco seguir creciendo profesionalmente en áreas relacionadas con automatización, desarrollo tecnológico e integración de sistemas, aportando valor a través de soluciones eficientes y bien estructuradas.",
-                "I aim to keep growing professionally in areas related to automation, technological development, and systems integration, bringing value through efficient and well-structured solutions.") },
+            // Proyectos destacados
+            { "HomeFeaturedTitle", ("Proyectos destacados",    "Featured projects") },
+            { "HomeAllProjects",   ("Ver todos los proyectos", "View all projects") },
 
             // Habilidades
+            { "HomeSkillsTitle",   ("Habilidades",  "Skills")       },
             { "MechatronicsTitle", ("Mecatrónica",  "Mechatronics") },
             { "SoftwareTitle",     ("Software",     "Software")     },
             { "SolutionsTitle",    ("Soluciones",   "Solutions")    },
