@@ -46,14 +46,34 @@
 
 <body>
     <div id="app">
-        <div class="loader-container">
-            <div class="loader-content">
-                <div class="hex-spinner"></div>
-                <div class="loader-text">Cargando...</div>
-                <div class="loader-bar">
-                    <div class="loader-progress"></div>
+        <!-- Loader: un programa de PLC que enciende un semáforo. Las lámparas y la
+             línea resaltada siguen el avance real de la descarga (ver app.css,
+             sección "LOADER DE INICIO"). -->
+        <div class="loader-container" role="status" aria-label="Cargando">
+            <div class="loader-scene" aria-hidden="true">
+                <div class="loader-code">
+                    <div class="loader-code-bar"><i></i><i></i><i></i>Arranque.st</div>
+                    <div class="loader-code-body">
+                        <div class="ld-line"><b>IF</b> carga &lt; 40 <b>THEN</b></div>
+                        <div class="ld-line" data-step="red">    rojo  := <u>TRUE</u>;</div>
+                        <div class="ld-line"><b>ELSIF</b> carga &lt; 85 <b>THEN</b></div>
+                        <div class="ld-line" data-step="amber">    ambar := <u>TRUE</u>;</div>
+                        <div class="ld-line"><b>ELSE</b></div>
+                        <div class="ld-line" data-step="green">    verde := <u>TRUE</u>;</div>
+                        <div class="ld-line"><b>END_IF</b>;</div>
+                    </div>
+                </div>
+                <div class="loader-wire"></div>
+                <div class="loader-semaforo">
+                    <span class="lamp lamp-red"></span>
+                    <span class="lamp lamp-amber"></span>
+                    <span class="lamp lamp-green"></span>
                 </div>
             </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+            <div class="loader-text">Cargando</div>
         </div>
     </div>
 

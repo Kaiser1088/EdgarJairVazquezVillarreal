@@ -45,25 +45,171 @@
             </div>
         </div>
 
-        <!-- Tarjeta de código decorativa (siempre oscura, como el sidebar) -->
-        <div class="col-xl-5 d-none d-xl-block" aria-hidden="true">
+        <!-- Tarjeta decorativa (siempre oscura, como el sidebar): una celda de ejemplo
+             vista desde mis tres áreas. El ladder lee los sensores, el robot mueve la
+             pieza y el código sigue el ciclo. Todo va sincronizado con CSS (app.css,
+             sección "INICIO — CELDA DE DEMOSTRACIÓN"); aquí solo está el dibujo. -->
+        <div class="col-xl-5" aria-hidden="true">
             <div class="hero-visual scroll-reveal">
-                <div class="code-card float-soft" data-bs-theme="dark">
+                <div class="code-card demo-card float-soft" data-bs-theme="dark">
                     <div class="code-card-bar">
                         <span class="code-card-dot"></span>
                         <span class="code-card-dot"></span>
                         <span class="code-card-dot"></span>
-                        <span class="code-card-file">Perfil.cs</span>
+                        <span class="code-card-file">@T(("celda-demo", "demo-cell"))</span>
+                        <span class="sim-run"><span class="sim-run-dot"></span>RUN</span>
                     </div>
-                    <div class="code-card-body">
-                        <div class="code-line"><span class="tk-kw">var</span> edgar = <span class="tk-kw">new</span> <span class="tk-type">Engineer</span></div>
-                        <div class="code-line">{</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Degree</span> = <span class="tk-str">"@LangApp.Get("HeroCodeDegree")"</span>,</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Software</span> = [<span class="tk-str">"C#"</span>, <span class="tk-str">".NET"</span>, <span class="tk-str">"SQL"</span>],</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Controls</span> = [<span class="tk-str">"PLC"</span>, <span class="tk-str">"SCADA"</span>],</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Robots</span> = [<span class="tk-str">"FANUC"</span>, <span class="tk-str">"KUKA"</span>],</div>
-                        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-prop">Hardware</span> = [<span class="tk-str">"ESP32"</span>, <span class="tk-str">"PCB"</span>, <span class="tk-str">"CNC"</span>],</div>
-                        <div class="code-line">};</div>
+
+                    <!-- 1 · PLC: cada instrucción se enciende cuando es verdadera -->
+                    <div class="demo-pane">
+                        <span class="pane-tag">PLC · Ladder</span>
+                        <svg class="ladder" viewBox="0 0 360 118" focusable="false">
+                            <line class="lad-rail" x1="16" y1="24" x2="16" y2="112" />
+                            <line class="lad-rail" x1="344" y1="24" x2="344" y2="112" />
+
+                            <path class="lad-wire" d="M16,34 H66 M74,34 H293.5 M306.5,34 H344
+                                                       M16,60 H66 M74,60 H293.5 M306.5,60 H344
+                                                       M16,86 H66 M74,86 H166 M174,86 H293.5 M306.5,86 H344
+                                                       M16,106 H66 M74,106 H110 V86" />
+                            <circle class="lad-node" cx="110" cy="86" r="2" />
+
+                            <!-- Renglón 1: hay pieza (S1) → ciclo del robot -->
+                            <g class="lad-i sig sig-s1">
+                                <path d="M66,28 V40 M74,28 V40" />
+                                <text x="70" y="23">S1</text>
+                            </g>
+                            <g class="lad-i sig sig-s1">
+                                <circle cx="300" cy="34" r="5.5" />
+                                <path d="M296,27.5 q-5,6.5 0,13 M304,27.5 q5,6.5 0,13" />
+                                <text x="300" y="23">ROBOT</text>
+                            </g>
+
+                            <!-- Renglón 2: no hay pieza (S1 cerrado) → banda de entrada M1 -->
+                            <g class="lad-i sig sig-s1n">
+                                <path d="M66,54 V66 M74,54 V66 M65,66 L75,54" />
+                                <text x="70" y="49">S1</text>
+                            </g>
+                            <g class="lad-i sig sig-s1n">
+                                <circle cx="300" cy="60" r="5.5" />
+                                <path d="M296,53.5 q-5,6.5 0,13 M304,53.5 q5,6.5 0,13" />
+                                <text x="300" y="49">M1</text>
+                            </g>
+
+                            <!-- Renglón 3: pieza entregada (S2) arranca la banda de salida M2,
+                                 M2 se enclava y el sensor de fin de banda (S3) la detiene -->
+                            <g class="lad-i sig sig-s2">
+                                <path d="M66,80 V92 M74,80 V92" />
+                                <text x="70" y="75">S2</text>
+                            </g>
+                            <g class="lad-i sig sig-s3n">
+                                <path d="M166,80 V92 M174,80 V92 M165,92 L175,80" />
+                                <text x="170" y="75">S3</text>
+                            </g>
+                            <g class="lad-i sig sig-m2">
+                                <circle cx="300" cy="86" r="5.5" />
+                                <path d="M296,79.5 q-5,6.5 0,13 M304,79.5 q5,6.5 0,13" />
+                                <text x="300" y="75">M2</text>
+                            </g>
+                            <g class="lad-i sig sig-m2">
+                                <path d="M66,100 V112 M74,100 V112" />
+                                <text x="92" y="103">M2</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <!-- 2 · Robótica: el brazo se dibuja recto hacia arriba y cada
+                         articulación gira sobre su propio eje -->
+                    <div class="demo-pane sim-view">
+                        <span class="pane-tag">@T(("Robótica", "Robotics"))</span>
+                        <svg class="robot-cell" viewBox="0 6 360 176" focusable="false">
+                            <!-- Torreta de señalización -->
+                            <line class="rb-pole" x1="44" y1="100" x2="44" y2="144" />
+                            <rect class="rb-lamp rb-lamp-red"   x="38" y="70" width="12" height="9" rx="2" />
+                            <rect class="rb-lamp rb-lamp-amber" x="38" y="80" width="12" height="9" rx="2" />
+                            <rect class="rb-lamp rb-lamp-green" x="38" y="90" width="12" height="9" rx="2" />
+
+                            <line class="rb-floor" x1="8" y1="176" x2="352" y2="176" />
+
+                            <!-- Banda de entrada: motor M1 y sensor S1 en el punto de toma -->
+                            <g class="rb-conveyor">
+                                <line class="rb-leg" x1="24" y1="153" x2="24" y2="176" />
+                                <line class="rb-leg" x1="120" y1="153" x2="120" y2="176" />
+                                <rect x="18" y="144" width="108" height="9" rx="4.5" />
+                                <line class="rb-belt rb-belt-in" x1="38" y1="148.5" x2="122" y2="148.5" />
+                            </g>
+                            <g class="rb-io sig sig-s1n"><text x="27" y="151.3">M1</text></g>
+                            <g class="rb-io sig sig-s1">
+                                <rect class="rb-sensor" x="89" y="155" width="14" height="8" rx="2" />
+                                <circle cx="96" cy="159" r="2" />
+                                <text x="96" y="173">S1</text>
+                            </g>
+
+                            <!-- Banda de salida: motor M2, sensor S2 donde se deja la pieza
+                                 y sensor S3 al final -->
+                            <g class="rb-conveyor">
+                                <line class="rb-leg" x1="240" y1="153" x2="240" y2="176" />
+                                <line class="rb-leg" x1="336" y1="153" x2="336" y2="176" />
+                                <rect x="234" y="144" width="108" height="9" rx="4.5" />
+                                <line class="rb-belt rb-belt-out" x1="238" y1="148.5" x2="322" y2="148.5" />
+                            </g>
+                            <g class="rb-io sig sig-m2"><text x="333" y="151.3">M2</text></g>
+                            <g class="rb-io sig sig-s2">
+                                <rect class="rb-sensor" x="257" y="155" width="14" height="8" rx="2" />
+                                <circle cx="264" cy="159" r="2" />
+                                <text x="264" y="173">S2</text>
+                            </g>
+                            <g class="rb-io sig sig-s3">
+                                <rect class="rb-sensor" x="317" y="155" width="14" height="8" rx="2" />
+                                <circle cx="324" cy="159" r="2" />
+                                <text x="324" y="173">S3</text>
+                            </g>
+
+                            <!-- Pieza que llega y pieza que se va -->
+                            <g class="rb-box rb-box-in">
+                                <rect x="85" y="126" width="22" height="18" rx="2" />
+                                <line x1="96" y1="126" x2="96" y2="144" />
+                            </g>
+                            <g class="rb-box rb-box-out">
+                                <rect x="253" y="126" width="22" height="18" rx="2" />
+                                <line x1="264" y1="126" x2="264" y2="144" />
+                            </g>
+
+                            <!-- Robot: base fija y tres articulaciones anidadas -->
+                            <rect class="rb-base" x="162" y="162" width="36" height="14" rx="3" />
+                            <rect class="rb-base" x="171" y="132" width="18" height="32" rx="4" />
+                            <g class="rb-j1">
+                                <rect class="rb-link" x="174" y="66" width="12" height="70" rx="6" />
+                                <g class="rb-j2">
+                                    <rect class="rb-link rb-link-2" x="175" y="15" width="10" height="62" rx="5" />
+                                    <g class="rb-j3">
+                                        <rect class="rb-tool" x="178" y="20" width="4" height="15" />
+                                        <rect class="rb-tool" x="167" y="34" width="26" height="6" rx="2" />
+                                        <rect class="rb-finger rb-finger-l" x="166" y="40" width="3" height="11" rx="1" />
+                                        <rect class="rb-finger rb-finger-r" x="191" y="40" width="3" height="11" rx="1" />
+                                        <g class="rb-box rb-box-carried">
+                                            <rect x="169" y="40" width="22" height="18" rx="2" />
+                                            <line x1="180" y1="40" x2="180" y2="58" />
+                                        </g>
+                                    </g>
+                                    <circle class="rb-joint" cx="180" cy="20" r="5" />
+                                </g>
+                                <circle class="rb-joint" cx="180" cy="72" r="6.5" />
+                            </g>
+                            <circle class="rb-joint" cx="180" cy="130" r="8" />
+                        </svg>
+                    </div>
+
+                    <!-- 3 · Software: se resalta la línea que corresponde al paso del ciclo -->
+                    <div class="demo-pane">
+                        <span class="pane-tag pane-tag-end">Software · C#</span>
+                        <div class="code-card-body is-compact">
+                            <div class="code-line"><span class="tk-kw">while</span> (@T(("celda.EnMarcha", "cell.Running"))) {</div>
+                            <div class="code-line code-step code-step-wait">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-kw">await</span> s1.<span class="tk-type">@T(("EsperarPieza", "WaitForPart"))</span>();</div>
+                            <div class="code-line code-step code-step-pick">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-kw">var</span> @T(("pieza", "part")) = <span class="tk-kw">await</span> robot.<span class="tk-type">@T(("Tomar", "Pick"))</span>();</div>
+                            <div class="code-line code-step code-step-place">&nbsp;&nbsp;&nbsp;&nbsp;<span class="tk-kw">await</span> robot.<span class="tk-type">@T(("Dejar", "Place"))</span>(@T(("pieza", "part")));</div>
+                            <div class="code-line code-step code-step-log">&nbsp;&nbsp;&nbsp;&nbsp;db.<span class="tk-type">@T(("Registrar", "Log"))</span>(@T(("pieza", "part")));</div>
+                            <div class="code-line">}</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,101 +276,36 @@
     </div>
 </section>
 
-<!-- ── Sobre mí ───────────────────────────────────────────────────── -->
-<section class="home-section">
+<!-- ── Sigue explorando ───────────────────────────────────────────── -->
+<!-- El inicio solo presenta; el detalle de cada tema vive en su página. -->
+<section class="home-section mb-5">
     <div class="section-head scroll-reveal">
-        <h2 class="section-heading"><i class="bi bi-person-fill"></i>@LangApp.Get("HomeTitle")</h2>
-    </div>
-
-    <p class="about-lead scroll-reveal">@LangApp.Get("BioP1")</p>
-    <p class="about-lead scroll-reveal">@LangApp.Get("BioP2")</p>
-
-    <p class="about-goal scroll-reveal">
-        <i class="bi bi-signpost-split-fill"></i>
-        <span><strong>@LangApp.Get("BioGoalLabel"):</strong> @LangApp.Get("BioGoal")</span>
-    </p>
-</section>
-
-<!-- ── Habilidades ────────────────────────────────────────────────── -->
-<section class="home-section">
-    <div class="section-head scroll-reveal">
-        <h2 class="section-heading"><i class="bi bi-tools"></i>@LangApp.Get("HomeSkillsTitle")</h2>
+        <h2 class="section-heading"><i class="bi bi-compass-fill"></i>@T(("Sigue explorando", "Keep exploring"))</h2>
     </div>
 
     <div class="row">
-        @foreach (var group in Skills)
+        @foreach (var link in Explore)
         {
-            <div class="col-md-6 col-xl-4 mb-4">
-                <div class="glass-card scroll-reveal h-100 p-4">
-                    <h3 class="h5 mb-3 text-neon">
-                        <i class="bi @group.Icon me-2"></i>@T(group.Title)
-                    </h3>
-                    <ul class="tech-list">
-                        @foreach (var item in group.Items)
-                        {
-                            <li>@T(item)</li>
-                        }
-                    </ul>
+            <div class="col-xl-4 mb-4">
+                <div class="glass-card mini-card explore-card scroll-reveal h-100">
+                    <span class="mini-icon"><i class="bi @link.Icon"></i></span>
+                    <div>
+                        <h3 class="mini-name">
+                            <a href="@link.Href" class="stretched-link">@LangApp.Get(link.TitleKey)</a>
+                        </h3>
+                        <p class="mini-detail">@T(link.Detail)</p>
+                    </div>
+                    <i class="bi bi-arrow-right explore-arrow"></i>
                 </div>
             </div>
         }
-    </div>
-
-    <div class="lang-row scroll-reveal">
-        <span class="lang-row-title"><i class="bi bi-translate me-2"></i>@LangApp.Get("LanguagesTitle")</span>
-        <span class="badge badge-glass">@LangApp.Get("LangSpanish")</span>
-        <span class="badge badge-glass">@LangApp.Get("LangEnglish")</span>
-    </div>
-</section>
-
-<!-- ── Logros y participaciones ───────────────────────────────────── -->
-<section class="home-section mb-5">
-    <div class="section-head scroll-reveal">
-        <h2 class="section-heading"><i class="bi bi-trophy-fill"></i>@LangApp.Get("CareerAndAchievements")</h2>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6 scroll-reveal">
-            <p><strong>@LangApp.Get("RoboticsSkills"):</strong></p>
-            <ul class="list-unstyled">
-                <li>
-                    <i class="bi bi-trophy-fill text-warning me-2"></i>
-                    <strong>@LangApp.Get("RobotBattle2018"):</strong>
-                    @LangApp.Get("ParticipationWithTeamDynamo")
-                </li>
-                <li>
-                    <i class="bi bi-trophy-fill text-warning me-2"></i>
-                    <strong>@LangApp.Get("RobotCIM"):</strong>
-                    @LangApp.Get("ParticipationWithTeamDynamoInCategories")
-                </li>
-                <li>
-                    <i class="bi bi-trophy-fill text-warning me-2"></i>
-                    <strong>@LangApp.Get("StateRoboticsNL"):</strong>
-                    @LangApp.Get("FirstAndSecondPlaceInSumoAndMinisumo")
-                </li>
-            </ul>
-        </div>
-
-        <div class="col-md-6 scroll-reveal">
-            <p><strong>@LangApp.Get("TechnologicalInnovation"):</strong></p>
-            <ul class="list-unstyled">
-                <li>
-                    <i class="bi bi-award-fill text-warning me-2"></i>
-                    @LangApp.Get("ParticipationScienceFair2019")
-                </li>
-                <li>
-                    <i class="bi bi-award-fill text-warning me-2"></i>
-                    @LangApp.Get("ParticipationScienceFair2020")
-                </li>
-            </ul>
-        </div>
     </div>
 </section>
 
 @code {
     private record FeaturedProject(string Name, string Icon, string SubtitleKey, string DescKey, string Href, string[] Tags, bool Wide = false);
 
-    private record SkillGroup(string Icon, (string Es, string En) Title, (string Es, string En)[] Items);
+    private record ExploreLink(string TitleKey, string Icon, string Href, (string Es, string En) Detail);
 
     // Frases que se teclean en el hero
     private string[] Roles => new[]
@@ -245,62 +326,14 @@
             new[] { "ASP.NET Core 10", "Blazor", "WPF", "PostgreSQL" }),
     };
 
-    // Habilidades por área. Para agregar una basta una línea en su grupo.
-    private static readonly SkillGroup[] Skills =
+    private static readonly ExploreLink[] Explore =
     {
-        new("bi-cpu", ("PLC y controles", "PLC & controls"), new[]
-        {
-            ("Siemens TIA Portal (S7-1200)", "Siemens TIA Portal (S7-1200)"),
-            ("Allen-Bradley: CompactLogix y MicroLogix", "Allen-Bradley: CompactLogix & MicroLogix"),
-            ("Studio 5000: Ladder y Structured Text", "Studio 5000: Ladder & Structured Text"),
-            ("Estándar IEC 61131-3", "IEC 61131-3 standard"),
-            ("SCADA / HMI", "SCADA / HMI"),
-            ("Factory I/O, LabVIEW y MATLAB", "Factory I/O, LabVIEW & MATLAB"),
-        }),
-        new("bi-robot", ("Robótica y CNC", "Robotics & CNC"), new[]
-        {
-            ("Robots FANUC", "FANUC robots"),
-            ("Robots KUKA (KR C4 / smartPAD)", "KUKA robots (KR C4 / smartPAD)"),
-            ("Robots ABB (RAPID, nivel básico)", "ABB robots (RAPID, basic level)"),
-            ("CNC con FluidNC y G-code", "CNC with FluidNC & G-code"),
-            ("Neumática y electroneumática", "Pneumatics & electro-pneumatics"),
-        }),
-        new("bi-lightning-charge", ("Piso y eléctrico", "Shop floor & electrical"), new[]
-        {
-            ("Cableado de tableros, sensores y motores", "Wiring of panels, sensors and motors"),
-            ("I/O check y power-up de equipos", "I/O check and equipment power-up"),
-            ("Lectura de diagramas (Ethernet, I/O, 24 V, 120 V)", "Reading diagrams (Ethernet, I/O, 24 V, 120 V)"),
-            ("Manejo de BOM y control de materiales", "BOM handling and material control"),
-            ("Seguridad: LOTO y NFPA 70E", "Safety: LOTO and NFPA 70E"),
-        }),
-        new("bi-motherboard", ("Embebidos y diseño", "Embedded & design"), new[]
-        {
-            ("ESP32 / ESP32-S3", "ESP32 / ESP32-S3"),
-            ("Diseño de PCB (I/O aisladas a 24 V)", "PCB design (isolated 24 V I/O)"),
-            ("KiCad", "KiCad"),
-            ("SOLIDWORKS (certificado CSWP)", "SOLIDWORKS (CSWP certified)"),
-            ("AutoCAD", "AutoCAD"),
-        }),
-        new("bi-code-slash", ("Software", "Software"), new[]
-        {
-            ("C# / .NET 10", "C# / .NET 10"),
-            ("ASP.NET Core Web API y EF Core", "ASP.NET Core Web API & EF Core"),
-            ("Blazor (Server y WebAssembly)", "Blazor (Server & WebAssembly)"),
-            ("WPF y WinForms", "WPF & WinForms"),
-            ("SQL Server, PostgreSQL y Supabase", "SQL Server, PostgreSQL & Supabase"),
-            ("TypeScript, React y Next.js", "TypeScript, React & Next.js"),
-            ("Python, Java y C++", "Python, Java & C++"),
-            ("Git", "Git"),
-        }),
-        new("bi-building-gear", ("Manufactura", "Manufacturing"), new[]
-        {
-            ("OEE e IATF 16949", "OEE & IATF 16949"),
-            ("Lean Six Sigma", "Lean Six Sigma"),
-            ("Troqueles progresivos de estampado", "Progressive stamping dies"),
-            ("Sistemas CTPAT", "CTPAT systems"),
-            ("Etiquetado ZPL", "ZPL labeling"),
-            ("Gestión de inventarios IT", "IT inventory management"),
-        }),
+        new("NavAboutMe", "bi-person-fill", "about",
+            ("Perfil, formación, certificaciones y habilidades.", "Profile, education, certifications and skills.")),
+        new("NavExperience", "bi-calendar-event-fill", "experience",
+            ("Mi trayectoria en piso y en software.", "My path on the shop floor and in software.")),
+        new("NavContact", "bi-envelope-fill", "contact",
+            ("Correo, LinkedIn y GitHub.", "Email, LinkedIn and GitHub.")),
     };
 
     private string T((string Es, string En) text) => LangApp.IsSpanish ? text.Es : text.En;

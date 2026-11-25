@@ -32,19 +32,17 @@
 }
 
 /* ── Íconos de Bootstrap en el sidebar ─────────────────
-   (clases generadas por Blazor para bi-*-nav-menu)
+   Son de la fuente bootstrap-icons: toman el color del enlace.
    ─────────────────────────────────────────────────────── */
 .bi {
     display: inline-block;
-    position: relative;
     width: 1.2rem;
-    height: 1.2rem;
     margin-right: 0.7rem;
-    top: -1px;
-    background-size: cover;
-    filter: brightness(0) invert(1);
-    opacity: 0.6;
-    transition: opacity 0.2s ease, filter 0.2s ease;
+    font-size: 1.05rem;
+    line-height: 1;
+    text-align: center;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
 }
 
 /* ── Items de navegación ────────────────────────────── */
@@ -76,11 +74,7 @@
     border-color: rgba(16, 185, 129, 0.28);
     font-weight: 500;
 }
-.nav-item ::deep a.active .bi {
-    opacity: 1;
-    filter: invert(65%) sepia(60%) saturate(600%) hue-rotate(120deg);
-    /* Convierte el ícono al tono verde esmeralda */
-}
+.nav-item ::deep a.active .bi { opacity: 1; }
 
 /* Estado hover */
 .nav-item ::deep a:hover {

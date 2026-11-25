@@ -22,7 +22,8 @@ namespace EdgarJairVazquezVillarreal.Services
         // DICCIONARIO BILINGÜE
         // Convención de prefijos:
         //   Nav*      → NavMenu / global
-        //   Home*     → Página "Sobre mí"
+        //   Home*     → Página "Inicio"
+        //   About*    → Página "Sobre mí" (el detalle vive en About.razor)
         //   Proj*     → Página "Proyectos"
         //   Exp*      → Página "Experiencia"
         //   Contact*  → Página "Contacto"
@@ -32,6 +33,7 @@ namespace EdgarJairVazquezVillarreal.Services
             // ══════════════════════════════════════════
             //  NAVEGACIÓN / GLOBAL
             // ══════════════════════════════════════════
+            { "NavHome",        ("Inicio",     "Home")       },
             { "NavAboutMe",     ("Sobre mí",   "About Me")   },
             { "NavProjects",    ("Proyectos",  "Projects")   },
             { "NavExperience",  ("Experiencia","Experience")  },
@@ -46,10 +48,8 @@ namespace EdgarJairVazquezVillarreal.Services
             { "ViewDocs",       ("Ver Documentación Completa","View Full Documentation") },
 
             // ══════════════════════════════════════════
-            //  HOME — Sobre mí
+            //  HOME — Inicio
             // ══════════════════════════════════════════
-            { "HomeTitle", ("Sobre Mí", "About Me") },
-
             // Hero
             { "HeroGreeting", ("Hola, soy", "Hi, I'm") },
             { "HeroRole1",    ("Ingeniero en Mecatrónica",             "Mechatronics Engineer")            },
@@ -60,7 +60,6 @@ namespace EdgarJairVazquezVillarreal.Services
                 "Trabajo en los dos lados de la automatización: en piso, instalando y arrancando líneas de producción, y en software, construyendo las herramientas que conectan ambos.",
                 "I work on both sides of automation: on the floor, installing and commissioning production lines, and in software, building the tools that connect the two.") },
             { "ViewProjects",   ("Ver proyectos", "View projects") },
-            { "HeroCodeDegree", ("Mecatrónica",   "Mechatronics")  },
 
             // Cifras
             { "StatErp",       ("Sistemas ERP desarrollados",      "ERP systems built")         },
@@ -68,6 +67,10 @@ namespace EdgarJairVazquezVillarreal.Services
             { "StatTests",     ("Pruebas automatizadas en CNCIMS", "Automated tests in CNCIMS") },
             { "StatCswp",      ("Certificación SOLIDWORKS",        "SOLIDWORKS certification")  },
 
+            // Sobre mí: perfil
+            { "AboutSubtitle", (
+                "Quién soy, qué estudié y con qué herramientas trabajo.",
+                "Who I am, what I studied and the tools I work with.") },
             { "BioP1", (
                 "Soy ingeniero en mecatrónica con experiencia en instalación y arranque de líneas de producción automotriz, y desarrollador de software industrial en C# / .NET. Mi día a día mezcla el conexionado eléctrico de tableros, sensores y motores, las pruebas funcionales y el power-up de equipos con la coordinación de materiales y cambios de ingeniería.",
                 "I'm a mechatronics engineer with experience installing and commissioning automotive production lines, and an industrial software developer in C# / .NET. My day-to-day mixes electrical wiring of panels, sensors and motors, functional testing and equipment power-up with coordinating materials and engineering changes.") },
@@ -83,14 +86,12 @@ namespace EdgarJairVazquezVillarreal.Services
             { "HomeFeaturedTitle", ("Proyectos destacados",    "Featured projects") },
             { "HomeAllProjects",   ("Ver todos los proyectos", "View all projects") },
 
-            // Habilidades (el detalle de cada tarjeta vive en Home.razor)
-            { "HomeSkillsTitle", ("Habilidades",      "Skills")           },
+            // Idiomas (ficha de Sobre mí)
             { "LanguagesTitle",  ("Idiomas",          "Languages")        },
             { "LangSpanish",     ("Español (nativo)", "Spanish (native)") },
             { "LangEnglish",     ("Inglés (B2)",      "English (B2)")     },
 
             // Logros y participaciones
-            { "CareerAndAchievements", ("Logros y Participaciones", "Achievements & Participations") },
             { "RoboticsSkills",        ("Robótica Competitiva",     "Competitive Robotics")          },
             { "TechnologicalInnovation",("Innovación Tecnológica",  "Technological Innovation")      },
 
@@ -199,9 +200,8 @@ namespace EdgarJairVazquezVillarreal.Services
                  "PLC programming, FANUC robotics, SCADA and OEE tracking; quality activities under IATF 16949.") },
             { "Exp1Location", ("Saltillo, Coahuila", "Saltillo, Coahuila, Mexico") },
 
-            { "ExpWorkTitle", ("Experiencia laboral",      "Work experience")           },
-            { "ExpEduTitle",  ("Formación académica",      "Education")                 },
-            { "ExpCertTitle", ("Certificaciones y cursos", "Certifications & courses")  },
+            { "ExpWorkTitle", ("Experiencia laboral", "Work experience") },
+            { "ExpSeeAbout",  ("Ver formación y certificaciones", "See education & certifications") },
 
             // Puesto actual. No se publica cliente final, proyecto ni planta: se describe en genérico.
             { "Exp0Status",   ("Actual", "Current") },
@@ -230,7 +230,7 @@ namespace EdgarJairVazquezVillarreal.Services
                 ("Operación de robots KUKA y FANUC.",
                  "Operation of KUKA and FANUC robots.") },
 
-            // Formación (datos del CV)
+            // Formación (datos del CV; se muestra en Sobre mí)
             { "Edu1Degree",    ("Ingeniería en Mecatrónica", "Mechatronics Engineering") },
             { "Edu1Specialty",
                 ("Especialidad en Automatización de Procesos de Manufactura",
